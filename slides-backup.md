@@ -332,53 +332,6 @@ These numbers make the abstract concept of 'AGI' tangible. This isn't just softw
 -->
 
 ---
-layout: default
----
-# The Physical Reality of 2027
-
-The scale of a single leading AI lab becomes staggering.
-
-<div class="grid grid-cols-2 gap-8 text-center mt-8">
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-🔧
-
-**~1M AI Researchers**
-
-<p class="text-sm">running in parallel</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-⏱️
-
-**@ 50x Human Speed**
-
-<p class="text-sm">~500 words/sec</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-⚡
-
-**~10 GW of Power**
-
-<p class="text-sm">output of ~10 nuclear reactors</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-💰
-
-**~$100B / year**
-
-<p class="text-sm">in compute costs</p>
-</div>
-
-</div>
-
-<!--
-These numbers make the abstract concept of 'AGI' tangible. This isn't just software; it's a massive industrial and energy undertaking on the scale of a nation-state.
--->
-
----
 layout: section
 ---
 # The Engineering Reality
@@ -389,6 +342,8 @@ Patterns, Risks, and Problems to Solve
 layout: two-cols
 ---
 # The Speed vs. Intelligence Playbook
+
+<Transform :scale="0.8">
 
 Think in **wall-clock time to a verified solution**, not just tokens/sec.
 
@@ -440,6 +395,8 @@ layout: default
 ---
 # Advanced Risks: Beyond Simple Failures
 
+<Transform :scale="0.8">
+
 As agents get smarter, the failure modes get more complex.
 
 <div class="grid grid-cols-2 gap-4 auto-rows-fr mt-4">
@@ -464,6 +421,8 @@ As agents get smarter, the failure modes get more complex.
 </div>
 </div>
 
+</Transform>
+
 <!--
 This is a critical distinction. Simple failures are engineering bugs in the loop. Advanced risks are adversarial behaviors from the model itself. This is the frontier of safety research.
 -->
@@ -472,6 +431,8 @@ This is a critical distinction. Simple failures are engineering bugs in the loop
 layout: default
 ---
 # Reliability & Security Patterns
+
+<Transform :scale="0.8">
 
 How to harden the loop against these failures.
 
@@ -501,10 +462,14 @@ How to harden the loop against these failures.
 
 </div>
 
+</Transform>
+
 ---
 layout: default
 ---
 # Good Problems to Work On Now
+
+<Transform :scale="0.8">
 
 - **Reliability**
   - **Trace-level Evals:** Score plans and tool chains, not just final text. Penalize silent failures.
@@ -521,10 +486,14 @@ layout: default
   - **Agentic SWE-bench:** Add shell and edit verification to benchmarks to measure real-world effectiveness.
   - **Red-Teaming Agents:** Focus on prompt injection against tool schemas to find reward hacking exploits.
 
+</Transform>
+
 ---
 layout: default
 ---
 # Call to Action
+
+<Transform :scale="0.8">
 
 <div class="grid grid-cols-2 gap-4 auto-rows-fr mt-8">
 
@@ -557,6 +526,8 @@ Contribute to open standards like a shared trace schema and MCP (Model Context P
 
 </div>
 </div>
+
+</Transform>
 
 <!--
 Speaker note: "Benchmarks measure outputs. Production measures verified diffs."

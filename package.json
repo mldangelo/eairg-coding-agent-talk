@@ -2,9 +2,9 @@
   "name": "eairg-agent-talk-final",
   "private": true,
   "scripts": {
-    "dev": "slidev talk.md --open",
-    "build": "slidev build talk.md",
-    "export": "slidev export talk.md"
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export"
   },
   "devDependencies": {
     "@slidev/cli": "^0.49.0",
