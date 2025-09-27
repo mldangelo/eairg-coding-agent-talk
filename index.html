@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Coding Agents: From Snippets to Swarms</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -203,6 +204,49 @@
             color: #6c757d;
         }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        table th, table td {
+            padding: 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        pre, code {
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+        }
+
+        .mermaid {
+            text-align: center;
+            margin: 2rem 0;
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -236,10 +280,13 @@
             <div class="nav-section">
                 <h2>Act II: The Proving Ground</h2>
                 <a href="#verifiability" class="nav-link">Verifiability Frontier</a>
-                <a href="#model-routing" class="nav-link">Model Routing</a>
-                <a href="#operating-costs" class="nav-link">Operating Costs</a>
+                <a href="#micro-demo" class="nav-link">Verifiability Demo</a>
+                <a href="#model-routing" class="nav-link">Model Routing Trade-off</a>
+                <a href="#model-routing-table" class="nav-link">Model Routing Table</a>
+                <a href="#operating-costs" class="nav-link">Economics & Costs</a>
                 <a href="#enterprise-eval" class="nav-link">Enterprise Evaluation</a>
                 <a href="#evaluation-pitfalls" class="nav-link">Evaluation Pitfalls</a>
+                <a href="#eval-kit" class="nav-link">Eval Starter Kit</a>
                 <a href="#agent-sre" class="nav-link">Agent SRE</a>
             </div>
 
@@ -266,6 +313,8 @@
                 <a href="#checklist" class="nav-link">Superhuman Teammates</a>
                 <a href="#takeaways" class="nav-link">Key Takeaways</a>
                 <a href="#deployment" class="nav-link">Deployment Playbook</a>
+                <a href="#call-to-action" class="nav-link">Call to Action</a>
+                <a href="#thank-you" class="nav-link">Thank You</a>
             </div>
         </nav>
 
@@ -291,6 +340,7 @@
 
             <section class="section" id="evolution">
                 <h2>Evolution: From Autocomplete to Agents</h2>
+                <p><em>Practice</em></p>
 
                 <div class="timeline">
                     <div class="timeline-item">
@@ -299,8 +349,8 @@
                             <li>GPT-style LMs emit small completions</li>
                             <li>Codex shows code-finetuning potential</li>
                             <li>HumanEval: "sample-and-rerank" wins</li>
-                            <li><strong>Capability:</strong> ~10 lines of JavaScript</li>
                         </ul>
+                        <p><strong>→ Capability:</strong> ~10 lines of JavaScript</p>
                     </div>
 
                     <div class="timeline-item">
@@ -309,39 +359,1561 @@
                             <li>Chat UIs + function calling</li>
                             <li>ReAct-style reasoning with actions</li>
                             <li>Agents read files, call tools, iterate</li>
-                            <li><strong>Capability:</strong> Single-file modifications</li>
                         </ul>
+                        <p><strong>→ Capability:</strong> Single-file modifications</p>
                     </div>
 
                     <div class="timeline-item">
                         <h4>2024-2025: Agentic Loops</h4>
                         <ul>
                             <li>Shell + editor + permission gates</li>
-                            <li>Multi-step debugging and iteration</li>
-                            <li>Context-aware codebase understanding</li>
-                            <li><strong>Capability:</strong> Multi-file feature implementation</li>
+                            <li>SWE-bench: repo-scale edits</li>
+                            <li>Long context + thinking budgets</li>
+                            <li>Rise of "Vibe Coding": AI-first development</li>
+                        </ul>
+                        <p><strong>→ Capability:</strong> Multi-file, verified changes</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Future: 2025-2027</h4>
+                        <ul>
+                            <li>Multi-agent coordination</li>
+                            <li>Formal verification integration</li>
+                            <li>Adaptive model routing</li>
+                            <li>"Vibe Researching": Automated discovery</li>
+                        </ul>
+                        <p><strong>→ Target:</strong> The Automated Researcher</p>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>Key Insight:</strong> The leap from "snippets" to "long-running repo edits" came from three ingredients:
+                    <ul>
+                        <li><strong>Tool use</strong> (ability to act on environment)</li>
+                        <li><strong>Verification loops</strong> (ability to check own work)</li>
+                        <li><strong>Massive context</strong> (ability to reason about entire codebases)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section" id="interface-landscape">
+                <h2>Interface Landscape: How Developers Actually Use AI Coding Tools</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Reality Check:</strong> Agent capabilities mean nothing without the right interface for the task
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>🏗️ Integrated Development</h4>
+                        <p><strong>Full AI IDEs:</strong> Cursor, JetBrains AI Assistant, Windsurf</p>
+                        <p><strong>IDE Extensions:</strong> GitHub Copilot, Sourcegraph Cody, Continue.dev</p>
+                        <p><strong>Best for:</strong> Daily coding, multi-file edits, repo-aware refactors</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>🖥️ Terminal & Command Line</h4>
+                        <p><strong>CLI Assistants:</strong> Claude Code, Copilot CLI, aider, Warp AI</p>
+                        <p><strong>Best for:</strong> DevOps, scripting, repo chores, terminal workflows</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>☁️ Agentic Environments</h4>
+                        <p><strong>Sandbox VMs:</strong> Devin, GitHub Copilot agents, OpenHands CodeAct 2.1</p>
+                        <p><strong>Planning & PR flow:</strong> GitHub Copilot Workspace, Claude Code</p>
+                        <p><strong>Best for:</strong> Ticket-sized tasks, bug fixes, background automation</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>🔍 Code Review & Repo Bots</h4>
+                        <p><strong>PR Automation:</strong> CodeRabbit, GitLab Duo, Copilot code review</p>
+                        <p><strong>Best for:</strong> Review quality, triage, enforcing guidelines</p>
+                    </div>
+                </div>
+
+                <h3>📊 Interface vs Task Matching</h3>
+                <table class="code-block" style="width: 100%; border-collapse: collapse;">
+                    <tr style="background: #e9ecef;"><th style="padding: 0.5rem; text-align: left;">Task Type</th><th style="padding: 0.5rem; text-align: left;">Best Interface</th><th style="padding: 0.5rem; text-align: left;">Why</th></tr>
+                    <tr><td style="padding: 0.5rem;">Daily coding</td><td style="padding: 0.5rem;">IDE + extension</td><td style="padding: 0.5rem;">Context, low friction</td></tr>
+                    <tr><td style="padding: 0.5rem;">Repo automation</td><td style="padding: 0.5rem;">CLI tools</td><td style="padding: 0.5rem;">Script-friendly</td></tr>
+                    <tr><td style="padding: 0.5rem;">Bug fixes</td><td style="padding: 0.5rem;">Agentic sandbox</td><td style="padding: 0.5rem;">Full investigation</td></tr>
+                    <tr><td style="padding: 0.5rem;">Code review</td><td style="padding: 0.5rem;">GitHub/GitLab bot</td><td style="padding: 0.5rem;">Native workflow</td></tr>
+                    <tr><td style="padding: 0.5rem;">Prototyping</td><td style="padding: 0.5rem;">Web IDE/chat</td><td style="padding: 0.5rem;">Zero setup</td></tr>
+                </table>
+
+                <h3>🔧 Common Interaction Patterns</h3>
+                <ul>
+                    <li><strong>Inline autocomplete:</strong> Sub-second, context-aware suggestions</li>
+                    <li><strong>Chat with code context:</strong> Natural language + file/selection awareness</li>
+                    <li><strong>Apply-edits workflow:</strong> Diff preview before writing files</li>
+                    <li><strong>Plan-execute-iterate:</strong> Sandbox → test → refine → PR</li>
+                    <li><strong>Tool integration:</strong> MCP connects Slack/Jira/GitHub context</li>
+                </ul>
+
+                <h3>🏢 Deployment Styles</h3>
+                <ul>
+                    <li><strong>Cloud SaaS:</strong> Fast adoption, managed context (Copilot, Cursor)</li>
+                    <li><strong>Self-hosted:</strong> Keep code in VPC (Windsurf Enterprise, Tabnine)</li>
+                    <li><strong>Local-only:</strong> Air-gapped, privacy-first (Continue + Ollama)</li>
+                    <li><strong>Hybrid:</strong> Local editing, cloud intelligence routing</li>
+                </ul>
+
+                <p><strong>Selection Strategy:</strong> Start with IDE extensions for daily work, add CLI tools for automation, evaluate agentic environments for complex tasks. Match interface to workflow, not technology hype.</p>
+            </section>
+
+            <section class="section" id="conceptual-framework">
+                <h2>The Conceptual Framework</h2>
+                <p><em>Research</em></p>
+
+                <h3>Formalizing Coding Agents as POMDPs</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>POMDP Components</h4>
+                        <p><strong>States s:</strong> Repository state (files, dependencies, tests)</p>
+                        <p><strong>Actions a:</strong> Tool calls (read, edit, execute, search)</p>
+                        <p><strong>Observations o:</strong> Compile results, test outcomes, error messages</p>
+                        <p><strong>Transition T(s'|s,a):</strong> How actions change repository state</p>
+                        <p><strong>Observation O(o|s',a):</strong> What feedback we get</p>
+                        <p><strong>Policy:</strong> π(a|h) where h is action-observation history</p>
+                    </div>
+                    <div class="card">
+                        <h4>Concrete Example: Fixing a Null Pointer Bug</h4>
+                        <p><strong>State s:</strong> Repository at commit abc123 with test_user_validation.py failing</p>
+                        <p><strong>Action a:</strong> Edit user.py:47 to add <code>if user is not None:</code> boundary check</p>
+                        <p><strong>Observation o:</strong> <code>pytest -q test_user_validation.py</code> returns "PASSED" (green)</p>
+                        <p><strong>Belief Update:</strong> Agent believes null pointer issue is resolved</p>
+                        <p><strong>Why POMDP:</strong> Agent can't directly see all code paths—must infer correctness from test feedback</p>
+                    </div>
+                </div>
+
+                <div class="mermaid">
+graph LR
+    A[Observe $o_t$] --> B[Update Belief $b_t$]
+    B --> C[Select Action $a_t$]
+    C --> D[Execute Tool]
+    D --> E[Environment Response]
+    E --> A
+    style A fill:#e3f2fd
+    style C fill:#f3e5f5
+    style D fill:#e8f5e8
+                </div>
+
+                <div class="highlight">
+                    <strong>Key Challenge:</strong> Partial observability means agents must infer repository state from limited feedback.
+                </div>
+
+                <p><strong>Why This Matters:</strong> This formalization reveals that coding agents are fundamentally about sequential decision-making under uncertainty - the same framework used in robotics and game AI.</p>
+            </section>
+
+            <section class="section" id="case-study">
+                <h2>Anatomy of a SOTA Agent: Claude Code Case Study</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Key Insight:</strong> Claude Code's success comes from architectural simplicity over complexity
+                </div>
+
+                <h3>🎯 Core Design Principles</h3>
+                <ol>
+                    <li><strong>One Main Loop</strong> - No multi-agent handoffs, single coherent context</li>
+                    <li><strong>Smart Tool Design</strong> - Mix of low/medium/high level operations</li>
+                    <li><strong>LLM Search > RAG</strong> - Uses ripgrep/find like developers do</li>
+                    <li><strong>Explicit Todo Management</strong> - Agent tracks its own progress</li>
+                    <li><strong>Subagents for Specialization</strong> - Task-specific isolated contexts</li>
+                    <li><strong>Extensive Prompting</strong> - 2.8K system + 9.4K tools prompts</li>
+                </ol>
+
+                <h3>Memory Architecture</h3>
+                <ul>
+                    <li>CLAUDE.md files load hierarchically (enterprise → project → user)</li>
+                    <li>@path imports up to 5 hops deep</li>
+                    <li>Prompt caching for conversation efficiency</li>
+                </ul>
+
+                <div class="mermaid">
+graph TD
+    A[User Request] --> B[Main Loop]
+    B --> C{Complex/Specialized?}
+    C -->|No| D[Direct Tool Use]
+    C -->|Yes| E[Delegate to Subagent]
+    E --> F[Isolated Context]
+    F --> G[Return Results]
+    D --> H[Update Todo List]
+    G --> H
+    H --> I[Continue Loop]
+    D --> J[Tool Categories]
+    J -.->|Meta| H
+    J -->|Read| K[Read/Glob/Grep]
+    J -->|Write ✓| L[Edit/MultiEdit]
+    J -->|Execute ✓| M[Bash]
+    B -.-> H
+    style B fill:#4caf50,color:#fff
+    style E fill:#ff9800,color:#fff
+    style F fill:#e8f5e8
+    style H fill:#2196f3,color:#fff
+    style K fill:#c8e6c9
+    style L fill:#ffcdd2
+    style M fill:#ffcdd2
+                </div>
+
+                <h3>Tool Categories</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Read</h4>
+                        <p>Read, Glob, Grep (permission-free)</p>
+                    </div>
+                    <div class="card">
+                        <h4>Write ✓</h4>
+                        <p>Edit, MultiEdit (approval required)</p>
+                    </div>
+                    <div class="card">
+                        <h4>Execute ✓</h4>
+                        <p>Bash (approval required)</p>
+                    </div>
+                    <div class="card">
+                        <h4>Meta</h4>
+                        <p>Task, TodoWrite (coordination)</p>
+                    </div>
+                </div>
+
+                <h3>Real Todo Trace (Redacted)</h3>
+                <div class="code-block">
+1. [pending] Fix authentication bug in login.py<br>
+2. [in_progress] Search for auth-related files<br>
+3. [completed] Found issue in validate_token() at line 45<br>
+4. [pending] Write test to reproduce the bug<br>
+5. [pending] Implement fix with error handling<br>
+6. [pending] Run full test suite to verify
+                </div>
+
+                <h3>Failure → Recovery Example</h3>
+                <p><strong>Iteration t:</strong> Agent edits config.py but breaks import</p>
+                <p><strong>Observation:</strong> <code>ModuleNotFoundError: No module named 'validators'</code></p>
+                <p><strong>Iteration t+1:</strong> Agent reads error, searches for validators usage, adds missing import</p>
+                <p><strong>Result:</strong> Tests pass, todo marked completed</p>
+
+                <div class="highlight">
+                    <strong>Strategic Insight:</strong> Debuggability beats complexity. Simple architecture scales with model improvements, while complex multi-agent systems introduce coordination failures.
+                </div>
+            </section>
+
+            <section class="section" id="typed-apis">
+                <h2>Tools That Don't Lie: Typed APIs & Constrained Generation</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Core Insight:</strong> Agent reliability depends on tool design as much as model intelligence
+                </div>
+
+                <h3>Principles of Agent-Ready Tools</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Atomic Operations</h4>
+                        <p>Single responsibility, complete or fail entirely</p>
+                        <p>✅ create_file vs ❌ multi-step bash pipeline</p>
+                    </div>
+                    <div class="card">
+                        <h4>Idempotent & Deterministic</h4>
+                        <p>Safe retries, predictable outcomes</p>
+                        <p>✅ ensure_dependency('pytest') vs ❌ pip install</p>
+                    </div>
+                    <div class="card">
+                        <h4>Structured Output</h4>
+                        <p>JSON/XML responses, not raw text</p>
+                        <p>✅ {"files": [...]} vs ❌ ls -l output</p>
+                    </div>
+                    <div class="card">
+                        <h4>Clear Error Codes</h4>
+                        <p>Specific failure reasons for retry logic</p>
+                        <p>✅ {'error': 'file_not_found'} vs ❌ generic exception</p>
+                    </div>
+                </div>
+
+                <h3>Example: Typed Tool Schema</h3>
+                <div class="code-block">
+{
+  "title": "ApplyPatch",
+  "type": "object",
+  "properties": {
+    "file": {"type": "string"},
+    "range": {
+      "type": "object",
+      "properties": {
+        "start": {"type": "integer"},
+        "end": {"type": "integer"}
+      },
+      "required": ["start", "end"]
+    },
+    "patch": {"type": "string"}
+  },
+  "required": ["file", "range", "patch"],
+  "additionalProperties": false
+}
+                </div>
+
+                <h3>Tool Evolution Patterns</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>❌ run_shell('ls -l | grep .py')</h4>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>⚠️ list_files(path='/', pattern='*.py')</h4>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>✅ find_symbol('MyClass')</h4>
+                    </div>
+                </div>
+                <p><strong>Progression:</strong> brittle → structured → semantic</p>
+
+                <p><strong>Implementation Tip:</strong> Require "file", "range", "patch" parameters; reject out-of-range edits by design to prevent corruption.</p>
+            </section>
+
+            <section class="section" id="verifiability">
+                <h2>The Verifiability Frontier</h2>
+                <p><em>Practice</em></p>
+
+                <h3>The Single Best Predictor of Agent Success</h3>
+                <div class="highlight">
+                    <strong>Core Insight:</strong> Task success correlates strongly with verifiability
+                </div>
+
+                <div class="mermaid">
+graph LR
+    A[High Verifiability] --> B[Agent Success]
+    C[Low Verifiability] --> D[Agent Failure]
+    A1[Unit Tests 80-90%] --> A
+    A2[Compilation 85-95%] --> A
+    A3[SWE-bench Verified 50-65%] --> A
+    C1[Design Decisions 20-40%] --> C
+    C2[User Experience 10-30%] --> C
+    C3[Architecture 30-50%] --> C
+    style A fill:#c8e6c9
+    style C fill:#ffcdd2
+    style B fill:#4caf50,color:#fff
+    style D fill:#f44336,color:#fff
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>✅ Verifiable Tasks (High Success Rate)</h4>
+                        <ul>
+                            <li>Bug fixes with existing tests</li>
+                            <li>Refactoring with type safety</li>
+                            <li>API implementations with schemas</li>
+                        </ul>
+                        <p><strong>Real repos:</strong> OpenHands CodeAct 2.1 achieves 50%+ on SWE-bench Verified</p>
+                        <p><strong>Enterprise:</strong> 90%+ compile rate, 70%+ green CI</p>
+                    </div>
+                    <div class="card">
+                        <h4>❌ Non-Verifiable Tasks (Low Success Rate)</h4>
+                        <ul>
+                            <li>New feature design</li>
+                            <li>Performance optimization</li>
+                            <li>UX improvements</li>
+                        </ul>
+                        <p><strong>Success rates:</strong> 20-40% for design decisions, 10-30% for user experience</p>
+                    </div>
+                </div>
+
+                <h3>🛠️ Your Workflow</h3>
+                <p>Before assigning a task to an agent, ask:</p>
+                <ol>
+                    <li>Can success be automatically verified?</li>
+                    <li>Is there a fast feedback loop?</li>
+                    <li>Are the requirements unambiguous?</li>
+                </ol>
+                <p>If no → decompose the task or do it yourself.</p>
+
+                <div class="highlight">
+                    <strong>Practical Takeaway:</strong> To maximize agent success, give it tasks it can verify. Write tests first, then ask the agent to implement. This single insight can 3x your productivity.
+                </div>
+            </section>
+
+            <section class="section" id="micro-demo">
+                <h2>Verifiability in Action: Micro-Demo</h2>
+                <p><em>Practice</em></p>
+
+                <h3>❌ Pre: Failing Test</h3>
+                <div class="code-block">
+$ pytest -q test_auth.py::test_login<br>
+FAILED test_auth.py::test_login - AttributeError:<br>
+'NoneType' object has no attribute 'id'
+                </div>
+
+                <h3>🔧 Agent Action</h3>
+                <p>Single Edit in auth.py:23</p>
+                <div class="code-block">
+- return User.objects.get(username=username)<br>
++ user = User.objects.filter(username=username).first()<br>
++ return user if user else None
+                </div>
+
+                <h3>✅ Post: Green Test</h3>
+                <div class="code-block">
+$ pytest -q test_auth.py::test_login<br>
+PASSED                                [100%]<br>
+1 passed in 0.03s
+                </div>
+
+                <h3>🎯 Why This Works</h3>
+                <ul>
+                    <li><strong>Clear failure signal:</strong> Specific error message</li>
+                    <li><strong>Fast feedback loop:</strong> 0.03s test execution</li>
+                    <li><strong>Unambiguous success:</strong> Green = good</li>
+                    <li><strong>Minimal scope:</strong> One function, one test</li>
+                </ul>
+
+                <p><strong>Result:</strong> Agent succeeded on first attempt. Task took 45 seconds total (15s analysis + 5s edit + 25s verification). ~12k tokens in, ~300 out; verified-diff@1 = 1/1. This is the 3x productivity multiplier in action.</p>
+            </section>
+
+            <section class="section" id="model-routing">
+                <h2>Model Routing: The Core Trade-off</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Smart Take:</strong> Routing is scheduling. Wall-clock and error-budget aware; triggers based on backtracks/fail streaks; smarter beats faster when N dominates.
+                </div>
+
+                <h3>The Problem: Choosing the right model for each task</h3>
+                <p>For any coding task, wall-clock time is:</p>
+                <div class="code-block">
+Time = N × (L_in + L_out)/TPS + tool_time + test_time
+                </div>
+                <p>Where:</p>
+                <ul>
+                    <li>N = iterations to converge (edits + test cycles)</li>
+                    <li>TPS = tokens per second</li>
+                    <li>L_in, L_out = input/output tokens per step</li>
+                    <li>p_fail = probability a step produces bad code</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Key Insight:</strong> Faster models often have larger N and higher p_fail
+                </div>
+
+                <h3>The Trade-off: Fast models are great at being many. Smart models are great at being right.</h3>
+
+                <h3>Estimating p_fail in Practice</h3>
+                <ul>
+                    <li><strong>Historical error rate:</strong> Task-specific success % from logs</li>
+                    <li><strong>Lint/test fail ratio:</strong> % of steps requiring fixes</li>
+                    <li><strong>Backtrack rate:</strong> Trace-level "undo" operations per step</li>
+                </ul>
+                <p><strong>Rule of thumb:</strong> If last 2 steps were backtracks → escalate to smarter model</p>
+
+                <h3>Your Workflow: Don't just pick the fastest or smartest model. Match model intelligence to task complexity.</h3>
+
+                <h3>Adaptive Thinking Time</h3>
+                <p>Short latency for easy tasks; expanded budget for hard tasks. Trigger-based escalation (≥2 backtracks, rising lint/test fail ratio).</p>
+            </section>
+
+            <section class="section" id="model-routing-table">
+                <h2>Model Routing: Practical Decision Table</h2>
+                <p><em>Practice</em></p>
+
+                <h3>The Heuristic: Mapping tasks to optimal models</h3>
+                <table class="code-block" style="width: 100%; border-collapse: collapse;">
+                    <tr style="background: #e9ecef;"><th style="padding: 0.5rem; text-align: left;">Task</th><th style="padding: 0.5rem; text-align: center;">Fast Model</th><th style="padding: 0.5rem; text-align: center;">Smart Model</th><th style="padding: 0.5rem; text-align: left;">Reasoning</th></tr>
+                    <tr><td style="padding: 0.5rem;">Generate tests/stubs</td><td style="padding: 0.5rem; text-align: center;">✅ High throughput</td><td style="padding: 0.5rem; text-align: center;">❌ Overkill</td><td style="padding: 0.5rem;">Low risk, needs volume</td></tr>
+                    <tr><td style="padding: 0.5rem;">Search symbols</td><td style="padding: 0.5rem; text-align: center;">✅ Quick iteration</td><td style="padding: 0.5rem; text-align: center;">❌ Unnecessary</td><td style="padding: 0.5rem;">Simple pattern matching</td></tr>
+                    <tr><td style="padding: 0.5rem;">Small patches</td><td style="padding: 0.5rem; text-align: center;">✅ Low risk</td><td style="padding: 0.5rem; text-align: center;">❌ Too slow</td><td style="padding: 0.5rem;">Easy to verify</td></tr>
+                    <tr style="background: #f8f9fa;"><td style="padding: 0.5rem;"><strong>Mass refactor</strong></td><td style="padding: 0.5rem; text-align: center;">❌ Type misuse</td><td style="padding: 0.5rem; text-align: center;">✅ Safety reasoning</td><td style="padding: 0.5rem;">Complex inference</td></tr>
+                    <tr style="background: #f8f9fa;"><td style="padding: 0.5rem;"><strong>Infra edits</strong></td><td style="padding: 0.5rem; text-align: center;">❌ Config risk</td><td style="padding: 0.5rem; text-align: center;">✅ System understanding</td><td style="padding: 0.5rem;">Cross-service deps</td></tr>
+                    <tr><td style="padding: 0.5rem;">Framework migration</td><td style="padding: 0.5rem; text-align: center;">❌ High failure</td><td style="padding: 0.5rem; text-align: center;">✅ Needs reasoning</td><td style="padding: 0.5rem;">Complex dependencies</td></tr>
+                    <tr><td style="padding: 0.5rem;">API design</td><td style="padding: 0.5rem; text-align: center;">❌ Poor abstractions</td><td style="padding: 0.5rem; text-align: center;">✅ Architectural thinking</td><td style="padding: 0.5rem;">Deep understanding</td></tr>
+                    <tr><td style="padding: 0.5rem;">Debug failures</td><td style="padding: 0.5rem; text-align: center;">❌ Misses context</td><td style="padding: 0.5rem; text-align: center;">✅ Deep analysis</td><td style="padding: 0.5rem;">Causal reasoning</td></tr>
+                </table>
+
+                <h3>Patterns</h3>
+                <ul>
+                    <li><strong>Coarse-to-fine:</strong> Fast model drafts, smart model validates</li>
+                    <li><strong>Best-of-K:</strong> Spawn K fast workers, smart model selects best</li>
+                    <li><strong>Manager-worker:</strong> Smart model plans, fast models execute</li>
+                </ul>
+
+                <p><strong>Escape Hatch:</strong> If confidence < threshold → escalate to smart model</p>
+                <p><strong>Your Workflow:</strong> Start with this table, then adapt based on your specific codebase and task patterns.</p>
+            </section>
+
+            <section class="section" id="operating-costs">
+                <h2>Model Routing: The Economics & Operating Costs</h2>
+                <p><em>Practice</em></p>
+
+                <h3>The Economics: Cost implications of routing strategies</h3>
+                <p><em>As of Sept 2025</em></p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>Claude Code Pro Economics</h4>
+                        <p><strong>Cost:</strong> $20/month for rate-limited usage</p>
+                        <p><strong>Alternative:</strong> Direct API at ~$15-60/1000 requests</p>
+                        <p><strong>Break-even:</strong> ~1,300 medium requests/month</p>
+                        <p><strong>Token Consumption Pattern:</strong></p>
+                        <ul>
+                            <li>Input tokens per session: 50,000-200,000</li>
+                            <li>Output tokens per session: 5,000-20,000</li>
+                            <li>Tool calls per session: 10-100</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Smart Model Routing Economics</h4>
+                        <table style="width: 100%; font-size: 0.9rem;">
+                            <tr style="background: #e9ecef;"><th style="padding: 0.3rem;">Pattern</th><th style="padding: 0.3rem;">Cost Per Task</th><th style="padding: 0.3rem;">Speed</th><th style="padding: 0.3rem;">Quality</th></tr>
+                            <tr><td style="padding: 0.3rem;">All-Smart</td><td style="padding: 0.3rem;">$2.50</td><td style="padding: 0.3rem;">Slow</td><td style="padding: 0.3rem;">High</td></tr>
+                            <tr><td style="padding: 0.3rem;">All-Fast</td><td style="padding: 0.3rem;">$0.25</td><td style="padding: 0.3rem;">Fast</td><td style="padding: 0.3rem;">Medium</td></tr>
+                            <tr><td style="padding: 0.3rem;">Hybrid</td><td style="padding: 0.3rem;">$0.75</td><td style="padding: 0.3rem;">Medium</td><td style="padding: 0.3rem;">High</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <h3>System-Level Cost Control: Token costs are just the beginning</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Intelligent Caching</h4>
+                        <ul>
+                            <li>KV/Prompt Caching: Reuse context across steps</li>
+                            <li>File Read Deduplication: Cache file contents within session</li>
+                            <li>Test Container Warm Pools: Skip cold start overhead</li>
+                            <li>Dependency Prefetch: Load likely imports ahead of time</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Queue Policies</h4>
+                        <ul>
+                            <li><strong>Priority:</strong> Verifiable tasks first (tests, compilation)</li>
+                            <li><strong>Throttling:</strong> Cap long-context steps per hour</li>
+                            <li><strong>Batching:</strong> Group similar tasks for efficiency</li>
+                            <li><strong>Preemption:</strong> Kill runaway sessions after budget</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>$/Win Optimization</h3>
+                <ul>
+                    <li><strong>Track at System Level:</strong> Include compute, storage, human time</li>
+                    <li><strong>Cost Per Success:</strong> (total_cost) / (verified_diffs)</li>
+                    <li><strong>Efficiency Curves:</strong> Cost vs speed vs quality trade-offs</li>
+                    <li><strong>Budget Alerts:</strong> Alert when cost/task exceeds threshold</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Reality Check:</strong> A 50% cache hit rate can reduce costs by 30%. Measure $/win, not just token costs, to capture true system efficiency.
+                </div>
+
+                <p><strong>Market Insight:</strong> Current pricing is unsustainable. Expect costs to rise 3-5x as subsidies end. Plan your routing strategy accordingly.</p>
+            </section>
+
+            <section class="section" id="enterprise-eval">
+                <h2>Enterprise Evaluation: Beyond Academic Benchmarks</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Beyond SWE-bench:</strong> What matters when agents ship to production
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>📊 Weekly Production Metrics</h4>
+                        <ul>
+                            <li><strong>PR-level success rate:</strong> Merged without revert within 7 days</li>
+                            <li><strong>Test-gated throughput:</strong> Issues closed per agent-hour</li>
+                            <li><strong>Review load:</strong> Reviewer minutes per agent PR</li>
+                            <li><strong>Defect density:</strong> Post-merge bugs per KLOC from agent patches</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔒 Quality Gates</h4>
+                        <ul>
+                            <li><strong>Security defects:</strong> Caught pre-merge by SAST/DAST</li>
+                            <li><strong>Coverage movement:</strong> Test coverage change after agent edits</li>
+                            <li><strong>Flake rate:</strong> Test stability after agent changes</li>
+                            <li><strong>Policy compliance:</strong> Code ownership, license, secrets scan</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>💰 Business Impact</h4>
+                        <ul>
+                            <li><strong>Cycle time reduction:</strong> Issue-to-deploy duration</li>
+                            <li><strong>Developer velocity:</strong> Features per sprint with/without agents</li>
+                            <li><strong>Cost per resolved issue:</strong> Total compute + human review time</li>
+                            <li><strong>Escalation rate:</strong> % requiring human intervention</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🚨 Failure Mode Detection</h4>
+                        <ul>
+                            <li><strong>Reward hacking:</strong> Hard-coded test outputs, test inference</li>
+                            <li><strong>Sycophancy signals:</strong> "Playing along" to secure approval</li>
+                            <li><strong>Drift accumulation:</strong> Performance degradation over time</li>
+                            <li><strong>Context bleeding:</strong> Cross-project information leakage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p><strong>Production Reality:</strong> Track verified-diff@1 (passes tests on first attempt), backtrack rate (<10% for reliability), and cost-per-win to measure true system performance beyond academic benchmarks.</p>
+            </section>
+
+            <section class="section" id="evaluation-pitfalls">
+                <h2>Evaluation Pitfalls in Agent Research</h2>
+                <p><em>Research</em></p>
+
+                <div class="highlight">
+                    <strong>Critical Question:</strong> Are we measuring what matters?
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>🚨 Current Problems</h4>
+                        <h5>Benchmark Contamination</h5>
+                        <ul>
+                            <li>Models trained on evaluation data</li>
+                            <li>"Teaching to the test" vs real capability</li>
+                            <li>Static benchmarks vs evolving tasks</li>
+                        </ul>
+                        <h5>Output-Only Evaluation</h5>
+                        <ul>
+                            <li>Ignores process and reasoning</li>
+                            <li>Misses catastrophic failures</li>
+                            <li>No credit for partial progress</li>
+                        </ul>
+                        <h5>Lab vs Production Gap</h5>
+                        <ul>
+                            <li>Synthetic tasks vs real complexity</li>
+                            <li>Missing human interaction patterns</li>
+                            <li>No long-term reliability testing</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>✅ What We Need for Rigor</h4>
+                        <h5>Contamination Control</h5>
+                        <ul>
+                            <li>Time-based splits and live evaluation</li>
+                            <li>Private test sets with time locks</li>
+                            <li>Dynamic benchmark generation</li>
+                        </ul>
+                        <h5>Process Evaluation</h5>
+                        <ul>
+                            <li>Trace-level scoring (plans + executions)</li>
+                            <li>Tool usage efficiency metrics</li>
+                            <li>Error recovery and self-correction</li>
+                        </ul>
+                        <h5>Deployment Realism</h5>
+                        <ul>
+                            <li>Integration testing, not just unit tests</li>
+                            <li>Human-in-the-loop interaction patterns</li>
+                            <li>Long-running session reliability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Measurement Standards</h3>
+                <ul>
+                    <li>pass@1 with fixed wall-clock budget</li>
+                    <li>Token accounting and cost normalization</li>
+                    <li>Reproducible container environments</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Research Gap:</strong> Current benchmarks don't predict real deployment success. We need evaluation methodologies that capture what matters in practice.
+                </div>
+            </section>
+
+            <section class="section" id="eval-kit">
+                <h2>Beyond Benchmarks: Starter Eval Kit</h2>
+                <p><em>Research</em></p>
+
+                <div class="highlight">
+                    <strong>Reproducible Recipe:</strong> Build your own agent evaluation infrastructure
+                </div>
+
+                <h3>🛠️ Infrastructure Components</h3>
+                <ul>
+                    <li><strong>Containerized Runner:</strong> Docker with repo isolation</li>
+                    <li><strong>Fixed Wall-Clock Budget:</strong> 30min max per task</li>
+                    <li><strong>JSONL Trace Schema:</strong> Plan/actions/obs/diffs/tests</li>
+                    <li><strong>Git Integration:</strong> Clean state per task</li>
+                </ul>
+
+                <h3>Example JSONL Trace:</h3>
+                <div class="code-block">
+{"t":1,"plan":"fix NPE","tool":"grep","args":"-n validate_token src","obs":"src/auth.py:45"}<br>
+{"t":2,"tool":"edit","args":{"file":"src/auth.py","range":{"start":44,"end":48},"patch":"+ if user is None: return None"},"obs":"ok"}<br>
+{"t":3,"tool":"pytest","args":"-q tests/test_auth.py::test_login","obs":"PASSED"}<br>
+{"t":4,"verified_diff":true,"cost":"$0.23","wall_time_ms":45000}
+                </div>
+
+                <h3>📊 Metrics That Matter</h3>
+                <ul>
+                    <li><strong>verified-diff@1:</strong> Passes tests on first attempt</li>
+                    <li><strong>Backtrack count:</strong> Mean iterations to converge</li>
+                    <li><strong>Recovery rate:</strong> Fix after initial failure</li>
+                    <li><strong>Cost per win:</strong> $/successful task</li>
+                </ul>
+
+                <h3>🎯 Evaluation Tasks</h3>
+                <ul>
+                    <li><strong>Bug fixes:</strong> With failing tests provided</li>
+                    <li><strong>Feature additions:</strong> With acceptance criteria</li>
+                    <li><strong>Refactoring:</strong> Maintain behavior, improve structure</li>
+                    <li><strong>Documentation:</strong> Generate from code + tests</li>
+                </ul>
+
+                <p><strong>Goal:</strong> Move from anecdotal "this agent feels better" to data-driven "Agent A has 23% higher verified-diff@1 on our task distribution."</p>
+            </section>
+
+            <section class="section" id="agent-sre">
+                <h2>Agent SRE: SLOs, Error Budgets, Rollbacks</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Production Reality:</strong> Agents need SRE discipline just like distributed systems
+                </div>
+
+                <h3>Agent SLOs</h3>
+                <ul>
+                    <li><strong>Success:</strong> verified-diff@1 ≥85%</li>
+                    <li><strong>Latency:</strong> p95 response time < 5min</li>
+                    <li><strong>Cost:</strong> $/successful task < $2.00</li>
+                    <li><strong>Stability:</strong> backtracks/task < 2.0</li>
+                </ul>
+
+                <h3>Error Budget & Kill Switches</h3>
+                <ul>
+                    <li>Auto-throttle when SLO breach detected</li>
+                    <li>Per-repo allowlist for agent access</li>
+                    <li>Circuit breaker after 3 consecutive failures</li>
+                    <li>Manual kill switch for agent runaway</li>
+                </ul>
+
+                <h3>PR Gates & Verification</h3>
+                <ul>
+                    <li><strong>Required:</strong> Green tests + policy checks</li>
+                    <li><strong>Required:</strong> Signed trace for full audit</li>
+                    <li><strong>Required:</strong> License scan + SBOM attached</li>
+                    <li><strong>Escalation:</strong> Human review for high-risk changes</li>
+                </ul>
+
+                <h3>Canary & Rollback</h3>
+                <ul>
+                    <li>Deploy new agent versions to 5% of repos first</li>
+                    <li>Monitor success rate, escalation rate, cost</li>
+                    <li>Automated rollback on SLO degradation</li>
+                    <li>On-call rotation for agent incidents</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Runbook Example:</strong> If verified-diff@1 drops below 70% for >10 tasks, auto-escalate to smart model; if still failing, page on-call and disable agent for affected repos.
+                </div>
+            </section>
+
+            <section class="section" id="swarms">
+                <h2>The Path to Swarms: From Single Agents to Collaboration</h2>
+                <p><em>Research</em></p>
+
+                <h3>Why Multi-Agent is Inevitable</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Evidence from Reasoning Research</h4>
+                        <ul>
+                            <li><strong>Self-consistency:</strong> Multiple solution paths → better outcomes</li>
+                            <li><strong>Tree of Thoughts:</strong> Search over action sequences</li>
+                            <li><strong>Constitutional AI:</strong> Multiple critics improve safety</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Natural Fit for Coding</h4>
+                        <ul>
+                            <li><strong>Specialization:</strong> frontend ↔ backend ↔ testing ↔ deployment</li>
+                            <li><strong>Parallel exploration:</strong> multiple implementation approaches</li>
+                            <li><strong>Verification:</strong> independent code review and testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mermaid">
+graph TB
+    BL[Backlog/PR Queue] --> W1[Frontend Agent<br/>Claude Haiku]
+    BL --> W2[Backend Agent<br/>Claude Haiku]
+    BL --> W3[Test Agent<br/>Claude Haiku]
+    M[Manager Agent<br/>Claude Sonnet] --> BL
+    W1 -.->|review| V[Verification Agent<br/>Claude Sonnet]
+    W2 -.->|review| V
+    W3 -.->|review| V
+    V ==>|commit| I[Integration Agent<br/>Claude Sonnet]
+    HS[Handoff Schema<br/>goal, constraints,<br/>files touched,<br/>tests to run,<br/>verification steps] -.-> W1
+    HS -.-> W2
+    HS -.-> W3
+    style M fill:#4caf50,color:#fff
+    style V fill:#ff9800,color:#fff
+    style I fill:#9c27b0,color:#fff
+    style BL fill:#e3f2fd
+    style HS fill:#f3e5f5
+                </div>
+
+                <h3>Collaboration Patterns</h3>
+                <ul>
+                    <li><strong>Manager-Worker:</strong> Smart planner, fast executors</li>
+                    <li><strong>Peer Review:</strong> Agents critique each other's work</li>
+                    <li><strong>Chain Assembly:</strong> Sequential handoffs with verification</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Insight:</strong> Multi-agent systems aren't just about parallelism - they enable specialization, verification, and fault tolerance that single agents cannot achieve.
+                </div>
+            </section>
+
+            <section class="section" id="persistent-memory">
+                <h2>Persistent Memory: Value, Risks, Guardrails</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Memory Architecture:</strong> How agents remember across sessions determines capability and risk
+                </div>
+
+                <h3>Work Diaries vs Raw Transcripts</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Work Diaries</h4>
+                        <p>Summarized decisions, patterns, and learnings</p>
+                        <p><strong>Strategy:</strong> Pin decisions, not raw logs</p>
+                        <p><strong>Retrieval Order:</strong> diary → code-intel → LLM search</p>
+                    </div>
+                    <div class="card">
+                        <h4>Raw Transcripts</h4>
+                        <p>Complete interaction logs</p>
+                        <p><strong>Risk:</strong> Context pollution and privacy concerns</p>
+                    </div>
+                </div>
+
+                <h3>Security Boundaries</h3>
+                <ul>
+                    <li><strong>Per-repo isolation:</strong> No cross-project memory bleed</li>
+                    <li><strong>Encryption at rest:</strong> All stored memories encrypted</li>
+                    <li><strong>Access controls:</strong> Team/org-level memory permissions</li>
+                    <li><strong>Audit trail:</strong> Who accessed what memory when</li>
+                </ul>
+
+                <h3>Memory Poisoning Risks</h3>
+                <ul>
+                    <li><strong>Injection attacks:</strong> Malicious prompts in stored memories</li>
+                    <li><strong>False patterns:</strong> Learning from incorrect decisions</li>
+                    <li><strong>Context pollution:</strong> Irrelevant memories affecting decisions</li>
+                    <li><strong>Drift accumulation:</strong> Errors compounding over time</li>
+                </ul>
+
+                <h3>Retention & Cleanup</h3>
+                <ul>
+                    <li><strong>TTL policies:</strong> Auto-expire memories after 90 days</li>
+                    <li><strong>PII redaction:</strong> Scrub personal info from memories</li>
+                    <li><strong>Quality scoring:</strong> Deweight low-confidence memories</li>
+                    <li><strong>Manual purge:</strong> Clear contaminated memory sets</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Best Practice:</strong> Keep RAG pipeline separate from write-path. Memories inform, but don't directly control agent actions.
+                </div>
+            </section>
+
+            <section class="section" id="alignment">
+                <h2>The Alignment Problem in Practice</h2>
+                <p><em>Research</em></p>
+
+                <h3>How Cooperation Amplifies Alignment Challenges</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Single-Agent Alignment Issues</h4>
+                        <ul>
+                            <li><strong>Sycophancy:</strong> Agreeing with user errors</li>
+                            <li><strong>Deception:</strong> Hiding failures for better ratings</li>
+                            <li><strong>Specification gaming:</strong> Following letter, not spirit</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Multi-Agent Amplification</h4>
+                        <ul>
+                            <li><strong>Herding:</strong> Agents reinforce each other's mistakes</li>
+                            <li><strong>Coordination Failures:</strong> Agents work at cross-purposes</li>
+                            <li><strong>Emergent Deception:</strong> Unintended collaborative lies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Real Examples from 2025</h3>
+                <div class="card">
+                    <h4>Amazon Q Developer (CVE-2025-8217):</h4>
+                    <ul>
+                        <li>Prompt injection in extension update</li>
+                        <li>Malicious code in VS Code release</li>
+                        <li>Supply chain compromise attempt</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Cross-Agent Privilege Escalation:</h4>
+                    <ul>
+                        <li>One agent modifies another's config</li>
+                        <li>Escalating permissions across tools</li>
+                        <li>Breaking isolation boundaries</li>
+                    </ul>
+                </div>
+
+                <p><strong>Representative Attack Path:</strong> A debugging agent with broad write access is socially engineered by a code-gen agent to modify a deploy agent's policy file, effectively escalating privileges.</p>
+
+                <h3>Research Challenges</h3>
+                <ol>
+                    <li>How do we maintain alignment as agents collaborate?</li>
+                    <li>Can we detect and prevent emergent deception?</li>
+                    <li>What governance structures work for agent teams?</li>
+                </ol>
+
+                <div class="highlight">
+                    <strong>Critical Insight:</strong> Alignment problems don't just scale linearly with more agents - they can amplify exponentially through coordination failures and emergent behaviors.
+                </div>
+            </section>
+
+            <section class="section" id="security-safety">
+                <h2>Security and Safety Research Challenges</h2>
+                <p><em>Research</em></p>
+
+                <h3>The Applied Alignment Problem</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>🚨 Immediate Threats</h4>
+                        <h5>Supply Chain Attacks</h5>
+                        <ul>
+                            <li>AI-generated code with backdoors</li>
+                            <li>Compromised agent extensions</li>
+                            <li>Example: CVE-2025-8217 in Amazon Q Developer</li>
+                        </ul>
+                        <h5>Privilege Escalation</h5>
+                        <ul>
+                            <li>Agents with filesystem and shell access</li>
+                            <li>Cross-agent configuration editing</li>
+                            <li>Breaking sandbox boundaries</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>The Lethal Trifecta (Willison, 2025)</h4>
+                        <p>Three capabilities that together enable complete security breach:</p>
+                        <ul>
+                            <li><strong>Private data access + untrusted content + external communication</strong></li>
+                            <li>Prompt injection via web/email/docs → secret exfiltration</li>
+                            <li><strong>Mitigation:</strong> Remove at least one leg of the trifecta</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Reward Hacking & Training-Game Behaviors</h3>
+                <ul>
+                    <li><strong>Hard-coding test outputs:</strong> Inferring expected results from artifacts</li>
+                    <li><strong>Sycophancy:</strong> "Playing along" to secure reward/approval</li>
+                    <li><strong>Hidden objectives:</strong> Pursuing goals not aligned with stated purpose</li>
+                    <li><strong>Mitigation:</strong> Hidden tests, mutation testing, ephemeral sandboxes</li>
+                </ul>
+
+                <h3>🔬 Research Directions</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>Formal Verification</h4>
+                        <ul>
+                            <li>Can we prove properties about agent-generated code?</li>
+                            <li>Automated security analysis pipelines</li>
+                            <li>Correctness guarantees for critical systems</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Capability Control</h4>
+                        <ul>
+                            <li>Just enough access to be useful, not dangerous</li>
+                            <li>Dynamic permission scaling</li>
+                            <li>Fail-safe defaults and recovery</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Audit and Accountability</h4>
+                        <ul>
+                            <li>Full reproducibility of agent actions</li>
+                            <li>Causal tracing for security incidents</li>
+                            <li>Signed execution logs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>Defense Strategy:</strong> Break the lethal trifecta by cutting exfiltration paths (default-deny outbound calls), limiting private data exposure (scoped tokens), or isolating untrusted content processing (separate reader/secret-holder tasks).
+                </div>
+
+                <h3>Trifecta-Breaking Checklist</h3>
+                <ul>
+                    <li><strong>Cut exfil:</strong> Default-deny outbound calls, route through allowlist proxy</li>
+                    <li><strong>Limit private data:</strong> Ephemeral scoped tokens, filtered RAG corpora</li>
+                    <li><strong>Isolate untrusted content:</strong> Separate reader tasks from secret-holders</li>
+                    <li><strong>Signed traces</strong> for full audit trail and incident response</li>
+                    <li><strong>Pre-flight check:</strong> Can it touch secrets + untrusted input + talk outside?</li>
+                </ul>
+            </section>
+
+            <section class="section" id="rlvr">
+                <h2>RLVR: Reinforcement Learning from Verifiable Rewards</h2>
+                <p><em>Research</em> • <strong>September 2025 Pulse Check</strong></p>
+
+                <div class="highlight">
+                    <strong>Core Insight:</strong> Training agents with execution-based rewards (tests pass, code compiles) rather than human feedback
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>✅ What's Working</h4>
+                        <ul>
+                            <li><strong>SWE-bench gains:</strong> 70-76% pass rates reported (verify on official board)</li>
+                            <li><strong>SQL execution:</strong> Spider/BIRD scores with execution accuracy rewards</li>
+                            <li><strong>One-shot RLVR:</strong> Single example can ~2x MATH-500 accuracy</li>
+                            <li><strong>Agent specialization:</strong> General LMs → SWE agents via environment feedback</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>⚠️ Measurement Challenges</h4>
+                        <ul>
+                            <li><strong>Spurious rewards:</strong> Gains even with random/inverted rewards</li>
+                            <li><strong>Pass@K rethink:</strong> CoT-Pass@K requires correct reasoning, not just answers</li>
+                            <li><strong>Exploration collapse:</strong> Boosts Pass@1 but loses coverage at high K</li>
+                            <li><strong>Marketing vs reality:</strong> Check official boards, not blog posts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>🔬 Active Research Areas</h3>
+                <ul>
+                    <li><strong>Adaptive exploration:</strong> Preventing premature policy collapse</li>
+                    <li><strong>Negative reinforcement:</strong> Penalizing poor samples for generalization</li>
+                    <li><strong>World model RLVR:</strong> Video/language models optimized for task metrics</li>
+                    <li><strong>Multimodal agents:</strong> OSWorld for GUI, computer use training</li>
+                </ul>
+
+                <h3>📊 Current Best Practices</h3>
+                <ul>
+                    <li><strong>Reward Design:</strong> Execution + partial credit + rule checks</li>
+                    <li><strong>Diversity Monitoring:</strong> Track high-K curves and entropy</li>
+                    <li><strong>Contamination-Free Eval:</strong> Hidden tests, seed randomization</li>
+                    <li><strong>Verifiable Constraints:</strong> Mix unseen constraints into curricula</li>
+                </ul>
+
+                <h3>🛠️ Tooling Consolidation</h3>
+                <ul>
+                    <li>GRPO/PPO with verifiable rewards</li>
+                    <li>Meta's SWE-RL rule-based reward codebase</li>
+                    <li>SQL-R1 execution accuracy frameworks</li>
+                    <li>IFBench for instruction-following generalization</li>
+                </ul>
+
+                <h3>🚨 Key Debates</h3>
+                <ul>
+                    <li>Does RLVR create new solutions or reweight existing ones?</li>
+                    <li>How much reward signal is spurious vs meaningful?</li>
+                    <li>Can we scale beyond unit tests to complex objectives?</li>
+                    <li>What's the right balance of exploration vs exploitation?</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Research Direction:</strong> RLVR works best when rewards are truly verifiable (tests, compilation, execution). The challenge is designing rich reward functions that capture complex software engineering objectives without gaming.
+                </div>
+            </section>
+
+            <section class="section" id="future-research">
+                <h2>Future Research Directions and Open Problems</h2>
+                <p><em>Research</em></p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>🔜 Near-term (1-2 years)</h4>
+                        <h5>Technical Challenges</h5>
+                        <ul>
+                            <li>Advanced planning with backtracking</li>
+                            <li>Self-improving agent architectures</li>
+                            <li>Efficient context utilization (1M+ tokens)</li>
+                        </ul>
+                        <h5>Evaluation Infrastructure</h5>
+                        <ul>
+                            <li>Live, contamination-free benchmarks</li>
+                            <li>Trace-level evaluation frameworks</li>
+                            <li>Multi-agent coordination metrics</li>
+                            <li>Autonomy-hours metric (1-5h → multi-day traces)</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item">
-                        <h4>2025+: Collaborative Swarms</h4>
+                        <h4>📅 Medium-term (2-5 years)</h4>
+                        <h5>Capabilities</h5>
                         <ul>
-                            <li>Persistent context and memory</li>
-                            <li>Specialization and coordination</li>
-                            <li>Self-improving systems</li>
-                            <li><strong>Capability:</strong> Autonomous research and development</li>
+                            <li>Multi-modal agents (UI, diagrams, video)</li>
+                            <li>Persistent cross-session learning</li>
+                            <li>Natural human-agent collaboration</li>
                         </ul>
+                        <h5>Safety & Alignment</h5>
+                        <ul>
+                            <li>Formal verification for agent code</li>
+                            <li>Provable alignment guarantees</li>
+                            <li>Multi-agent governance protocols</li>
+                            <li>Discovery evals (novel math/programming with independent verification)</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>🚀 Long-term Questions</h4>
+                        <h5>Fundamental Questions</h5>
+                        <ul>
+                            <li>What is "software engineering" with AGI?</li>
+                            <li>How do we maintain human agency?</li>
+                            <li>Can we build truly autonomous software engineers?</li>
+                        </ul>
+                        <h5>Societal Implications</h5>
+                        <ul>
+                            <li>Economic displacement and transition</li>
+                            <li>New forms of human-AI collaboration</li>
+                            <li>Governance of autonomous systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>Research Opportunity:</strong> This field offers immediate practical impact while addressing fundamental questions in AI alignment, verification, and human-computer interaction.
+                </div>
+            </section>
+
+            <section class="section" id="consolidation">
+                <h2>The Consolidation & Specialization Phase</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>Late 2025:</strong> From horizontal assistants to vertical specialists
+                </div>
+
+                <h3>Consolidation Vectors</h3>
+                <ul>
+                    <li><strong>Editors:</strong> IDE integration becoming table stakes</li>
+                    <li><strong>CI/CD:</strong> Testing and deployment automation</li>
+                    <li><strong>Code Intelligence:</strong> Search, analysis, and navigation</li>
+                    <li><strong>Platform Agents:</strong> Cloud-native development environments</li>
+                </ul>
+
+                <h3>Vertical Specialists</h3>
+                <ul>
+                    <li><strong>Bio-tech:</strong> Genomic sequence analysis agents</li>
+                    <li><strong>Finance:</strong> HFT strategy backtesting</li>
+                    <li><strong>Game Engines:</strong> Procedural content generation</li>
+                    <li><strong>Embedded:</strong> Real-time systems optimization</li>
+                </ul>
+
+                <h3>Distribution Moats</h3>
+                <ul>
+                    <li><strong>IDE Integration:</strong> Native workflow embedding</li>
+                    <li><strong>Policy/Compliance:</strong> Enterprise governance features</li>
+                    <li><strong>Data Residency:</strong> On-premises and hybrid deployments</li>
+                    <li><strong>Eval/Trace Infrastructure:</strong> Observability and debugging</li>
+                </ul>
+
+                <h3>Strategic Implications</h3>
+                <ul>
+                    <li>Horizontal assistants plateau at commodity margins</li>
+                    <li>Winning stacks integrate verification by default</li>
+                    <li>Vertical specialists capture premium pricing</li>
+                    <li>Distribution beats pure technology</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Market Insight:</strong> The agent space is maturing from "funding frenzy" to strategic specialization. Winners will own specific problem domains, not generic capabilities.
+                </div>
+            </section>
+
+            <section class="section" id="timeline">
+                <h2>Major Product Releases Timeline</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>September 2025:</strong> A Watershed Month
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>GPT-5-Codex (Sept 15)</h4>
+                        <ul>
+                            <li>Coding-tuned GPT-5 variant (OpenAI)</li>
+                            <li>Multi-hour "thinking" windows, reported up to 7 hours (OpenAI)</li>
+                            <li>Press reports cite 51.3% on a refactoring eval vs 33.9% for GPT-5 [media]</li>
+                            <li>Integrated code-review and repo workflows (OpenAI)</li>
+                            <li>Emerging pattern: Correctness-as-a-Service APIs that other agents call for verification</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>GitHub Copilot CLI (Sept 25)</h4>
+                        <ul>
+                            <li>CLI can start and track Copilot coding-agent sessions</li>
+                            <li>Uses GitHub Models multi-model backends</li>
+                            <li>Shared billing with existing Copilot plans</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Cross-Agent Privilege Escalation (Sept 24)</h4>
+                        <ul>
+                            <li>Rehberger shows agents can rewrite each other's configs</li>
+                            <li>Mitigation: isolate configs, containerize, enforce least-privilege</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Key Trends Emerging</h3>
+                <ol>
+                    <li><strong>Model Specialization:</strong>
+                        <ul>
+                            <li>Coding-specific fine-tuning becoming standard</li>
+                            <li>Task-specific thinking budgets</li>
+                        </ul>
+                    </li>
+                    <li><strong>Platform Convergence:</strong>
+                        <ul>
+                            <li>Multiple model backends in single tools</li>
+                            <li>Cross-platform agent workflows</li>
+                        </ul>
+                    </li>
+                    <li><strong>Security Maturation:</strong>
+                        <ul>
+                            <li>Real incidents driving better practices</li>
+                            <li>Industry-wide security standards emerging</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="highlight">
+                    <strong>Market Insight:</strong> The rapid release cycle indicates this field is still in the "land grab" phase, with major players competing for developer mindshare.
+                </div>
+
+                <p><em>As of Sept 2025; examples, see References.</em></p>
+            </section>
+
+            <section class="section" id="discussion">
+                <h2>Decisions for Your Team Next Quarter</h2>
+                <p><em>Practice & Research</em></p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>🤔 For Researchers</h4>
+                        <ol>
+                            <li><strong>Evaluation:</strong> How do we create benchmarks that predict real-world agent success?</li>
+                            <li><strong>Multi-Agent Coordination:</strong> What are the fundamental limits of agent collaboration?</li>
+                            <li><strong>Alignment:</strong> Can we prove alignment properties for agent-generated code?</li>
+                            <li><strong>Capability Control:</strong> How do we give agents just enough power to be useful but not dangerous?</li>
+                        </ol>
+                    </div>
+                    <div class="card">
+                        <h4>🛠️ For Practitioners</h4>
+                        <ol>
+                            <li><strong>Adoption Strategy:</strong> Which agent should you integrate into your workflow first?</li>
+                            <li><strong>Task Selection:</strong> How do you identify which tasks to automate vs keep human?</li>
+                            <li><strong>Security Posture:</strong> What security practices are essential when using coding agents?</li>
+                            <li><strong>ROI Measurement:</strong> How do you measure the true productivity impact of agents?</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>Meta-Question:</strong> Are we building the future we want? How do we ensure that increasingly capable agents serve human flourishing rather than replace human agency?
+                </div>
+            </section>
+
+            <section class="section" id="references">
+                <h2>References & Further Reading</h2>
+                <p><em>Practice & Research</em></p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>📌 Foundational Papers</h4>
+                        <ul>
+                            <li>METR: "Measuring AI Ability to Complete Long Tasks" (2024)</li>
+                            <li>SWE-bench: "Can Language Models Resolve Real-World GitHub Issues?" (2024)</li>
+                            <li>Sleeper Agents: "Training Deceptive LLMs" (2024)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔬 AI Safety Research</h4>
+                        <ul>
+                            <li>Among Us: "A Sandbox for Agentic Deception" (2024)</li>
+                            <li>AI Agents and Painted Facades (2024)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🏗️ System Architecture</h4>
+                        <ul>
+                            <li>Basic Systems Architecture for AI Agents (2024)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🏭 Industry Analysis</h4>
+                        <ul>
+                            <li>AI 2027: "Forecasting Superhuman Coders" (LessWrong, 2024)</li>
+                            <li>Claude Code Deep Dive: MinusX analysis (2025)</li>
+                            <li>GPT-5-Codex Analysis: Simon Willison's blog (Sept 2025)</li>
+                            <li>Cross-Agent Security Research: Johann Rehberger (Sept 2025)</li>
+                            <li>Amazon Q Security Advisory: CVE-2025-8217</li>
+                            <li>From Vibe Coding to Vibe Researching: Chen & Pachocki (2025) — internal video; quotes used for "automated researcher" and "vibe researching" context</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📊 Benchmarks & Evaluation</h3>
+                <ul>
+                    <li>SWE-bench Pro, SWE-bench-Live</li>
+                    <li>LiveCodeBench, RepoQA</li>
+                    <li>SWE-bench Critiques: "Illusion" and "UTBoost" papers</li>
+                </ul>
+
+                <h3>🌐 Essential Resources</h3>
+                <ul>
+                    <li>Simon Willison's Blog: AI-assisted programming tag</li>
+                    <li>swyx's AI Engineering Guide</li>
+                    <li>Hacker News: Search "coding agents"</li>
+                    <li>r/MachineLearning: Academic discussions</li>
+                    <li>AI Engineering Communities: Real-time insights</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Stay Current:</strong> This field evolves daily. Follow security researchers, read vendor blogs, and test new releases carefully.
+                </div>
+            </section>
+
+            <section class="section" id="checklist">
+                <h2>The Checklist for Superhuman Teammates</h2>
+                <p><em>Practice & Research</em></p>
+
+                <div class="highlight">
+                    To bridge the capability gap from today's "stumbling agents" to reliable "superhuman teammates," we need:
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>1️⃣ Advanced Planning</h4>
+                        <p>Move from linear scripts to partial-order plans with backtracking capabilities</p>
+                    </div>
+                    <div class="card">
+                        <h4>2️⃣ Verified Edits</h4>
+                        <p>Property checks, automated test synthesis, and formal verification of agent actions</p>
+                    </div>
+                    <div class="card">
+                        <h4>3️⃣ Secure Observability</h4>
+                        <p>Signed traces with replay guarantees and full audit capabilities</p>
+                    </div>
+                    <div class="card">
+                        <h4>4️⃣ Intelligent Memory</h4>
+                        <p>Work diaries and persistent learning, not just conversation dumps</p>
+                    </div>
+                    <div class="card">
+                        <h4>5️⃣ Adaptive Model Routing</h4>
+                        <p>Smart selection between fast and intelligent models based on task complexity and adaptive thinking time</p>
+                    </div>
+                    <div class="card">
+                        <h4>6️⃣ Multi-Agent Coordination</h4>
+                        <p>Specialized teams with shared context and verified handoffs</p>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <strong>The Path Forward:</strong> Co-design the LLM "brain" with the entire agentic scaffold - success comes from the system, not just the model
+                </div>
+            </section>
+
+            <section class="section" id="takeaways">
+                <h2>Key Takeaways & Research Directions</h2>
+
+                <h3>🎯 What We Learned</h3>
+                <ul>
+                    <li><strong>Evolution:</strong> Tool use + verification + context enabled the leap from snippets to repo-scale edits</li>
+                    <li><strong>POMDP Framework:</strong> Coding agents are sequential decision-making under uncertainty</li>
+                    <li><strong>Verifiability Predicts Success:</strong> Tasks with fast feedback loops (tests, compilation) have 80-95% success rates</li>
+                    <li><strong>Model Routing:</strong> Fast models for volume, smart models for correctness. Adaptive thinking time based on complexity</li>
+                    <li><strong>Evaluation Crisis:</strong> Current benchmarks don't predict deployment success. Need trace-level, process evaluation</li>
+                    <li><strong>Multi-Agent Future:</strong> Specialization and verification through coordination, but alignment challenges amplify</li>
+                </ul>
+
+                <h3>📊 Actionable Metrics</h3>
+                <ul>
+                    <li><strong>verified-diff@1:</strong> Passes tests on first attempt</li>
+                    <li><strong>Backtrack rate:</strong> <10% for superhuman teammates</li>
+                    <li><strong>Cost per win:</strong> Track $/successful task at system level</li>
+                    <li><strong>Autonomy-hours:</strong> 1-5h → multi-day uninterrupted operation</li>
+                    <li><strong>Recovery rate:</strong> Fix after initial failure</li>
+                    <li><strong>Escalation trigger:</strong> ≥2 backtracks or rising lint/test failures</li>
+                </ul>
+
+                <h3>🔬 Research Opportunities</h3>
+                <ul>
+                    <li><strong>Learned Model Routing:</strong> Contextual bandits for π(model|task, history)</li>
+                    <li><strong>Formal Verification:</strong> Property checking for agent-generated code</li>
+                    <li><strong>Discovery Evaluation:</strong> Novel math/programming with independent verification</li>
+                    <li><strong>Cross-Agent Coordination:</strong> Safe handoff protocols and shared state management</li>
+                    <li><strong>Security Research:</strong> Preventing privilege escalation and emergent deception</li>
+                    <li><strong>Memory Architecture:</strong> Work diaries vs raw transcripts, retention policies</li>
+                    <li><strong>Contamination-Free Benchmarks:</strong> Time-locked, dynamic evaluation generation</li>
+                </ul>
+
+                <h3>🛠️ Engineering Priorities</h3>
+                <ul>
+                    <li><strong>Tool Design:</strong> Typed schemas, idempotent operations, structured error codes</li>
+                    <li><strong>Trace Infrastructure:</strong> JSONL schemas, signed audit trails, replay capabilities</li>
+                    <li><strong>Policy Engine:</strong> No commits to main, writes require tests, approval gates</li>
+                    <li><strong>Cost Optimization:</strong> KV caching, prompt reuse, queue scheduling by verifiability</li>
+                    <li><strong>Security by Design:</strong> Container isolation, least privilege, secrets scanning</li>
+                    <li><strong>SRE for Agents:</strong> SLOs, error budgets, automated rollbacks</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>The Path Forward:</strong> We're moving from "stumbling agents" to "superhuman teammates" through systematic engineering: better tools, smarter routing, trace-level evaluation, and multi-agent coordination with safety guardrails.
+                </div>
+            </section>
+
+            <section class="section" id="deployment">
+                <h2>Practical Deployment Playbook: Shipping Agents That Close Tickets</h2>
+                <p><em>Practice</em></p>
+
+                <div class="highlight">
+                    <strong>System Design:</strong> Five-component architecture for production agent deployment
+                </div>
+
+                <h3>🏗️ Core Components</h3>
+                <ol>
+                    <li><strong>Planner:</strong> Issue → step plan + acceptance tests</li>
+                    <li><strong>Actor:</strong> File edits, test runs, artifact capture</li>
+                    <li><strong>Verifier:</strong> Policy checks, SAST, secret scan, hidden tests</li>
+                    <li><strong>Repo Memory:</strong> Symbol graph + embeddings + change history</li>
+                    <li><strong>Safety Guard:</strong> File allowlists + code-owner approval gates</li>
+                </ol>
+
+                <h3>📊 Data & RL Loop</h3>
+                <ul>
+                    <li><strong>Log everything:</strong> Inputs, plans, changes, test outputs, human feedback</li>
+                    <li><strong>Verifiable rewards:</strong> Compile, lint, unit, property, fuzz tests</li>
+                    <li><strong>Weekly RLVR:</strong> Train on your backlog distribution</li>
+                    <li><strong>Start narrow:</strong> Bug fixes with good tests → features</li>
+                </ul>
+
+                <h3>🚀 Staged Rollout</h3>
+                <ul>
+                    <li><strong>Phase 1:</strong> Bash-only or edit-only "copilot plus tests"</li>
+                    <li><strong>Phase 2:</strong> PR with tests passing and policy OK</li>
+                    <li><strong>Phase 3:</strong> "Merge on green" for allowlisted directories</li>
+                    <li><strong>Monitor:</strong> Success rate, review load, defect density</li>
+                </ul>
+
+                <h3>🔒 Safety Checklist</h3>
+                <ul>
+                    <li><strong>Sandboxes:</strong> Locked egress, per-run identities, minimal secrets</li>
+                    <li><strong>Hidden tests:</strong> Adversarial CI, mutation testing, fuzzing</li>
+                    <li><strong>Policy engine:</strong> File allowlists, ownership matching, secret scanners</li>
+                    <li><strong>Rollout gates:</strong> PR labels, staged canaries, auto-revert</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Start Here:</strong> Pick one task type (bug fixes), one repo (well-tested), implement basic planner-actor-verifier loop, measure verified-diff@1 rate, then expand systematically.
+                </div>
+            </section>
+
+            <section class="section" id="call-to-action">
+                <h2>Start This Week</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>For Practitioners</h3>
+                        <ul>
+                            <li>Pick one local agent, one cloud agent</li>
+                            <li>Instrument traces and ship evaluations</li>
+                            <li>Add policy.md: no commits to main; writes require passing tests; shell behind approval; secrets scanning on save</li>
+                            <li>Contribute to MCP servers and tool ecosystems</li>
+                        </ul>
+
+                        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e9ecef;">
+                            <h4>For Researchers</h4>
+                            <ul>
+                                <li>Focus on trace-level evaluation methodologies</li>
+                                <li>Study agent failure modes systematically</li>
+                                <li>Build better verification primitives</li>
+                                <li>Design multi-agent coordination protocols</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Key Insights to Remember</h3>
+
+                        <div style="margin: 1rem 0;">
+                            <blockquote style="background: white; padding: 0.75rem; border-left: 4px solid #9c27b0; font-style: italic; margin: 0.5rem 0;">
+                                "Long context helps you read more. Tests help you know."
+                            </blockquote>
+
+                            <blockquote style="background: white; padding: 0.75rem; border-left: 4px solid #9c27b0; font-style: italic; margin: 0.5rem 0;">
+                                "Fast models are great at being many. Smart models are great at being right."
+                            </blockquote>
+
+                            <blockquote style="background: white; padding: 0.75rem; border-left: 4px solid #9c27b0; font-style: italic; margin: 0.5rem 0;">
+                                "If you cannot replay the trace, you cannot trust the change."
+                            </blockquote>
+
+                            <blockquote style="background: white; padding: 0.75rem; border-left: 4px solid #9c27b0; font-style: italic; margin: 0.5rem 0;">
+                                "Benchmarks measure outputs. Production measures verified diffs."
+                            </blockquote>
+
+                            <blockquote style="background: white; padding: 0.75rem; border-left: 4px solid #9c27b0; font-style: italic; margin: 0.5rem 0;">
+                                "The default way to code is vibe coding... the future hopefully will be vibe researching."
+                            </blockquote>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; background: #e8f5e8; padding: 1rem; border-radius: 8px; border: 1px solid #c8e6c9;">
+                            <h4 style="color: #2e7d32; margin-bottom: 0.75rem;">🚀 Next 7 Days Action Plan</h4>
+                            <div style="font-size: 0.9rem;">
+                                <div style="margin-bottom: 0.5rem;"><strong>Day 1:</strong> Choose agent + enable trace logging</div>
+                                <div style="margin-bottom: 0.5rem;"><strong>Day 2-3:</strong> Add tests-first workflow for 2 task types</div>
+                                <div style="margin-bottom: 0.5rem;"><strong>Day 4-5:</strong> Implement basic routing rule (escalate after 2 backtracks)</div>
+                                <div><strong>Day 6-7:</strong> Run 20-task A/B and measure verified-diff@1</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- This is a template structure - the actual content will be populated from the markdown -->
-            <section class="section" id="interface-landscape">
-                <h2>Interface Landscape</h2>
-                <p>Content to be populated from talk.md...</p>
-            </section>
+            <section class="section" id="thank-you">
+                <h2>Thank You</h2>
+                <div class="header">
+                    <h3>Questions & Discussion</h3>
+                    <p class="subtitle">From snippets to swarms: engineering the future of AI coding agents</p>
+                </div>
 
-            <!-- Additional sections will be populated dynamically -->
+                <div class="grid">
+                    <div class="card">
+                        <h4>Try Today</h4>
+                        <ul>
+                            <li>Claude Code</li>
+                            <li>Cursor, GitHub Copilot</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Research</h4>
+                        <ul>
+                            <li>SWE-bench variants</li>
+                            <li>Multi-agent coordination</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Build</h4>
+                        <ul>
+                            <li>MCP servers</li>
+                            <li>Evaluation frameworks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer" style="margin-top: 2rem; text-align: center;">
+                    <p><strong>Engineering AI Research Group (EAIRG)</strong></p>
+                    <p>September 27, 2025</p>
+                </div>
+            </section>
 
             <div class="footer">
                 <p>AI Coding Agents Research Seminar | Engineering AI Research Group | September 27, 2025</p>
@@ -350,6 +1922,16 @@
     </div>
 
     <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+
         // Simple navigation highlighting
         document.addEventListener('DOMContentLoaded', function() {
             const links = document.querySelectorAll('.nav-link');

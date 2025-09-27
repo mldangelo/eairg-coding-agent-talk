@@ -51,7 +51,6 @@ This presentation follows a four-act structure: deconstructing modern agents, un
 layout: section
 ---
 
-# Act I: The Blueprint
 ## Deconstructing the Modern Agent
 
 <div class="text-lg opacity-75 mt-8">
@@ -66,12 +65,15 @@ Act I builds our foundation. We'll trace the evolutionary path, establish the th
 layout: default
 ---
 
-# Evolution: From Autocomplete to Agents
+# From Completions to Repo Edits
 *Practice*
 
 <div class="grid grid-cols-2 gap-6">
 
 <div class="space-y-4">
+
+<v-clicks>
+
 <div class="p-4 bg-gray-50 rounded border">
 <h3 class="font-bold text-blue-600 mb-3">2019-2021: Text-to-Code</h3>
 <ul class="text-sm space-y-1">
@@ -91,9 +93,15 @@ layout: default
 <li class="font-semibold text-green-600 mt-2">→ Capability: Single-file modifications</li>
 </ul>
 </div>
+
+</v-clicks>
+
 </div>
 
 <div class="space-y-4">
+
+<v-clicks>
+
 <div class="p-4 bg-green-50 rounded border">
 <h3 class="font-bold text-blue-600 mb-3">2024-2025: Agentic Loops</h3>
 <ul class="text-sm space-y-1">
@@ -101,6 +109,7 @@ layout: default
 <li>• SWE-bench: repo-scale edits</li>
 <li>• Long context + thinking budgets</li>
 <li>• Rise of "Vibe Coding": AI-first development</li>
+<li>• Adaptive thinking time (dynamic presets)</li>
 <li class="font-semibold text-green-600 mt-2">→ Capability: Multi-file, verified changes</li>
 </ul>
 </div>
@@ -115,6 +124,9 @@ layout: default
 <li class="font-semibold text-purple-600 mt-2">→ Target: The Automated Researcher</li>
 </ul>
 </div>
+
+</v-clicks>
+
 </div>
 
 </div>
@@ -264,10 +276,21 @@ layout: default
 layout: default
 ---
 
-# The Conceptual Framework
+# Why Agents Fail: Partial Observability
 *Research*
 
 ## Formalizing Coding Agents as POMDPs
+
+<div class="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+<strong class="text-green-800">Concrete Example: Fixing a Null Pointer Bug</strong>
+<div class="mt-3 text-sm">
+<strong>State $s$:</strong> Repository at commit abc123 with test_user_validation.py failing<br>
+<strong>Action $a$:</strong> Edit user.py:47 to add `if user is not None:` boundary check<br>
+<strong>Observation $o$:</strong> `pytest -q test_user_validation.py` returns "PASSED" (green)<br>
+<strong>Belief Update:</strong> Agent believes null pointer issue is resolved<br>
+<strong>Why POMDP:</strong> Agent can't directly see all code paths—must infer correctness from test feedback
+</div>
+</div>
 
 <div class="grid grid-cols-2 gap-6">
 
@@ -275,6 +298,9 @@ layout: default
 
 <div class="bg-gray-50 p-4 rounded border">
 <h3 class="font-bold mb-3">POMDP Components</h3>
+
+<v-clicks>
+
 <ul class="text-sm space-y-2">
 <li><strong>States</strong> $s$: Repository state (files, dependencies, tests)</li>
 <li><strong>Actions</strong> $a$: Tool calls (read, edit, execute, search)</li>
@@ -286,6 +312,9 @@ layout: default
 <div class="mt-3 p-2 bg-blue-100 rounded text-sm">
 <strong>Policy:</strong> $\pi(a|h)$ where $h$ is action-observation history
 </div>
+
+</v-clicks>
+
 </div>
 
 </div>
@@ -309,23 +338,8 @@ graph LR
 <strong class="text-blue-600">Key Challenge:</strong> Partial observability means agents must infer repository state from limited feedback.
 </div>
 
-<div class="mt-2 text-xs text-gray-600">
-*Example ranges only; replace with org baselines*
 </div>
 
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Concrete Example: Fixing a Null Pointer Bug</strong>
-<div class="mt-3 text-sm">
-<strong>State $s$:</strong> Repository at commit abc123 with test_user_validation.py failing<br>
-<strong>Action $a$:</strong> Edit user.py:47 to add `if user is not None:` boundary check<br>
-<strong>Observation $o$:</strong> `pytest -q test_user_validation.py` returns "PASSED" (green)<br>
-<strong>Belief Update:</strong> Agent believes null pointer issue is resolved<br>
-<strong>Why POMDP:</strong> Agent can't directly see all code paths—must infer correctness from test feedback
-</div>
 </div>
 
 <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
@@ -342,7 +356,7 @@ The parallel to robotics is important - we're essentially doing "software roboti
 layout: default
 ---
 
-# Anatomy of a SOTA Agent: Claude Code Case Study
+# Claude Code: The Minimal Loop That Scales
 *Practice*
 
 <div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
@@ -585,7 +599,6 @@ Progression: brittle → structured → semantic
 layout: section
 ---
 
-# Act II: The Proving Ground
 ## Performance, Reliability & Cost
 
 <div class="text-lg opacity-75 mt-8">
@@ -602,7 +615,7 @@ The verifiability insight is crucial: it's the single best predictor of agent su
 layout: default
 ---
 
-# The Verifiability Frontier
+# Design Tasks the Agent Can Verify
 *Practice*
 
 ## The Single Best Predictor of Agent Success
@@ -633,6 +646,10 @@ graph LR
     style B fill:#4caf50,color:#fff
     style D fill:#f44336,color:#fff
 ```
+
+<div class="mt-2 text-xs text-center font-mono text-gray-600">
+Track time-to-first-green-test per task
+</div>
 
 <div class="mt-3 bg-green-50 p-2 rounded border border-green-200">
 <h4 class="font-semibold text-green-700 mb-1 text-sm">✅ Verifiable Tasks (High Success Rate)</h4>
@@ -698,6 +715,8 @@ layout: default
 
 <div>
 
+<v-clicks>
+
 <div class="bg-red-50 p-3 rounded border border-red-200">
 <h4 class="font-semibold text-red-700 mb-2 text-sm">❌ Pre: Failing Test</h4>
 <div class="text-sm font-mono">
@@ -723,9 +742,13 @@ FAILED test_auth.py::test_login - AttributeError:
 </div>
 </div>
 
+</v-clicks>
+
 </div>
 
 <div>
+
+<v-clicks>
 
 <div class="bg-green-50 p-3 rounded border border-green-200">
 <h4 class="font-semibold text-green-700 mb-2 text-sm">✅ Post: Green Test</h4>
@@ -749,6 +772,8 @@ PASSED                                [100%]
 </ul>
 </div>
 
+</v-clicks>
+
 </div>
 
 </div>
@@ -761,7 +786,7 @@ PASSED                                [100%]
 layout: default
 ---
 
-# Model Routing: The Core Trade-off
+# Model Routing A: The Core Trade-off
 *Practice* • **A. Trade-off**
 
 <div class="mb-2 p-2 bg-purple-50 rounded border border-purple-200">
@@ -820,6 +845,10 @@ Rule of thumb: If last 2 steps were backtracks → escalate to smarter model
 </div>
 </div>
 
+<div class="bg-purple-50 p-2 rounded border border-purple-200 mt-2">
+<strong class="text-purple-800 text-xs">Pattern:</strong> Error rate often rises with step count; cap plan length; escalate on 2 backtracks or rising lint/test fail streaks.
+</div>
+
 </div>
 
 </div>
@@ -843,7 +872,7 @@ The formula shows that wall-clock time depends on both raw speed and the number 
 layout: default
 ---
 
-# Model Routing: Practical Decision Table
+# Routing Heuristic You Can Ship Today
 *Practice* • **B. Heuristic**
 
 <div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
@@ -898,7 +927,7 @@ The key insight is in hybrid patterns - combining multiple models in a single wo
 layout: default
 ---
 
-# Model Routing: The Economics
+# Model Routing C: The Economics
 *Practice* • **C. Economics**
 
 <div class="mb-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
@@ -1139,7 +1168,7 @@ layout: default
 layout: default
 ---
 
-# Model Routing: The Research Frontier
+# Model Routing D: The Research Frontier
 *Research* • **D. Learned Routing**
 
 <div class="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
@@ -1208,7 +1237,7 @@ The contextual bandit formulation is key because it captures the sequential deci
 layout: default
 ---
 
-# Evaluation Pitfalls in Agent Research
+# Stop Measuring the Wrong Thing
 *Research*
 
 <div class="mb-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
@@ -1243,7 +1272,7 @@ layout: default
 </div>
 
 <div class="bg-red-50 p-2 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-1 text-sm">Lab vs Production Gap</h4>
+<h4 class="font-semibold text-red-700 mb-1 text-sm">The Deployment Cliff</h4>
 <ul class="text-xs space-y-1">
 <li>• Synthetic tasks vs real complexity</li>
 <li>• Missing human interaction patterns</li>
@@ -1464,7 +1493,6 @@ layout: default
 layout: section
 ---
 
-# Act III: The Horizon
 ## Swarms, Safety & The Future
 
 <div class="text-lg opacity-75 mt-8">
@@ -1481,7 +1509,7 @@ The alignment and safety challenges become much more complex in multi-agent sett
 layout: default
 ---
 
-# The Path to Swarms: From Single Agents to Collaboration
+# When Many Agents Beat One
 *Research*
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
@@ -1635,7 +1663,7 @@ layout: default
 layout: default
 ---
 
-# The Alignment Problem in Practice
+# Cooperation Amplifies Misalignment
 *Research*
 
 <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-200">
@@ -1722,7 +1750,7 @@ Multi-agent systems make these problems worse because agents can coordinate in u
 layout: default
 ---
 
-# Security and Safety Research Challenges
+# Guardrails That Ship
 *Research*
 
 <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-200">
@@ -1926,7 +1954,7 @@ layout: default
 layout: default
 ---
 
-# Future Research Directions and Open Problems
+# What's Next (Engineering + Research)
 *Research*
 
 <div class="grid grid-cols-2 gap-8">
@@ -2044,7 +2072,6 @@ The near-term work is essential for making current systems reliable. The long-te
 layout: section
 ---
 
-# Act IV: The Ecosystem
 ## Market Forces & Final Thoughts
 
 <div class="text-lg opacity-75 mt-8">
@@ -2061,7 +2088,7 @@ This context is crucial for understanding why certain research directions matter
 layout: default
 ---
 
-# The Consolidation & Specialization Phase
+# Where the Market Is Moving
 *Practice*
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
@@ -2248,7 +2275,7 @@ The convergence trends are particularly important - the field is moving toward m
 layout: default
 ---
 
-# Discussion Questions
+# Decisions for Your Team Next Quarter
 *Practice & Research*
 
 <div class="grid grid-cols-2 gap-8">
@@ -2287,19 +2314,23 @@ layout: default
 
 <div class="space-y-3 text-sm">
 <div>
-<strong>1. Adoption Strategy:</strong> Which agent should you integrate into your workflow first?
+<strong>1. Routing triggers:</strong> Escalate to smart model after 2 backtracks; cap plan length at 10 steps
 </div>
 
 <div>
-<strong>2. Task Selection:</strong> How do you identify which tasks to automate vs keep human?
+<strong>2. PR gates:</strong> Require green tests + SBOM + license scan before merge
 </div>
 
 <div>
-<strong>3. Security Posture:</strong> What security practices are essential when using coding agents?
+<strong>3. Agent SLOs:</strong> verified-diff@1 ≥85%, p95 latency <5min, $/win <$2.00
 </div>
 
 <div>
-<strong>4. ROI Measurement:</strong> How do you measure the true productivity impact of agents?
+<strong>4. Isolation policy:</strong> Per-agent containers, read-only filesystem, approval for write/exec
+</div>
+
+<div>
+<strong>5. Budget per task:</strong> $5 max; kill runaway sessions after 30 minutes
 </div>
 </div>
 
@@ -2645,7 +2676,7 @@ layout: default
 layout: default
 ---
 
-# Call to Action
+# Start This Week
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -2654,6 +2685,8 @@ layout: default
 <ul class="space-y-2 text-sm">
 <li>• Pick one local agent, one cloud agent</li>
 <li>• Instrument traces and ship evaluations</li>
+<li>• <strong>Governance:</strong> No merges without green tests + SBOM + license scan + signed trace</li>
+<li>• <strong>Auto-escalation:</strong> Escalate after 2 backtracks; cap plan length</li>
 <li>• Add policy.md: no commits to main; writes require passing tests; shell behind approval; secrets scanning on save</li>
 <li>• Contribute to MCP servers and tool ecosystems</li>
 </ul>
