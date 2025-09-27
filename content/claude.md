@@ -359,7 +359,7 @@ This is the most powerful tool. It requires precision.
 
 1.  **Claude's Thought:** "I have read the file and know what to change. I will replace the old function with the new one, including the docstring."
 2.  **Tool Call:** replace(file_path, old_string, new_string)
-    - old_string: Contains the _exact_ original function text, with several lines of context before and after to ensure a unique match.
+    - old*string: Contains the \_exact* original function text, with several lines of context before and after to ensure a unique match.
     - new_string: Contains the new version of the function, with the added docstring.
 3.  **User Confirmation:** Claude Code prompts the user to approve the change.
 4.  **Execution:** If approved, the file is modified on disk.

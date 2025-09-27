@@ -1,6 +1,7 @@
 # Slidev Presentation Instructions
 
 ## Overview
+
 Your talk has been converted to a fully-featured Slidev presentation with:
 
 - **14 main slides** plus cover, discussion, references, and thank you slides
@@ -11,6 +12,7 @@ Your talk has been converted to a fully-featured Slidev presentation with:
 ## Key Features Added
 
 ### 1. **Slide Layouts**
+
 - `cover` - Title slide with background and navigation
 - `default` - Standard content slides
 - `two-cols` - Side-by-side comparisons
@@ -18,17 +20,20 @@ Your talk has been converted to a fully-featured Slidev presentation with:
 - `end` - Thank you slide
 
 ### 2. **Interactive Elements**
+
 - `<v-clicks>` - Progressive revelation of content
 - Hover effects on navigation elements
 - Click-to-advance functionality
 
 ### 3. **Visual Enhancements**
+
 - **Mermaid diagrams** for system architecture, agentic loops, and multi-agent workflows
 - **Mathematical notation** using LaTeX syntax
 - **Color-coded sections** with semantic backgrounds
 - **Grid layouts** for organized content presentation
 
 ### 4. **Presenter Features**
+
 - **Speaker notes** in HTML comments (`<!-- -->`)
 - **Progressive disclosure** to control information flow
 - **Visual hierarchy** with proper typography and spacing
@@ -36,17 +41,20 @@ Your talk has been converted to a fully-featured Slidev presentation with:
 ## Running the Presentation
 
 ### Prerequisites
+
 ```bash
 npm install -g @slidev/cli
 ```
 
 ### Start Development Server
+
 ```bash
 cd /path/to/eairg-agent-talk
 slidev talk.md
 ```
 
 ### Export Options
+
 ```bash
 # Export to PDF
 slidev export talk.md
@@ -61,19 +69,25 @@ slidev build talk.md
 ## Customization Options
 
 ### Themes
+
 The presentation uses the `academic` theme. You can change it in the frontmatter:
+
 ```yaml
-theme: default  # or seriph, apple, etc.
+theme: default # or seriph, apple, etc.
 ```
 
 ### Background Images
+
 Add images to `./images/` directory and reference in frontmatter:
+
 ```yaml
 background: ./images/your-background.jpg
 ```
 
 ### Transitions
+
 Current transition is `slide-left`. Options include:
+
 - `slide-up`, `slide-down`, `slide-right`
 - `fade`, `zoom`
 
@@ -105,11 +119,13 @@ Current transition is `slide-left`. Options include:
 ## Troubleshooting
 
 ### Common Issues
+
 - **Missing diagrams**: Ensure Mermaid is properly installed
 - **LaTeX not rendering**: Check mathematical notation syntax
 - **Layout issues**: Verify grid class names and structure
 
 ### Performance
+
 - **Large presentations**: Consider splitting into multiple files
 - **Image optimization**: Compress background images for faster loading
 
