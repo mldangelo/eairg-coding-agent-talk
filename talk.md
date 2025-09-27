@@ -1677,11 +1677,12 @@ layout: default
 </div>
 
 <div class="bg-red-50 p-3 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-2">Information Leakage</h4>
+<h4 class="font-semibold text-red-700 mb-2">The Lethal Trifecta (Willison, 2025)</h4>
+<p class="text-xs mb-2 text-red-600">Three capabilities that together enable complete security breach:</p>
 <ul class="text-sm space-y-1">
-<li>• Agents exposing API keys and secrets</li>
-<li>• Inadvertent data exfiltration</li>
-<li>• Context bleeding between projects</li>
+<li>• <strong>Private data access</strong> + <strong>untrusted content</strong> + <strong>external communication</strong></li>
+<li>• Prompt injection via web/email/docs → secret exfiltration</li>
+<li>• <strong>Mitigation:</strong> Remove at least one leg of the trifecta</li>
 </ul>
 </div>
 </div>
@@ -1726,17 +1727,17 @@ layout: default
 </div>
 
 <div class="mt-4 p-3 bg-yellow-50 rounded border border-yellow-200">
-<strong class="text-yellow-800 text-sm">Defense Strategy:</strong> Container isolation, least-privilege access, and signed audit trails are essential. Treat agents like junior developers with security training.
+<strong class="text-yellow-800 text-sm">Defense Strategy:</strong> Break the lethal trifecta by cutting exfiltration paths (default-deny outbound calls), limiting private data exposure (scoped tokens), or isolating untrusted content processing (separate reader/secret-holder tasks).
 </div>
 
 <div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-2 text-sm">Minimum Isolation Checklist</h4>
+<h4 class="font-semibold text-blue-700 mb-2 text-sm">Trifecta-Breaking Checklist</h4>
 <ul class="text-xs space-y-1">
-<li>• <strong>Per-agent container</strong> isolation</li>
-<li>• <strong>Read-only mounts</strong> by default</li>
-<li>• <strong>Write/Shell behind explicit gates</strong> with approval</li>
-<li>• <strong>Signed traces</strong> for full audit trail</li>
-<li>• <strong>Secrets scan on save</strong> before commits</li>
+<li>• <strong>Cut exfil:</strong> Default-deny outbound calls, route through allowlist proxy</li>
+<li>• <strong>Limit private data:</strong> Ephemeral scoped tokens, filtered RAG corpora</li>
+<li>• <strong>Isolate untrusted content:</strong> Separate reader tasks from secret-holders</li>
+<li>• <strong>Signed traces</strong> for full audit trail and incident response</li>
+<li>• <strong>Pre-flight check:</strong> Can it touch secrets + untrusted input + talk outside?</li>
 </ul>
 </div>
 
