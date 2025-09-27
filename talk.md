@@ -27,6 +27,7 @@ aspectRatio: 16/9
 ## From Snippets to Swarms
 
 ### The Evolution of Intelligent Code Generation
+#### Toward the Automated Researcher
 
 **Research Seminar**
 
@@ -98,6 +99,7 @@ layout: default
 <li>• Shell + editor + permission gates</li>
 <li>• SWE-bench: repo-scale edits</li>
 <li>• Long context + thinking budgets</li>
+<li>• Rise of "Vibe Coding": AI-first development</li>
 <li class="font-semibold text-green-600 mt-3">→ Capability: Multi-file, verified changes</li>
 </ul>
 </div>
@@ -108,7 +110,8 @@ layout: default
 <li>• Multi-agent coordination</li>
 <li>• Formal verification integration</li>
 <li>• Adaptive model routing</li>
-<li class="font-semibold text-purple-600 mt-3">→ Target: Superhuman teammates</li>
+<li>• "Vibe Researching": Automated discovery</li>
+<li class="font-semibold text-purple-600 mt-3">→ Target: The Automated Researcher</li>
 </ul>
 </div>
 </div>
@@ -718,6 +721,14 @@ layout: default
 <li>3. Use hybrid patterns for best ROI</li>
 </ol>
 </div>
+
+<div class="mt-3 bg-gray-100 p-2 rounded text-xs">
+<strong>Assumptions:</strong> 5 steps, ~30k in/3k out tokens per step, TPS 2-5k/s. "All-Fast" requires +3 backtracks on complex tasks. "Medium request" = ≤60k total tokens, ≤5 tool calls, no long-running tests.
+</div>
+
+<div class="mt-2 bg-purple-100 p-2 rounded text-sm">
+<strong>Calculator:</strong> Your task cost ≈ (tokens_in + tokens_out) × price + test_runs × compute_cost
+</div>
 </div>
 
 </div>
@@ -739,6 +750,7 @@ layout: default
 ---
 
 # Model Routing: The Research Frontier
+*Research*
 
 <div class="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
 <strong class="text-purple-800">The Research Goal:</strong> From heuristics to learned policies
@@ -807,6 +819,7 @@ layout: default
 ---
 
 # Evaluation Pitfalls in Agent Research
+*Research*
 
 <div class="mb-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
 <strong class="text-orange-800">Critical Question:</strong> Are we measuring what matters?
@@ -914,6 +927,73 @@ The shift from output-only to process evaluation is crucial - we need to underst
 -->
 
 ---
+layout: default
+---
+
+# Beyond Benchmarks: Starter Eval Kit
+*Research*
+
+<div class="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
+<strong class="text-purple-800">Reproducible Recipe:</strong> Build your own agent evaluation infrastructure
+</div>
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+<div class="bg-gray-50 p-6 rounded border">
+<h4 class="font-semibold mb-4">🛠️ Infrastructure Components</h4>
+<ul class="space-y-3">
+<li>• <strong>Containerized Runner:</strong> Docker with repo isolation</li>
+<li>• <strong>Fixed Wall-Clock Budget:</strong> 30min max per task</li>
+<li>• <strong>JSONL Trace Schema:</strong> Plan/actions/obs/diffs/tests</li>
+<li>• <strong>Git Integration:</strong> Clean state per task</li>
+</ul>
+</div>
+
+<div class="bg-blue-50 p-6 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-4">📊 Metrics That Matter</h4>
+<ul class="space-y-3">
+<li>• <strong>verified-diff@1:</strong> Passes tests on first attempt</li>
+<li>• <strong>Backtrack count:</strong> Mean iterations to converge</li>
+<li>• <strong>Recovery rate:</strong> Fix after initial failure</li>
+<li>• <strong>Cost per win:</strong> $/successful task</li>
+</ul>
+</div>
+
+</div>
+
+<div>
+
+<div class="bg-green-50 p-6 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-4">🎯 Evaluation Tasks</h4>
+<ul class="space-y-3">
+<li>• <strong>Bug fixes:</strong> With failing tests provided</li>
+<li>• <strong>Feature additions:</strong> With acceptance criteria</li>
+<li>• <strong>Refactoring:</strong> Maintain behavior, improve structure</li>
+<li>• <strong>Documentation:</strong> Generate from code + tests</li>
+</ul>
+</div>
+
+<div class="bg-yellow-50 p-6 rounded border border-yellow-200">
+<h4 class="font-semibold text-yellow-700 mb-4">🔧 Implementation</h4>
+<div class="text-sm space-y-2">
+<div><strong>GitHub Template:</strong> Coming soon</div>
+<div><strong>Docker Image:</strong> Pre-configured eval environment</div>
+<div><strong>CLI Tool:</strong> `agent-eval run --task bug-fix-001`</div>
+<div><strong>Dashboard:</strong> Web UI for result visualization</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+<strong class="text-purple-800">Goal:</strong> Move from anecdotal "this agent feels better" to data-driven "Agent A has 23% higher verified-diff@1 on our task distribution."
+</div>
+
+---
 layout: section
 ---
 
@@ -935,6 +1015,7 @@ layout: default
 ---
 
 # The Path to Swarms: From Single Agents to Collaboration
+*Research*
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
 <strong class="text-blue-800">Why Multi-Agent is Inevitable</strong>
@@ -1013,6 +1094,7 @@ layout: default
 ---
 
 # The Alignment Problem in Practice
+*Research*
 
 <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-200">
 <strong class="text-red-800">How Cooperation Amplifies Alignment Challenges</strong>
@@ -1096,6 +1178,7 @@ layout: default
 ---
 
 # Security and Safety Research Challenges
+*Research*
 
 <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-200">
 <strong class="text-red-800">The Applied Alignment Problem</strong>
@@ -1190,6 +1273,7 @@ layout: default
 ---
 
 # Future Research Directions and Open Problems
+*Research*
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -1321,114 +1405,67 @@ This context is crucial for understanding why certain research directions matter
 layout: default
 ---
 
-# The Venture Capital Explosion
+# The Consolidation & Specialization Phase
+*Practice*
 
-<div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Funding Drives Technical Direction</strong>
+<div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+<strong class="text-blue-800">Late 2025:</strong> From horizontal assistants to vertical specialists
 </div>
 
 <div class="grid grid-cols-2 gap-8">
 
 <div>
 
-<div class="bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Major Funding Rounds (2024-2025)</h4>
-
-<table class="w-full">
-<thead>
-<tr class="border-b">
-<th class="text-left py-2">Company</th>
-<th class="text-center py-2">Amount</th>
-<th class="text-left py-2">Focus Area</th>
-</tr>
-</thead>
-<tbody>
-<tr class="border-b">
-<td class="py-2"><strong>Cursor</strong></td>
-<td class="text-center py-2">$60M Series A</td>
-<td class="py-2">AI-first editor</td>
-</tr>
-<tr class="border-b">
-<td class="py-2"><strong>Replit</strong></td>
-<td class="text-center py-2">$97.4M Series B</td>
-<td class="py-2">Cloud development</td>
-</tr>
-<tr class="border-b">
-<td class="py-2"><strong>Sourcegraph</strong></td>
-<td class="text-center py-2">$150M Series D</td>
-<td class="py-2">Code intelligence</td>
-</tr>
-<tr class="border-b">
-<td class="py-2"><strong>Tabnine</strong></td>
-<td class="text-center py-2">$25M Series B</td>
-<td class="py-2">Enterprise coding AI</td>
-</tr>
-<tr>
-<td class="py-2"><strong>GitHub Copilot</strong></td>
-<td class="text-center py-2">N/A (Microsoft)</td>
-<td class="py-2">Platform integration</td>
-</tr>
-</tbody>
-</table>
-
-<div class="mt-3 bg-blue-100 p-2 rounded text-sm">
-<strong>Investment Thesis:</strong>
-<ul class="mt-1 space-y-1">
-<li>• $500B+ global software development market</li>
-<li>• 10x productivity gains possible</li>
-<li>• Network effects in developer tools</li>
+<div class="bg-gray-50 p-6 rounded border">
+<h4 class="font-semibold mb-4">Consolidation Vectors</h4>
+<ul class="space-y-3">
+<li>• <strong>Editors:</strong> IDE integration becoming table stakes</li>
+<li>• <strong>CI/CD:</strong> Testing and deployment automation</li>
+<li>• <strong>Code Intelligence:</strong> Search, analysis, and navigation</li>
+<li>• <strong>Platform Agents:</strong> Cloud-native development environments</li>
 </ul>
 </div>
+
+<div class="bg-purple-50 p-6 rounded border border-purple-200">
+<h4 class="font-semibold text-purple-700 mb-4">Vertical Specialists</h4>
+<ul class="space-y-3">
+<li>• <strong>Bio-tech:</strong> Genomic sequence analysis agents</li>
+<li>• <strong>Finance:</strong> HFT strategy backtesting</li>
+<li>• <strong>Game Engines:</strong> Procedural content generation</li>
+<li>• <strong>Embedded:</strong> Real-time systems optimization</li>
+</ul>
 </div>
 
 </div>
 
 <div>
 
-<div class="bg-blue-50 p-4 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-3">What VCs Are Betting On</h4>
-
-<v-clicks>
-
-<div class="space-y-3 text-sm">
-<div>
-<strong>1. AI-Native Development Environments</strong>
-<ul class="mt-1 space-y-1 ml-4">
-<li>• Cursor's editor-first approach</li>
-<li>• Replit's cloud-native platform</li>
+<div class="bg-green-50 p-6 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-4">Distribution Moats</h4>
+<ul class="space-y-3">
+<li>• <strong>IDE Integration:</strong> Native workflow embedding</li>
+<li>• <strong>Policy/Compliance:</strong> Enterprise governance features</li>
+<li>• <strong>Data Residency:</strong> On-premises and hybrid deployments</li>
+<li>• <strong>Eval/Trace Infrastructure:</strong> Observability and debugging</li>
 </ul>
 </div>
 
-<div>
-<strong>2. Enterprise Integration</strong>
-<ul class="mt-1 space-y-1 ml-4">
-<li>• Security and compliance features</li>
-<li>• Organizational memory and policies</li>
+<div class="bg-yellow-50 p-6 rounded border border-yellow-200">
+<h4 class="font-semibold text-yellow-700 mb-4">Strategic Implications</h4>
+<ul class="space-y-3">
+<li>• Horizontal assistants plateau at commodity margins</li>
+<li>• Winning stacks integrate verification by default</li>
+<li>• Vertical specialists capture premium pricing</li>
+<li>• Distribution beats pure technology</li>
 </ul>
 </div>
 
-<div>
-<strong>3. Specialized Agent Workflows</strong>
-<ul class="mt-1 space-y-1 ml-4">
-<li>• Code review automation</li>
-<li>• Testing and deployment agents</li>
-</ul>
-</div>
-</div>
-
-</v-clicks>
-
-<div class="mt-4 bg-yellow-100 p-2 rounded text-sm">
-<strong>Market Signal:</strong> The funding indicates belief that current tools are just the beginning of a fundamental transformation in how software is built.
-</div>
 </div>
 
 </div>
 
-</div>
-
-<div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Implication:</strong> This level of investment ensures rapid iteration and competition, driving both innovation and consolidation in the agent space.
+<div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+<strong class="text-blue-800">Market Insight:</strong> The agent space is maturing from "funding frenzy" to strategic specialization. Winners will own specific problem domains, not generic capabilities.
 </div>
 
 <!--
@@ -1442,6 +1479,7 @@ layout: default
 ---
 
 # Major Product Releases Timeline
+*Practice*
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
 <strong class="text-blue-800">September 2025: A Watershed Month</strong>
@@ -1545,6 +1583,7 @@ layout: default
 ---
 
 # Discussion Questions
+*Practice & Research*
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -1619,6 +1658,7 @@ layout: default
 ---
 
 # References & Further Reading
+*Practice & Research*
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -1696,6 +1736,7 @@ layout: default
 ---
 
 # From Stumbling to Superhuman: The 2027 Checklist
+*Practice & Research*
 
 <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border">
 <strong class="text-blue-800">To bridge the capability gap from today's "stumbling agents" to reliable "superhuman teammates," we need:</strong>
@@ -1778,7 +1819,7 @@ layout: default
 <ul class="space-y-2 text-sm">
 <li>• Pick one local agent, one cloud agent</li>
 <li>• Instrument traces and ship evaluations</li>
-<li>• Start a policy file and enforce it</li>
+<li>• Add policy.md: no commits to main; writes require passing tests; shell behind approval; secrets scanning on save</li>
 <li>• Contribute to MCP servers and tool ecosystems</li>
 </ul>
 
@@ -1812,6 +1853,20 @@ layout: default
 <blockquote class="bg-white p-3 rounded border-l-4 border-purple-300 italic">
 "Benchmarks measure outputs. Production measures verified diffs."
 </blockquote>
+
+<blockquote class="bg-white p-3 rounded border-l-4 border-purple-300 italic">
+"The default way to code is vibe coding... the future hopefully will be vibe researching."
+</blockquote>
+</div>
+
+<div class="mt-6 bg-green-50 p-4 rounded-lg border border-green-200">
+<h4 class="font-semibold text-green-700 mb-3">🚀 Next 7 Days Action Plan</h4>
+<div class="text-sm space-y-2">
+<div><strong>Day 1:</strong> Choose agent + enable trace logging</div>
+<div><strong>Day 2-3:</strong> Add tests-first workflow for 2 task types</div>
+<div><strong>Day 4-5:</strong> Implement basic routing rule (escalate after 2 backtracks)</div>
+<div><strong>Day 6-7:</strong> Run 20-task A/B and measure verified-diff@1</div>
+</div>
 </div>
 </div>
 
