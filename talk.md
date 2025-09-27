@@ -21,6 +21,7 @@ fonts:
   mono: 'Fira Code'
 canvasWidth: 1280
 aspectRatio: 16/9
+class: text-center
 ---
 
 # AI Coding Agents
@@ -34,8 +35,8 @@ aspectRatio: 16/9
 *Engineering AI Research Group (EAIRG)*
 *September 27, 2025*
 
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer hover:bg-gray-100">
+<div class="pt-8">
+  <span @click="$slidev.nav.next" class="px-4 py-2 rounded cursor-pointer hover:bg-blue-50 text-blue-600 border border-blue-200">
     Press Space for next page <carbon:arrow-right class="inline"/>
   </span>
 </div>
@@ -68,50 +69,50 @@ layout: default
 # Evolution: From Autocomplete to Agents
 *Practice*
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
-<div class="space-y-6">
-<div class="p-6 bg-gray-50 rounded-lg border">
-<h3 class="font-bold text-blue-600 mb-4 text-lg">2019-2021: Text-to-Code</h3>
-<ul class="space-y-2">
+<div class="space-y-4">
+<div class="p-4 bg-gray-50 rounded border">
+<h3 class="font-bold text-blue-600 mb-3">2019-2021: Text-to-Code</h3>
+<ul class="text-sm space-y-1">
 <li>• GPT-style LMs emit small completions</li>
 <li>• Codex shows code-finetuning potential</li>
 <li>• HumanEval: "sample-and-rerank" wins</li>
-<li class="font-semibold text-green-600 mt-3">→ Capability: ~10 lines of JavaScript</li>
+<li class="font-semibold text-green-600 mt-2">→ Capability: ~10 lines of JavaScript</li>
 </ul>
 </div>
 
-<div class="p-6 bg-blue-50 rounded-lg border">
-<h3 class="font-bold text-blue-600 mb-4 text-lg">2021-2023: Tool-Using Assistants</h3>
-<ul class="space-y-2">
+<div class="p-4 bg-blue-50 rounded border">
+<h3 class="font-bold text-blue-600 mb-3">2021-2023: Tool-Using Assistants</h3>
+<ul class="text-sm space-y-1">
 <li>• Chat UIs + function calling</li>
 <li>• ReAct-style reasoning with actions</li>
 <li>• Agents read files, call tools, iterate</li>
-<li class="font-semibold text-green-600 mt-3">→ Capability: Single-file modifications</li>
+<li class="font-semibold text-green-600 mt-2">→ Capability: Single-file modifications</li>
 </ul>
 </div>
 </div>
 
-<div class="space-y-6">
-<div class="p-6 bg-green-50 rounded-lg border">
-<h3 class="font-bold text-blue-600 mb-4 text-lg">2024-2025: Agentic Loops</h3>
-<ul class="space-y-2">
+<div class="space-y-4">
+<div class="p-4 bg-green-50 rounded border">
+<h3 class="font-bold text-blue-600 mb-3">2024-2025: Agentic Loops</h3>
+<ul class="text-sm space-y-1">
 <li>• Shell + editor + permission gates</li>
 <li>• SWE-bench: repo-scale edits</li>
 <li>• Long context + thinking budgets</li>
 <li>• Rise of "Vibe Coding": AI-first development</li>
-<li class="font-semibold text-green-600 mt-3">→ Capability: Multi-file, verified changes</li>
+<li class="font-semibold text-green-600 mt-2">→ Capability: Multi-file, verified changes</li>
 </ul>
 </div>
 
-<div class="p-6 bg-purple-50 rounded-lg border border-purple-200">
-<h3 class="font-bold text-purple-600 mb-4 text-lg">Future: 2025-2027</h3>
-<ul class="space-y-2">
+<div class="p-4 bg-purple-50 rounded border border-purple-200">
+<h3 class="font-bold text-purple-600 mb-3">Future: 2025-2027</h3>
+<ul class="text-sm space-y-1">
 <li>• Multi-agent coordination</li>
 <li>• Formal verification integration</li>
 <li>• Adaptive model routing</li>
 <li>• "Vibe Researching": Automated discovery</li>
-<li class="font-semibold text-purple-600 mt-3">→ Target: The Automated Researcher</li>
+<li class="font-semibold text-purple-600 mt-2">→ Target: The Automated Researcher</li>
 </ul>
 </div>
 </div>
@@ -146,13 +147,13 @@ layout: default
 
 ## Formalizing Coding Agents as POMDPs
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="bg-gray-50 p-6 rounded-lg border">
-<h3 class="font-bold mb-4 text-lg">POMDP Components</h3>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h3 class="font-bold mb-3">POMDP Components</h3>
+<ul class="text-sm space-y-2">
 <li><strong>States</strong> $s$: Repository state (files, dependencies, tests)</li>
 <li><strong>Actions</strong> $a$: Tool calls (read, edit, execute, search)</li>
 <li><strong>Observations</strong> $o$: Compile results, test outcomes, error messages</li>
@@ -160,7 +161,7 @@ layout: default
 <li><strong>Observation</strong> $O(o|s',a)$: What feedback we get</li>
 </ul>
 
-<div class="mt-4 p-3 bg-blue-100 rounded">
+<div class="mt-3 p-2 bg-blue-100 rounded text-sm">
 <strong>Policy:</strong> $\pi(a|h)$ where $h$ is action-observation history
 </div>
 </div>
@@ -222,46 +223,46 @@ layout: default
 <strong class="text-green-800">Key Insight:</strong> Claude Code's success comes from architectural simplicity over complexity
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<h3 class="font-bold text-blue-600 mb-4">🎯 Core Design Principles</h3>
+<h3 class="font-bold text-blue-600 mb-3">🎯 Core Design Principles</h3>
 
 <v-clicks>
 
-<div class="space-y-4">
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">1.</span>
-<div><strong>One Main Loop</strong> - No multi-agent handoffs, single coherent context</div>
+<div class="space-y-3">
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1 font-bold text-sm">1.</span>
+<div class="text-sm"><strong>One Main Loop</strong> - No multi-agent handoffs, single coherent context</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">2.</span>
-<div><strong>Smart Tool Design</strong> - Mix of low/medium/high level operations</div>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1 font-bold text-sm">2.</span>
+<div class="text-sm"><strong>Smart Tool Design</strong> - Mix of low/medium/high level operations</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">3.</span>
-<div><strong>LLM Search > RAG</strong> - Uses ripgrep/find like developers do</div>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1 font-bold text-sm">3.</span>
+<div class="text-sm"><strong>LLM Search > RAG</strong> - Uses ripgrep/find like developers do</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">4.</span>
-<div><strong>Explicit Todo Management</strong> - Agent tracks its own progress</div>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1 font-bold text-sm">4.</span>
+<div class="text-sm"><strong>Explicit Todo Management</strong> - Agent tracks its own progress</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">5.</span>
-<div><strong>Subagents for Specialization</strong> - Task-specific isolated contexts</div>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1 font-bold text-sm">5.</span>
+<div class="text-sm"><strong>Subagents for Specialization</strong> - Task-specific isolated contexts</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">6.</span>
-<div><strong>Extensive Prompting</strong> - 2.8K system + 9.4K tools prompts</div>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1 font-bold text-sm">6.</span>
+<div class="text-sm"><strong>Extensive Prompting</strong> - 2.8K system + 9.4K tools prompts</div>
 </div>
 </div>
 
 </v-clicks>
 
-<div class="mt-6 bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Memory Architecture</h4>
-<ul class="space-y-2">
+<div class="mt-4 bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold mb-2 text-sm">Memory Architecture</h4>
+<ul class="text-xs space-y-1">
 <li>• CLAUDE.md files load hierarchically (enterprise → project → user)</li>
 <li>• @path imports up to 5 hops deep</li>
 <li>• Prompt caching for conversation efficiency</li>
@@ -290,9 +291,9 @@ graph TD
     style H fill:#2196f3,color:#fff
 ```
 
-<div class="mt-6 bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Tool Categories</h4>
-<ul class="space-y-2">
+<div class="mt-4 bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold mb-2 text-sm">Tool Categories</h4>
+<ul class="text-xs space-y-1">
 <li><strong>Read:</strong> Read, Glob, Grep (permission-free)</li>
 <li><strong>Write:</strong> Edit, MultiEdit (approval required)</li>
 <li><strong>Execute:</strong> Bash (approval required)</li>
@@ -366,12 +367,12 @@ layout: default
 
 ## The Single Best Predictor of Agent Success
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Core Insight:</strong> Task success correlates strongly with <strong>verifiability</strong>
+<div class="mb-3 p-2 bg-green-50 rounded border border-green-200">
+<strong class="text-green-800 text-sm">Core Insight:</strong> Task success correlates strongly with <strong>verifiability</strong>
 </div>
 
 ```mermaid
@@ -393,9 +394,9 @@ graph LR
     style D fill:#f44336,color:#fff
 ```
 
-<div class="mt-4 bg-green-50 p-3 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-2">✅ Verifiable Tasks (High Success Rate)</h4>
-<ul class="text-sm space-y-1">
+<div class="mt-3 bg-green-50 p-2 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-1 text-sm">✅ Verifiable Tasks (High Success Rate)</h4>
+<ul class="text-xs space-y-1">
 <li>• Bug fixes with existing tests</li>
 <li>• Refactoring with type safety</li>
 <li>• API implementations with schemas</li>
@@ -406,24 +407,24 @@ graph LR
 
 <div>
 
-<div class="bg-red-50 p-3 rounded border border-red-200 mb-4">
-<h4 class="font-semibold text-red-700 mb-2">❌ Non-Verifiable Tasks (Low Success Rate)</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-red-50 p-2 rounded border border-red-200 mb-3">
+<h4 class="font-semibold text-red-700 mb-1 text-sm">❌ Non-Verifiable Tasks (Low Success Rate)</h4>
+<ul class="text-xs space-y-1">
 <li>• New feature design</li>
 <li>• Performance optimization</li>
 <li>• UX improvements</li>
 </ul>
 </div>
 
-<div class="bg-blue-50 p-4 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-2">🛠️ Your Workflow</h4>
-<p class="text-sm mb-2">Before assigning a task to an agent, ask:</p>
-<ol class="text-sm space-y-1 ml-4">
+<div class="bg-blue-50 p-3 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-1 text-sm">🛠️ Your Workflow</h4>
+<p class="text-xs mb-1">Before assigning a task to an agent, ask:</p>
+<ol class="text-xs space-y-1 ml-3">
 <li>1. Can success be automatically verified?</li>
 <li>2. Is there a fast feedback loop?</li>
 <li>3. Are the requirements unambiguous?</li>
 </ol>
-<p class="text-sm mt-3 font-semibold">If no → decompose the task or do it yourself.</p>
+<p class="text-xs mt-2 font-semibold">If no → decompose the task or do it yourself.</p>
 </div>
 
 </div>
@@ -447,12 +448,12 @@ layout: default
 # Verifiability in Action: Micro-Demo
 *Practice*
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="bg-red-50 p-4 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-3">❌ Pre: Failing Test</h4>
+<div class="bg-red-50 p-3 rounded border border-red-200">
+<h4 class="font-semibold text-red-700 mb-2 text-sm">❌ Pre: Failing Test</h4>
 <div class="text-sm font-mono">
 ```bash
 $ pytest -q test_auth.py::test_login
@@ -462,8 +463,8 @@ FAILED test_auth.py::test_login - AttributeError:
 </div>
 </div>
 
-<div class="mt-4 bg-blue-50 p-4 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-3">🔧 Agent Action</h4>
+<div class="mt-3 bg-blue-50 p-3 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-2 text-sm">🔧 Agent Action</h4>
 <div class="text-sm">
 <strong>Single Edit in auth.py:23</strong>
 <div class="font-mono mt-2">
@@ -480,8 +481,8 @@ FAILED test_auth.py::test_login - AttributeError:
 
 <div>
 
-<div class="bg-green-50 p-4 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-3">✅ Post: Green Test</h4>
+<div class="bg-green-50 p-3 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-2 text-sm">✅ Post: Green Test</h4>
 <div class="text-sm font-mono">
 ```bash
 $ pytest -q test_auth.py::test_login
@@ -492,9 +493,9 @@ PASSED                                [100%]
 </div>
 </div>
 
-<div class="mt-4 bg-yellow-50 p-4 rounded border border-yellow-200">
-<h4 class="font-semibold text-yellow-700 mb-3">🎯 Why This Works</h4>
-<ul class="text-sm space-y-2">
+<div class="mt-3 bg-yellow-50 p-3 rounded border border-yellow-200">
+<h4 class="font-semibold text-yellow-700 mb-2 text-sm">🎯 Why This Works</h4>
+<ul class="text-xs space-y-1">
 <li>• <strong>Clear failure signal:</strong> Specific error message</li>
 <li>• <strong>Fast feedback loop:</strong> 0.03s test execution</li>
 <li>• <strong>Unambiguous success:</strong> Green = good</li>
@@ -529,12 +530,12 @@ $$\text{Time} = N \times \frac{L_{in} + L_{out}}{TPS} + \text{tool\_time} + \tex
 
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<h4 class="font-semibold mb-4">Where:</h4>
-<ul class="space-y-3">
+<h4 class="font-semibold mb-3 text-sm">Where:</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>N</strong> = iterations to converge (edits + test cycles)</li>
 <li>• <strong>TPS</strong> = tokens per second</li>
 <li>• <strong>L<sub>in</sub>, L<sub>out</sub></strong> = input/output tokens per step</li>
@@ -547,24 +548,24 @@ $$\text{Time} = N \times \frac{L_{in} + L_{out}}{TPS} + \text{tool\_time} + \tex
 
 <v-clicks>
 
-<div class="bg-yellow-50 p-3 rounded border border-yellow-200 mb-3">
-<strong class="text-yellow-800">Key Insight:</strong> Faster models often have larger N and higher p<sub>fail</sub>
+<div class="bg-yellow-50 p-2 rounded border border-yellow-200 mb-2">
+<strong class="text-yellow-800 text-sm">Key Insight:</strong> Faster models often have larger N and higher p<sub>fail</sub>
 </div>
 
-<div class="bg-green-50 p-3 rounded border border-green-200">
-<strong class="text-green-800">The Trade-off:</strong> Fast models are great at being many. Smart models are great at being right.
+<div class="bg-green-50 p-2 rounded border border-green-200">
+<strong class="text-green-800 text-sm">The Trade-off:</strong> Fast models are great at being many. Smart models are great at being right.
 </div>
 
 </v-clicks>
 
-<div class="bg-blue-50 p-3 rounded border border-blue-200 mt-3">
-<h4 class="font-semibold text-blue-700 mb-2">Estimating p_fail in Practice</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-blue-50 p-2 rounded border border-blue-200 mt-2">
+<h4 class="font-semibold text-blue-700 mb-1 text-sm">Estimating p_fail in Practice</h4>
+<ul class="text-xs space-y-1">
 <li>• <strong>Historical error rate:</strong> Task-specific success % from logs</li>
 <li>• <strong>Lint/test fail ratio:</strong> % of steps requiring fixes</li>
 <li>• <strong>Backtrack rate:</strong> Trace-level "undo" operations per step</li>
 </ul>
-<div class="mt-2 text-sm font-semibold text-blue-600">
+<div class="mt-1 text-xs font-semibold text-blue-600">
 Rule of thumb: If last 2 steps were backtracks → escalate to smarter model
 </div>
 </div>
@@ -594,32 +595,32 @@ layout: default
 <strong class="text-green-800">The Heuristic:</strong> Mapping tasks to optimal models
 </div>
 
-| Task | Fast Model (Flash/Haiku) | Smart Model (Pro/Sonnet) | Reasoning |
-|------|:-----------------------:|:------------------------:|-----------|
+| Task | Fast Model | Smart Model | Reasoning |
+|------|:----------:|:-----------:|-----------|
 | Generate tests/stubs | ✅ High throughput | ❌ Overkill | Low risk, needs volume |
 | Search symbols | ✅ Quick iteration | ❌ Unnecessary | Simple pattern matching |
 | Small patches | ✅ Low risk | ❌ Too slow | Easy to verify |
-| **Mass refactor with types** | ❌ Type system misuse | ✅ Safety reasoning | Complex inference chains |
-| **Infra-as-code edits** | ❌ Misconfiguration risk | ✅ System understanding | Cross-service dependencies |
-| Framework migration | ❌ High failure rate | ✅ Needs reasoning | Complex dependencies |
-| API design | ❌ Poor abstractions | ✅ Architectural thinking | Requires deep understanding |
-| Debug failures | ❌ Misses context | ✅ Deep analysis | Complex causal reasoning |
+| **Mass refactor** | ❌ Type misuse | ✅ Safety reasoning | Complex inference |
+| **Infra edits** | ❌ Config risk | ✅ System understanding | Cross-service deps |
+| Framework migration | ❌ High failure | ✅ Needs reasoning | Complex dependencies |
+| API design | ❌ Poor abstractions | ✅ Architectural thinking | Deep understanding |
+| Debug failures | ❌ Misses context | ✅ Deep analysis | Causal reasoning |
 
-<div class="mt-6 grid grid-cols-3 gap-4">
+<div class="mt-4 grid grid-cols-3 gap-3">
 
-<div class="bg-blue-50 p-3 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-2">Coarse-to-fine</h4>
-<p class="text-sm">Fast model drafts, smart model validates</p>
+<div class="bg-blue-50 p-2 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-1 text-sm">Coarse-to-fine</h4>
+<p class="text-xs">Fast model drafts, smart model validates</p>
 </div>
 
-<div class="bg-purple-50 p-3 rounded border border-purple-200">
-<h4 class="font-semibold text-purple-700 mb-2">Best-of-K</h4>
-<p class="text-sm">Spawn K fast workers, smart model selects best</p>
+<div class="bg-purple-50 p-2 rounded border border-purple-200">
+<h4 class="font-semibold text-purple-700 mb-1 text-sm">Best-of-K</h4>
+<p class="text-xs">Spawn K fast workers, smart model selects best</p>
 </div>
 
-<div class="bg-green-50 p-3 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-2">Manager-worker</h4>
-<p class="text-sm">Smart model plans, fast models execute</p>
+<div class="bg-green-50 p-2 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-1 text-sm">Manager-worker</h4>
+<p class="text-xs">Smart model plans, fast models execute</p>
 </div>
 
 </div>
@@ -649,19 +650,19 @@ layout: default
 <strong class="text-yellow-800">The Economics:</strong> Cost implications of routing strategies *As of Sept 2025*
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Claude Code Pro Economics</h4>
+<div class="bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold mb-2 text-sm">Claude Code Pro Economics</h4>
 <ul class="text-sm space-y-2">
 <li><strong>Cost:</strong> $20/month for rate-limited usage</li>
 <li><strong>Alternative:</strong> Direct API at ~$15-60/1000 requests</li>
 <li><strong>Break-even:</strong> ~1,300 medium requests/month</li>
 </ul>
 
-<div class="mt-3 bg-blue-100 p-2 rounded text-sm">
+<div class="mt-2 bg-blue-100 p-2 rounded text-xs">
 <strong>Token Consumption Pattern:</strong>
 <ul class="mt-1 space-y-1">
 <li>• Input tokens per session: 50,000-200,000</li>
@@ -670,7 +671,7 @@ layout: default
 </ul>
 </div>
 
-<div class="mt-3 p-2 bg-yellow-100 rounded text-sm">
+<div class="mt-2 p-2 bg-yellow-100 rounded text-xs">
 <strong>Economic Reality:</strong> Pro subscriptions are heavily subsidized to drive adoption
 </div>
 </div>
@@ -679,54 +680,54 @@ layout: default
 
 <div>
 
-<div class="bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Smart Model Routing Economics</h4>
+<div class="bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold mb-2 text-sm">Smart Model Routing Economics</h4>
 
-<table class="w-full">
+<table class="w-full text-xs">
 <thead>
 <tr class="border-b">
-<th class="text-left py-2">Pattern</th>
-<th class="text-center py-2">Cost Per Task</th>
-<th class="text-center py-2">Speed</th>
-<th class="text-center py-2">Quality</th>
+<th class="text-left py-1">Pattern</th>
+<th class="text-center py-1">Cost Per Task</th>
+<th class="text-center py-1">Speed</th>
+<th class="text-center py-1">Quality</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="py-2">All-Smart</td>
-<td class="text-center py-2">$2.50</td>
-<td class="text-center text-red-600 py-2">Slow</td>
-<td class="text-center text-green-600 py-2">High</td>
+<td class="py-1">All-Smart</td>
+<td class="text-center py-1">$2.50</td>
+<td class="text-center text-red-600 py-1">Slow</td>
+<td class="text-center text-green-600 py-1">High</td>
 </tr>
 <tr>
-<td class="py-2">All-Fast</td>
-<td class="text-center py-2">$0.25</td>
-<td class="text-center text-green-600 py-2">Fast</td>
-<td class="text-center text-yellow-600 py-2">Medium</td>
+<td class="py-1">All-Fast</td>
+<td class="text-center py-1">$0.25</td>
+<td class="text-center text-green-600 py-1">Fast</td>
+<td class="text-center text-yellow-600 py-1">Medium</td>
 </tr>
 <tr>
-<td class="py-2">Hybrid</td>
-<td class="text-center py-2">$0.75</td>
-<td class="text-center text-blue-600 py-2">Medium</td>
-<td class="text-center text-green-600 py-2">High</td>
+<td class="py-1">Hybrid</td>
+<td class="text-center py-1">$0.75</td>
+<td class="text-center text-blue-600 py-1">Medium</td>
+<td class="text-center text-green-600 py-1">High</td>
 </tr>
 </tbody>
 </table>
 
-<div class="mt-4 bg-blue-100 p-2 rounded text-sm">
+<div class="mt-2 bg-blue-100 p-2 rounded text-xs">
 <strong>Cost Optimization Strategy:</strong>
-<ol class="mt-1 space-y-1 ml-4">
+<ol class="mt-1 space-y-1 ml-3">
 <li>1. Profile your task mix</li>
 <li>2. Route based on complexity</li>
 <li>3. Use hybrid patterns for best ROI</li>
 </ol>
 </div>
 
-<div class="mt-3 bg-gray-100 p-2 rounded text-xs">
+<div class="mt-2 bg-gray-100 p-2 rounded text-xs">
 <strong>Assumptions:</strong> 5 steps, ~30k in/3k out tokens per step, TPS 2-5k/s. "All-Fast" requires +3 backtracks on complex tasks. "Medium request" = ≤60k total tokens, ≤5 tool calls, no long-running tests.
 </div>
 
-<div class="mt-2 bg-purple-100 p-2 rounded text-sm">
+<div class="mt-2 bg-purple-100 p-2 rounded text-xs">
 <strong>Calculator:</strong> Your task cost ≈ (tokens_in + tokens_out) × price + test_runs × compute_cost
 </div>
 </div>
@@ -756,23 +757,23 @@ layout: default
 <strong class="text-purple-800">The Research Goal:</strong> From heuristics to learned policies
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Current State</h4>
-<p class="text-sm mb-3">We route models using human-designed heuristics (the table)</p>
+<div class="bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold mb-2 text-sm">Current State</h4>
+<p class="text-xs mb-2">We route models using human-designed heuristics (the table)</p>
 
-<h4 class="font-semibold mb-3">Research Goal</h4>
-<p class="text-sm">Learn optimal routing policies automatically</p>
+<h4 class="font-semibold mb-2 text-sm">Research Goal</h4>
+<p class="text-xs">Learn optimal routing policies automatically</p>
 </div>
 
 <v-clicks>
 
-<div class="bg-blue-50 p-4 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-3">Formulation as Contextual Bandit Problem</h4>
-<ul class="text-sm space-y-2">
+<div class="bg-blue-50 p-3 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-2 text-sm">Formulation as Contextual Bandit Problem</h4>
+<ul class="text-xs space-y-1">
 <li><strong>Context:</strong> Task description, codebase features, user preferences</li>
 <li><strong>Actions:</strong> Model choices (fast, smart, hybrid patterns)</li>
 <li><strong>Rewards:</strong> Success rate, latency, cost trade-offs</li>
@@ -788,9 +789,9 @@ layout: default
 
 <v-clicks>
 
-<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
-<h4 class="font-semibold text-yellow-700 mb-3">Research Challenges</h4>
-<ol class="text-sm space-y-2 ml-4">
+<div class="bg-yellow-50 p-3 rounded border border-yellow-200">
+<h4 class="font-semibold text-yellow-700 mb-2 text-sm">Research Challenges</h4>
+<ol class="text-xs space-y-1 ml-3">
 <li>1. <strong>Exploration vs Exploitation:</strong> How to try new routing strategies safely?</li>
 <li>2. <strong>Multi-objective Optimization:</strong> Balancing speed, quality, and cost</li>
 <li>3. <strong>Transfer Learning:</strong> Policies learned on one codebase → another</li>
@@ -825,36 +826,36 @@ layout: default
 <strong class="text-orange-800">Critical Question:</strong> Are we measuring what matters?
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<h3 class="font-bold text-red-600 mb-4">🚨 Current Problems</h3>
+<h3 class="font-bold text-red-600 mb-3 text-sm">🚨 Current Problems</h3>
 
 <v-clicks>
 
-<div class="space-y-4">
-<div class="bg-red-50 p-3 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-2">Benchmark Contamination</h4>
-<ul class="text-sm space-y-1">
+<div class="space-y-3">
+<div class="bg-red-50 p-2 rounded border border-red-200">
+<h4 class="font-semibold text-red-700 mb-1 text-sm">Benchmark Contamination</h4>
+<ul class="text-xs space-y-1">
 <li>• Models trained on evaluation data</li>
 <li>• "Teaching to the test" vs real capability</li>
 <li>• Static benchmarks vs evolving tasks</li>
 </ul>
 </div>
 
-<div class="bg-red-50 p-3 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-2">Output-Only Evaluation</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-red-50 p-2 rounded border border-red-200">
+<h4 class="font-semibold text-red-700 mb-1 text-sm">Output-Only Evaluation</h4>
+<ul class="text-xs space-y-1">
 <li>• Ignores process and reasoning</li>
 <li>• Misses catastrophic failures</li>
 <li>• No credit for partial progress</li>
 </ul>
 </div>
 
-<div class="bg-red-50 p-3 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-2">Lab vs Production Gap</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-red-50 p-2 rounded border border-red-200">
+<h4 class="font-semibold text-red-700 mb-1 text-sm">Lab vs Production Gap</h4>
+<ul class="text-xs space-y-1">
 <li>• Synthetic tasks vs real complexity</li>
 <li>• Missing human interaction patterns</li>
 <li>• No long-term reliability testing</li>
@@ -868,41 +869,41 @@ layout: default
 
 <div>
 
-<h3 class="font-bold text-green-600 mb-4">✅ What We Need for Rigor</h3>
+<h3 class="font-bold text-green-600 mb-3 text-sm">✅ What We Need for Rigor</h3>
 
 <v-clicks>
 
-<div class="space-y-4">
-<div class="bg-green-50 p-3 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-2">Contamination Control</h4>
-<ul class="text-sm space-y-1">
+<div class="space-y-3">
+<div class="bg-green-50 p-2 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-1 text-sm">Contamination Control</h4>
+<ul class="text-xs space-y-1">
 <li>• Time-based splits and live evaluation</li>
 <li>• Private test sets with time locks</li>
 <li>• Dynamic benchmark generation</li>
 </ul>
 </div>
 
-<div class="bg-green-50 p-3 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-2">Process Evaluation</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-green-50 p-2 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-1 text-sm">Process Evaluation</h4>
+<ul class="text-xs space-y-1">
 <li>• Trace-level scoring (plans + executions)</li>
 <li>• Tool usage efficiency metrics</li>
 <li>• Error recovery and self-correction</li>
 </ul>
 </div>
 
-<div class="bg-green-50 p-3 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-2">Deployment Realism</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-green-50 p-2 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-1 text-sm">Deployment Realism</h4>
+<ul class="text-xs space-y-1">
 <li>• Integration testing, not just unit tests</li>
 <li>• Human-in-the-loop interaction patterns</li>
 <li>• Long-running session reliability</li>
 </ul>
 </div>
 
-<div class="bg-blue-50 p-3 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-2">Measurement Standards</h4>
-<ul class="text-sm space-y-1">
+<div class="bg-blue-50 p-2 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-1 text-sm">Measurement Standards</h4>
+<ul class="text-xs space-y-1">
 <li>• pass@1 with fixed wall-clock budget</li>
 <li>• Token accounting and cost normalization</li>
 <li>• Reproducible container environments</li>
@@ -937,13 +938,13 @@ layout: default
 <strong class="text-purple-800">Reproducible Recipe:</strong> Build your own agent evaluation infrastructure
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🛠️ Infrastructure Components</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">🛠️ Infrastructure Components</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>Containerized Runner:</strong> Docker with repo isolation</li>
 <li>• <strong>Fixed Wall-Clock Budget:</strong> 30min max per task</li>
 <li>• <strong>JSONL Trace Schema:</strong> Plan/actions/obs/diffs/tests</li>
@@ -951,9 +952,9 @@ layout: default
 </ul>
 </div>
 
-<div class="bg-blue-50 p-6 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-4">📊 Metrics That Matter</h4>
-<ul class="space-y-3">
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-3 text-sm">📊 Metrics That Matter</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>verified-diff@1:</strong> Passes tests on first attempt</li>
 <li>• <strong>Backtrack count:</strong> Mean iterations to converge</li>
 <li>• <strong>Recovery rate:</strong> Fix after initial failure</li>
@@ -965,9 +966,9 @@ layout: default
 
 <div>
 
-<div class="bg-green-50 p-6 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-4">🎯 Evaluation Tasks</h4>
-<ul class="space-y-3">
+<div class="bg-green-50 p-4 rounded border border-green-200">
+<h4 class="font-semibold text-green-700 mb-3 text-sm">🎯 Evaluation Tasks</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>Bug fixes:</strong> With failing tests provided</li>
 <li>• <strong>Feature additions:</strong> With acceptance criteria</li>
 <li>• <strong>Refactoring:</strong> Maintain behavior, improve structure</li>
@@ -975,9 +976,9 @@ layout: default
 </ul>
 </div>
 
-<div class="bg-yellow-50 p-6 rounded border border-yellow-200">
-<h4 class="font-semibold text-yellow-700 mb-4">🔧 Implementation</h4>
-<div class="text-sm space-y-2">
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold text-yellow-700 mb-3 text-sm">🔧 Implementation</h4>
+<div class="text-xs space-y-1">
 <div><strong>GitHub Template:</strong> Coming soon</div>
 <div><strong>Docker Image:</strong> Pre-configured eval environment</div>
 <div><strong>CLI Tool:</strong> `agent-eval run --task bug-fix-001`</div>
@@ -1021,23 +1022,23 @@ layout: default
 <strong class="text-blue-800">Why Multi-Agent is Inevitable</strong>
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
-<div class="space-y-4">
-<div class="bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Evidence from Reasoning Research</h4>
-<ul class="text-sm space-y-2">
+<div class="space-y-3">
+<div class="bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold mb-2 text-sm">Evidence from Reasoning Research</h4>
+<ul class="text-xs space-y-1">
 <li>• <strong>Self-consistency:</strong> Multiple solution paths → better outcomes</li>
 <li>• <strong>Tree of Thoughts:</strong> Search over action sequences</li>
 <li>• <strong>Constitutional AI:</strong> Multiple critics improve safety</li>
 </ul>
 </div>
 
-<div class="bg-blue-50 p-4 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-3">Natural Fit for Coding</h4>
-<ul class="text-sm space-y-2">
+<div class="bg-blue-50 p-3 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-2 text-sm">Natural Fit for Coding</h4>
+<ul class="text-xs space-y-1">
 <li>• <strong>Specialization:</strong> frontend ↔ backend ↔ testing ↔ deployment</li>
 <li>• <strong>Parallel exploration:</strong> multiple implementation approaches</li>
 <li>• <strong>Verification:</strong> independent code review and testing</li>
@@ -1494,17 +1495,17 @@ layout: default
 
 <div class="space-y-3 text-sm">
 <div>
-<strong class="text-blue-600">GPT-5-Codex</strong> (Sept 15):
+<strong class="text-blue-600">GPT-5-Codex</strong> (Sept 15):¹⁵
 <ul class="mt-1 space-y-1 ml-4">
 <li>• First coding-specific GPT-5 variant</li>
-<li>• Dynamic thinking time (up to 7 hours)</li>
-<li>• 51.3% on refactoring evals vs 33.9% for GPT-5</li>
+<li>• Adaptive thinking time (up to 7 hours)¹⁸</li>
+<li>• 51.3% on refactoring evals vs 33.9% for GPT-5¹⁹</li>
 <li>• Integrated code review workflows</li>
 </ul>
 </div>
 
 <div>
-<strong class="text-blue-600">GitHub Copilot CLI</strong> (Sept 25):
+<strong class="text-blue-600">GitHub Copilot CLI</strong> (Sept 25):¹⁶
 <ul class="mt-1 space-y-1 ml-4">
 <li>• Public preview with GitHub Models</li>
 <li>• Defaults to Claude Sonnet 4, supports GPT-5</li>
@@ -1513,7 +1514,7 @@ layout: default
 </div>
 
 <div>
-<strong class="text-blue-600">Cross-Agent Security Research</strong> (Sept 24):
+<strong class="text-blue-600">Cross-Agent Security Research</strong> (Sept 24):¹⁷
 <ul class="mt-1 space-y-1 ml-4">
 <li>• Johann Rehberger's privilege escalation findings</li>
 <li>• Industry wake-up call for container isolation</li>
@@ -1660,41 +1661,41 @@ layout: default
 # References & Further Reading
 *Practice & Research*
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6">
 
-<div class="space-y-6">
+<div class="space-y-4">
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">📖 Foundational Papers</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">📖 Foundational Papers</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>METR:</strong> "Measuring AI Ability to Complete Long Tasks" (2024)</li>
 <li>• <strong>SWE-bench:</strong> "Can Language Models Resolve Real-World GitHub Issues?" (2024)</li>
 <li>• <strong>Sleeper Agents:</strong> "Training Deceptive LLMs" (2024)</li>
 </ul>
 </div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🔬 AI Safety Research</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">🔬 AI Safety Research</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>Among Us:</strong> "A Sandbox for Agentic Deception" (2024)</li>
 <li>• <strong>AI Agents and Painted Facades</strong> (2024)</li>
 </ul>
 </div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🏗️ System Architecture</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">🏗️ System Architecture</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>Basic Systems Architecture for AI Agents</strong> (2024)</li>
 </ul>
 </div>
 
 </div>
 
-<div class="space-y-6">
+<div class="space-y-4">
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🏭 Industry Analysis</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">🏭 Industry Analysis</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>AI 2027:</strong> "Forecasting Superhuman Coders" (LessWrong, 2024)</li>
 <li>• <strong>Claude Code Deep Dive:</strong> MinusX analysis (2025)</li>
 <li>• <strong>GPT-5-Codex Analysis:</strong> Simon Willison's blog (Sept 2025)</li>
@@ -1703,18 +1704,18 @@ layout: default
 </ul>
 </div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">📊 Benchmarks & Evaluation</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">📊 Benchmarks & Evaluation</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>SWE-bench Pro, SWE-bench-Live</strong></li>
 <li>• <strong>LiveCodeBench, RepoQA</strong></li>
 <li>• <strong>SWE-bench Critiques:</strong> "Illusion" and "UTBoost" papers</li>
 </ul>
 </div>
 
-<div class="bg-blue-50 p-6 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-4">🌐 Essential Resources</h4>
-<ul class="space-y-3">
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-3 text-sm">🌐 Essential Resources</h4>
+<ul class="text-sm space-y-2">
 <li>• <strong>Simon Willison's Blog:</strong> AI-assisted programming tag</li>
 <li>• <strong>swyx's AI Engineering Guide</strong></li>
 <li>• <strong>Hacker News:</strong> Search "coding agents"</li>
@@ -1727,8 +1728,36 @@ layout: default
 
 </div>
 
-<div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200 text-center">
-<strong class="text-blue-800">Stay Current:</strong> This field evolves daily. Follow security researchers, read vendor blogs, and test new releases carefully.
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200 text-center">
+<strong class="text-blue-800 text-sm">Stay Current:</strong> This field evolves daily. Follow security researchers, read vendor blogs, and test new releases carefully.
+</div>
+
+---
+layout: default
+---
+
+# Footnotes
+
+<div class="text-xs space-y-1">
+<div>¹ Radford et al. "Language Models are Unsupervised Multitask Learners" (2019)</div>
+<div>² Chen et al. "Evaluating Large Language Models Trained on Code" (2021)</div>
+<div>³ Chen et al. "CodeT5: Identifier-aware Unified Pre-trained Encoder-Decoder Models" (2021)</div>
+<div>⁴ OpenAI Function Calling Documentation (2023)</div>
+<div>⁵ Yao et al. "ReAct: Synergizing Reasoning and Acting in Language Models" (2022)</div>
+<div>⁶ Yang et al. "InterCode: Standardizing and Benchmarking Interactive Coding" (2023)</div>
+<div>⁷ Anthropic Claude Code Documentation (2024)</div>
+<div>⁸ Jimenez et al. "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?" (2024)</div>
+<div>⁹ Wei et al. "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models" (2022)</div>
+<div>¹⁰ Amazon Security Advisory CVE-2025-8217 (Sept 2025)</div>
+<div>¹¹ Rehberger, Johann. "Cross-Agent Security Research" (Sept 2025)</div>
+<div>¹² Wang et al. "Self-Consistency Improves Chain of Thought Reasoning" (2022)</div>
+<div>¹³ Yao et al. "Tree of Thoughts: Deliberate Problem Solving with Large Language Models" (2023)</div>
+<div>¹⁴ Bai et al. "Constitutional AI: Harmlessness from AI Feedback" (2022)</div>
+<div>¹⁵ OpenAI GPT-5-Codex Release Notes (Sept 2025)</div>
+<div>¹⁶ GitHub Copilot CLI Public Preview (Sept 2025)</div>
+<div>¹⁷ Rehberger, Johann. "Multi-Agent Security Findings" (Sept 2025)</div>
+<div>¹⁸ Concept of adaptive thinking time in model routing based on task complexity</div>
+<div>¹⁹ OpenAI GPT-5-Codex Performance Benchmarks (Sept 2025)</div>
 </div>
 
 ---
@@ -1785,7 +1814,7 @@ layout: default
 <span class="text-2xl">5️⃣</span>
 <div>
 <strong class="text-blue-600">Adaptive Model Routing</strong>
-<p class="text-sm mt-1">Smart selection between fast and intelligent models based on task complexity</p>
+<p class="text-sm mt-1">Smart selection between fast and intelligent models based on task complexity and adaptive thinking time</p>
 </div>
 </div>
 
