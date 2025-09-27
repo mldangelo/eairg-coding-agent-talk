@@ -20,7 +20,7 @@ layout: two-cols
 ---
 # The Evolution: From Snippets to Swarms
 
-<Transform :scale="0.8">
+<Transform :scale="0.65">
 
 <v-click>
 
@@ -95,7 +95,7 @@ layout: default
 ---
 # The Agentic Loop: How They Actually Work
 
-<Transform :scale="0.8">
+<Transform :scale="0.7">
 
 Modern coding agents follow a structured loop:
 
