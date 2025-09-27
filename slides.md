@@ -16,11 +16,15 @@ layout: cover
 </div>
 
 ---
-layout: two-cols
+layout: default
 ---
 # The Evolution: From Snippets to Swarms
 
-<Transform :scale="0.65">
+<div class="grid grid-cols-4 gap-4 h-full">
+
+<div class="col-span-3">
+
+<Transform :scale="0.45">
 
 <v-click>
 
@@ -28,6 +32,7 @@ layout: two-cols
 
 - GPT-style LMs emit small code completions (short local snippets).
 - **Codex (Chen et al., 2021)**: 12B parameters, 28.8% on HumanEval@1, 70.2%@100
+- **GPT-4 baselines in 2024**: Low-teens on SWE-bench Verified; **GPT-4o rose to 33.2%** by Feb 2025
 - HumanEval: multi-sample pass@k ("sample-and-rerank") becomes the early win pattern.
 
 </v-click>
@@ -45,26 +50,10 @@ layout: two-cols
 **2024-2025: Agents with Real Loops**
 
 - Systems add shells, editors, and permission gates.
-- **SWE-bench (Jimenez et al., 2024)**: 2,294 real GitHub issues; GPT-4 achieves 1.74% on Full, 12.3% on Verified subset
-- Long context on certain models (e.g., up to 1M tokens on Gemini 1.5/2.5) and prompt caching enable sustained work.
+- **SWE-bench Verified** (500 tasks) released Aug 2024. By Feb 2025, **GPT-4o reached 33.2%** under OpenAI's scaffold; by Aug 2025, **Claude 4 Opus reached 67.6%** on the public board.
+- Long context (**Gemini 2.5 Pro** supports up to 1M tokens) and prompt caching enable sustained work.
 
 </v-click>
-
-</Transform>
-
-::right::
-
-<Transform :scale="0.8">
-
-```mermaid
-graph TD
-    A["Code Snippets<br/>~10 lines"] --> B["Function Calling<br/>Read + Act"]
-    B --> C["Agentic Loop<br/>Plan + Verify"]
-    C --> D["Repo-Scale Edits<br/>Multi-file changes"]
-    D --> E["Parallel Agents<br/>Multiple workers"]
-```
-
-</Transform>
 
 <v-click>
 
@@ -79,9 +68,54 @@ The jump from "a few lines of JS" to "repo-scale edits" came from:
 
 </v-click>
 
+</Transform>
+
+</div>
+
+<div class="flex items-start justify-center pt-4">
+
+<Transform :scale="0.6">
+
+```mermaid
+graph TD
+    A["Code Snippets<br/>~10 lines"] --> B["Function Calling<br/>Read + Act"]
+    B --> C["Agentic Loop<br/>Plan + Verify"]
+    C --> D["Repo-Scale Edits<br/>Multi-file changes"]
+    D --> E["Parallel Agents<br/>Multiple workers"]
+```
+
+</Transform>
+
+</div>
+
+</div>
+
 <!--
 This slide provides crucial historical context. The key point to land here is that progress wasn't just one thing; it was the convergence of multiple innovations. The final takeaway sets up the rest of the talk.
 -->
+
+---
+layout: default
+---
+# Research Foundation: Key Papers
+
+<Transform :scale="0.7">
+
+**Core Techniques:**
+- **Codex (Chen et al., 2021)**: First large-scale code generation model
+- **ReAct (Yao et al., 2023)**: Reasoning + Acting with LLMs
+- **Toolformer (Schick et al., 2023)**: Learning to use external tools
+- **Tree-of-Thoughts (Yao et al., 2023)**: Multi-path reasoning
+
+**Evaluation & Safety:**
+- **SWE-bench (Jimenez et al., 2024)**: Repository-level evaluation
+- **HumanEval+ (Liu et al., 2023)**: Enhanced code generation benchmarks
+
+**Agent Architectures:**
+- **AutoGen (Wu et al., 2023)**: Multi-agent conversation framework
+- **SWE-agent (Yang et al., 2024)**: Computer-use for software engineering
+
+</Transform>
 
 ---
 layout: section
@@ -95,7 +129,10 @@ layout: default
 ---
 # The Agentic Loop: How They Actually Work
 
-<Transform :scale="0.7">
+<div class="grid grid-cols-3 gap-6">
+
+<div class="col-span-1">
+<Transform :scale="0.9">
 
 Modern coding agents follow a structured loop:
 
@@ -118,16 +155,25 @@ sequenceDiagram
     Agent-->>User: "Fixed authentication bug + diff"
 ```
 
+</Transform>
+</div>
+
+<div class="col-span-2">
+<Transform :scale="0.7">
+
 **Key Components:**
-- **Brain:** LLM with function calling (Claude, Gemini, etc.)
+- **Brain:** LLM with function calling (o3/o4-mini, Claude 4, Gemini 2.5)
 - **Orchestrator/harness:** assembles prompts, executes tools, manages state/permissions
-- **Tools:** read, edit, shell, grep, web; local vs server-executed (MCP)
-- **Memory:** project files (CLAUDE.md / GEMINI.md), hierarchical imports, conversation history
+- **Tools:** read, edit, shell, grep, web; local vs server-executed ([MCP](https://modelcontextprotocol.io/))
+- **Memory:** project files (CLAUDE.md), hierarchical imports, conversation history
 - **Verifier:** Tests, linters, compilers for feedback
 
 **Key insight:** Domains with verifiable outcomes (code, math) see dramatic agent improvements because the feedback loop provides clear reward signals.
 
 </Transform>
+</div>
+
+</div>
 
 <!--
 This is the central thesis. Domains with verifiable outcomes (like coding and math) were the first to see dramatic gains from agentic RL because the feedback loop is so pure. This is the secret sauce.
@@ -136,11 +182,92 @@ This is the central thesis. Domains with verifiable outcomes (like coding and ma
 ---
 layout: default
 ---
-# The Speed vs Intelligence Playbook
+# Case Study: Claude Code Architecture
+
+<Transform :scale="0.6">
+
+**Claude Code: A Local Terminal Agent**
+
+A terminal-first agentic assistant that wraps Anthropic's Claude models with permission-gated tool calls.
+
+<v-click>
+
+**Core Loop in Practice:**
+1. **You describe a goal** → Agent prepares system prompt with project memory
+2. **It plans** → Builds TODO list, updates as it works
+3. **Gathers context** → Agentic search over repository, follows imports
+4. **Acts with tools** → 13 built-in tools, each permission-gated
+5. **Verifies & iterates** → Tool outputs fed back, automatic context management
+
+</v-click>
+
+<v-click>
+
+**The 13 Built-in Tools:**
+- **File ops:** Read, Write, Edit, MultiEdit, NotebookEdit/Read
+- **Code search:** Grep, Glob
+- **Execution:** Bash (persistent shell session)
+- **External:** WebSearch, WebFetch
+- **Planning:** Task, TodoWrite
+
+</v-click>
+
+<v-click>
+
+**Memory Architecture:**
+- **Hierarchical CLAUDE.md files:** enterprise → project → user
+- **@path imports:** Recursive up to 5 files deep
+- **Prompt caching:** 5-minute TTL, reduces latency on long sessions
+- **Context compaction:** LLM-powered summarization when history grows
+
+</v-click>
+
+<v-click>
+
+**Permission Model:**
+- **Read-only by default:** When Claude wants to edit/run, it asks
+- **Three modes:** Normal (ask), Plan (read-only), Auto-accept (trusted)
+- **Workspace boundaries:** Can only write inside working directory
+- **MCP extensibility:** Connect external tools with per-server permissions
+
+</v-click>
+
+</Transform>
+
+<!--
+This slide shows the agentic loop in concrete practice. Key point: the loop is simple, but the scaffolding (tools, memory, permissions) makes it reliable and safe.
+-->
+
+---
+layout: default
+---
+# Current Performance Reality: The Benchmark Gap
 
 <Transform :scale="0.8">
 
+| Task Type | HumanEval | SWE-bench Verified | SWE-bench Full |
+|-----------|-----------|-------------------|----------------|
+| **Difficulty** | Single functions | Curated real issues | All real issues |
+| **Claude-3.5-Sonnet** | ~90% | ~49% | ~3-5% |
+| **GPT-4** | ~67% | ~12.3% | ~1.74% |
+| **Open Source** | ~40-60% | ~5-20% | ~1-3% |
+
+**Key Insight:** The jump from synthetic to real-world tasks shows a 10-20x performance drop, highlighting the importance of repository context and tool orchestration.
+
+**Context Matters:** Agents need full repository understanding, not just function-level reasoning.
+
+</Transform>
+
+---
+layout: default
+---
+# The Speed vs Intelligence Playbook
+
+<Transform :scale="0.65">
+
 Think in **wall-clock time to a verified solution**, not just tokens/sec.
+
+Routing should optimize **wall-clock to verified pass**, not raw tokens per second.
 
 <div class="grid grid-cols-2 gap-6 mt-4">
 
@@ -221,9 +348,9 @@ graph TD
 - Manager (Pro/Opus) creates spec and acceptance tests
 - Workers (Flash/Haiku) generate candidate solutions in parallel
 - Manager evaluates results and merges the best approach
-- Tests provide the final verification step
+- **Best-of-K with verifier tends to win on repo tasks; use tests as the arbiter**
 
-**Research basis:** Tree-of-Thoughts (Yao et al., 2023) and self-consistency sampling show multi-path reasoning outperforms single-shot approaches.
+**Research basis:** Tree-of-Thoughts (Yao et al., 2023) and self-consistency sampling show multi-path reasoning outperforms single-shot approaches. Simple controllers can perform well - avoid assuming complex orchestration is required.
 
 > "Fast models are great at being many. Smart models are great at being right."
 
@@ -236,24 +363,24 @@ layout: default
 ---
 # Real-World Landscape: Measured Capabilities
 
-<Transform :scale="0.8">
+<Transform :scale="0.65">
 
-**Benchmarked Performance (SWE-bench Verified, 500 tasks):**
-- Claude-3.5-Sonnet: ~49% (as of Jan 2025)
-- GPT-4 Turbo: ~12-15%
-- Open source agents: 5-20%
+**2025 SWE-bench Verified Performance:**
 
-**Architectural Split:**
-- **Local agents** (Claude Code, Aider): File system access, user permissions
-- **Cloud agents** (GitHub Copilot Workspace): Sandboxed, audit trails
-- **IDE-integrated** (Cursor, Windsurf): Deep editor context, real-time feedback
+| Model/Agent | SWE-bench Verified | Notes |
+|-------------|-------------------|-------|
+| **Claude 4 Opus** | **67.6%** | Aug 2025 leaderboard |
+| **GPT-4o** | **33.2%** | Feb 2025, OpenAI scaffold |
+| **Open agents** | **60-70%** | Some report; verify against official reruns |
 
-**Adoption signals:** GitHub reports 1M+ Copilot subscribers; Claude Code in public beta
+**Adoption Signals:** **1.8M paid Copilot subscribers** (Microsoft FY2024), **Claude Code CLI publicly available** (Anthropic Apr 2025), $150M+ invested in agent startups
 
-**Technical differentiation:**
+**Technical Differentiation:**
 - **Context length:** Gemini 2.5 Pro (1M+ tokens) vs others (~200K)
 - **Permission models:** Local approval vs cloud sandboxing
 - **Tool ecosystems:** MCP standardization vs proprietary APIs
+
+**Performance Reality:** Local agents excel at file operations, cloud agents provide better security/audit, IDE agents optimize for developer workflow integration.
 
 </Transform>
 
@@ -262,18 +389,20 @@ This slide quantifies the scale. The key insight is the compounding effect: the 
 -->
 
 ---
-layout: two-cols
+layout: default
 ---
 # Where Agents Excel vs Where They Stumble
 
-<Transform :scale="0.8">
+<Transform :scale="0.7">
 
-<div class="grid grid-cols-2 gap-6">
+<div class="grid grid-cols-2 gap-8 mt-8">
 
-<div>
+<div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-400">
 <v-click>
 
-### ✅ **What Works Today**
+## ✅ **What Works Today**
+
+<div class="space-y-3 mt-4">
 
 - **Code changes** with test-driven specs
 - **Refactoring** with existing test coverage
@@ -281,19 +410,26 @@ layout: two-cols
 - **Bug fixes** with clear reproduction steps
 - **Documentation** updates and API changes
 
+</div>
+
 </v-click>
 </div>
 
-<div>
+<div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-400">
 <v-click>
 
-### ❌ **What Still Breaks**
+## ❌ **What Still Breaks**
+
+<div class="space-y-3 mt-4">
 
 - **Plan drift** - losing sight of main goal
 - **Silent failures** - tools fail, model doesn't notice
 - **Context miss** - working from stale assumptions
 - **Over-editing** - wide diffs with low signal
 - **Security regressions** - unsafe changes slip through
+- **Reward hacking in tests** - plausible but wrong patches
+
+</div>
 
 </v-click>
 </div>
@@ -302,7 +438,11 @@ layout: two-cols
 
 <v-click>
 
+<div class="bg-blue-50 p-4 rounded-lg mt-6 border-l-4 border-blue-400">
+
 **Key Pattern:** Agents thrive with **verifiable outcomes** (compile, test, lint) but struggle with **ambiguous requirements** or **complex multi-step coordination**.
+
+</div>
 
 </v-click>
 
@@ -498,27 +638,26 @@ layout: default
 ---
 layout: default
 ---
-# Open Problems for EAIRG
+# Open Research Questions for EAIRG
 
 <Transform :scale="0.7">
 
-**1. Verification at Scale:** How do we verify correctness of 10,000-line changes?
-- Research direction: Formal verification integration with agent workflows
-- Testable hypothesis: Property-based verification reduces regression rates
+**Measurement & Evaluation:**
+- How do we score planning quality independently of execution success?
+- What intermediate metrics predict final task completion?
+- Can we detect reward hacking in repository-scale tasks?
 
-**2. Planning Under Uncertainty:** When should agents backtrack vs. continue?
-- Research direction: Adaptive planning with partial-order execution
-- Testable hypothesis: Multi-path planning outperforms linear execution
+**Multi-Agent Coordination:**
+- How should specialized agents (frontend, backend, testing) divide work?
+- What communication protocols prevent coordination failures?
+- How do we maintain consistency across parallel agent modifications?
 
-**3. Multi-Agent Safety:** How do we prevent coordination failures in agent teams?
-- Research direction: Formal protocols for agent collaboration
-- Testable hypothesis: Hierarchical coordination reduces failure modes
+**Long-Context Reasoning:**
+- How effectively can agents use 1M+ token contexts for repository understanding?
+- What are the optimal strategies for context compaction and caching?
+- Can agents learn to identify the most relevant context for a given task?
 
-**4. Evaluation Methodology:** What metrics actually predict deployment success?
-- Research direction: Trace-level evaluation beyond final outputs
-- Testable hypothesis: Intermediate step quality predicts final success
-
-**Each question can be turned into concrete experiments with measurable outcomes.**
+**Testable Hypotheses:** Each question can be turned into controlled experiments with measurable outcomes.
 
 </Transform>
 
@@ -574,11 +713,48 @@ class: text-center
 
 # Thank You
 
-### Q&A
+<div class="text-center mt-12">
+  <div class="text-3xl mb-8">Questions & Discussion</div>
+  <div class="text-lg text-gray-600 mb-12">EAIRG Engineering AI Research Group • September 2025</div>
+</div>
 
-**References:**
+<div class="mt-16">
 
-- [OpenAI: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)
-- [SWE-bench Verified Paper](https://arxiv.org/html/2401.05566v3)
-- [METR: Recent Frontier Models Are Reward Hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/)
-- [Amazon Q Developer Security Bulletin (CVE-2024-6991)](https://aws.amazon.com/security/security-bulletins/AWS-2024-004/)
+<Transform :scale="0.75">
+
+**Key References for Follow-up:**
+
+<div class="grid grid-cols-3 gap-8 mt-8">
+
+<div class="bg-blue-50 p-4 rounded-lg">
+
+**Foundation Papers**
+- [SWE-bench](https://arxiv.org/abs/2310.06770) - Real-world evaluation
+- [Codex](https://arxiv.org/abs/2107.03374) - Code generation breakthrough
+- [ReAct](https://arxiv.org/abs/2210.03629) - Reasoning + Acting
+
+</div>
+
+<div class="bg-green-50 p-4 rounded-lg">
+
+**Current Performance**
+- [SWE-bench Leaderboard](https://www.swebench.com/) - Live rankings
+- [OpenAI SWE-bench Verified](https://openai.com/index/introducing-swe-bench-verified/) - 500-task subset
+- [Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices) - Implementation guide
+
+</div>
+
+<div class="bg-orange-50 p-4 rounded-lg">
+
+**Safety Research**
+- [METR Reward Hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/) - Advanced risks
+- [AWS Security Bulletin](https://aws.amazon.com/security/security-bulletins/AWS-2025-015/) - Real incidents
+- [OpenAI Reasoning Models](https://openai.com/index/learning-to-reason-with-llms/) - o-series
+
+</div>
+
+</div>
+
+</Transform>
+
+</div>
