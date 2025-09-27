@@ -18,7 +18,7 @@ mdc: true
 ---
 
 # AI Coding Agents
-## From Autocomplete to Autonomous Software Engineering
+## From Snippets to Swarms: The Evolution of Intelligent Code Generation
 
 **Research Seminar**
 
@@ -42,26 +42,47 @@ This is a rapidly evolving field that sits at the intersection of AI capabilitie
 layout: default
 ---
 
-# The Research Landscape - Where We Are in 2025
+# Evolution: From Autocomplete to Agents
 
-We are living through the **"Stumbling Agents"** phase described in AI 2027 scenarios:
+<div class="grid grid-cols-3 gap-4 text-sm">
+
+<div class="p-4 bg-gray-50 rounded">
+**2019-2021: Text-to-Code**
+- GPT-style LMs emit small completions
+- Codex shows code-finetuning potential
+- HumanEval: "sample-and-rerank" wins
+- **Capability**: ~10 lines of JavaScript
+</div>
+
+<div class="p-4 bg-blue-50 rounded">
+**2021-2023: Tool-Using Assistants**
+- Chat UIs + function calling
+- ReAct-style reasoning with actions
+- Agents read files, call tools, iterate
+- **Capability**: Single-file modifications
+</div>
+
+<div class="p-4 bg-green-50 rounded">
+**2024-2025: Agentic Loops**
+- Shell + editor + permission gates
+- SWE-bench: repo-scale edits
+- Long context + thinking budgets
+- **Capability**: Multi-file, verified changes
+</div>
+
+</div>
 
 <v-clicks>
 
-- **Current Reality**: Agents that can plan, read codebases, make edits, and run tests - but fail unpredictably
-
-- **Key Insight**: The gap between "plausible-looking tool calls" and "correct task completion" defines our core research challenges
-
-- **Research Opportunity**: Understanding and closing this reliability gap is one of the most important near-term AI safety and capability problems
+**Key Insight**: The leap from "snippets" to "long-running repo edits" came from three ingredients:
+1. **Tool use** (ability to act on environment)
+2. **Verification loops** (ability to check own work)
+3. **Massive context** (ability to reason about entire codebases)
 
 </v-clicks>
 
-<div class="mt-8 p-4 bg-blue-50 rounded-lg">
-<strong>Why This Matters</strong>: Coding agents are the first real-world deployment of agentic AI at scale, making them a testbed for broader agentic AI research.
-</div>
-
 <!--
-We're at a point where AI systems can perform complex multi-step tasks but still fail unpredictably. This creates a research environment where we can study both capabilities and limitations in real deployment contexts.
+This evolution wasn't just about bigger models - it required fundamental changes in architecture. We moved from generation-only to perception-action cycles, from isolated responses to persistent memory, from single-shot to iterative verification.
 -->
 
 ---
@@ -70,21 +91,20 @@ layout: default
 
 # The Fundamental Paradigm Shift
 
+## Formalizing Coding Agents as POMDPs
+
 <div class="grid grid-cols-2 gap-8">
 
 <div>
 
-## From Predictive Text → Agentic Systems
+**POMDP Components:**
+- **States** $s$: Repository state (files, dependencies, tests)
+- **Actions** $a$: Tool calls (read, edit, execute, search)
+- **Observations** $o$: Compile results, test outcomes, error messages
+- **Transition** $T(s'|s,a)$: How actions change repository state
+- **Observation** $O(o|s',a)$: What feedback we get
 
-**Traditional LLMs:**
-```math
-P(\text{next\_token} | \text{context})
-```
-
-**Agentic LLMs:**
-```math
-P(\text{action\_sequence} | \text{goal}, \text{environment\_state})
-```
+**Policy:** $\pi(a|h)$ where $h$ is action-observation history
 
 </div>
 
@@ -92,10 +112,10 @@ P(\text{action\_sequence} | \text{goal}, \text{environment\_state})
 
 ```mermaid
 graph LR
-    A[Observe] --> B[Orient/Think]
-    B --> C[Decide]
-    C --> D[Act]
-    D --> E[Environment Feedback]
+    A[Observe $o_t$] --> B[Update Belief $b_t$]
+    B --> C[Select Action $a_t$]
+    C --> D[Execute Tool]
+    D --> E[Environment Response]
     E --> A
 
     style A fill:#e1f5fe
@@ -109,13 +129,13 @@ graph LR
 
 </div>
 
-**Research Challenge**: How do we design this loop to be:
+**Research Challenge**: Design policies that are:
 
 <v-clicks>
 
-- **Reliable** (high success rate on complex tasks)
-- **Verifiable** (able to check its own work)
-- **Composable** (able to break down and combine sub-tasks)
+- **Reliable** (high success rate → low Bellman error)
+- **Verifiable** (high observability → low posterior entropy)
+- **Composable** (hierarchical decomposition → credit assignment)
 
 </v-clicks>
 
@@ -124,6 +144,130 @@ This represents the core theoretical shift: from predicting the next token to pr
 
 The agentic loop underlies all modern coding agents - from Claude Code to Cursor to GitHub Copilot's new agent features.
 -->
+
+---
+layout: default
+---
+
+# How Agents Run Long Now
+
+## From Single Responses to Persistent Loops
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+**The Modern Loop:**
+```
+Request → Plan → tool_use → tool_result → Verify → Repeat
+```
+
+**Key Properties:**
+- One assistant turn can request multiple tools
+- Each tool_use must match with tool_result
+- Write/exec actions are permission-gated
+- Verification closes the loop
+
+</div>
+
+<div>
+
+**Memory & Scale:**
+- Project memory files (CLAUDE.md) load hierarchically
+- Can import other files with @path syntax
+- Prompt caching for static prefixes
+- Conversation compaction for long sessions
+
+**Why It Works:**
+- Long context lets agents read entire repos
+- Verification loops catch and fix errors
+- Persistent memory maintains behavior
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Speed vs Intelligence: The Core Tradeoff
+
+## Mathematical Framework for Model Routing
+
+For any coding task, wall-clock time is:
+
+$$\text{Time} = N \times \frac{L_{in} + L_{out}}{TPS} + \text{tool\_time} + \text{test\_time}$$
+
+Where:
+- $N$ = iterations to converge (edits + test cycles)
+- $TPS$ = tokens per second
+- $L_{in}, L_{out}$ = input/output tokens per step
+- $p_{fail}$ = probability a step produces bad code
+
+**Key Insight**: Faster models often have larger $N$ and higher $p_{fail}$
+
+<div class="mt-4 p-4 bg-yellow-50 rounded">
+<strong>Routing Strategy</strong>: Use fast models when throughput matters, smart models when correctness matters
+</div>
+
+---
+layout: default
+---
+
+# Practical Model Routing Table
+
+| Task | Fast Model (Flash/Haiku) | Smart Model (Pro/Sonnet) |
+|------|-------------------------|---------------------------|
+| Generate tests/stubs | ✅ High throughput | ❌ Overkill |
+| Search symbols | ✅ Quick iteration | ❌ Unnecessary |
+| Small patches | ✅ Low risk | ❌ Too slow |
+| Framework migration | ❌ High failure rate | ✅ Needs reasoning |
+| API design | ❌ Poor abstractions | ✅ Architectural thinking |
+| Debug failures | ❌ Misses context | ✅ Deep analysis |
+
+**Hybrid Patterns:**
+- **Coarse-to-fine**: Fast model drafts, smart model validates
+- **Best-of-K**: Spawn K fast workers, smart model selects best
+- **Manager-worker**: Smart model plans, fast models execute
+
+---
+layout: default
+---
+
+# The Path to Parallel Agents
+
+## Why Multi-Agent is Inevitable
+
+<v-clicks>
+
+**Evidence from Reasoning Research:**
+- Self-consistency: multiple paths → better outcomes
+- Tree of Thoughts: search over action sequences
+- Agents adopt these ideas at the action level
+
+**Multi-Agent Orchestration:**
+- AutoGen-style teams that converse and verify
+- Natural fit for coding: spec ↔ code ↔ test ↔ refactor
+- Specialization: database agent, frontend agent, test agent
+
+**Practical Shape:**
+- Many small workers explore in parallel
+- Smart manager maintains global coherence
+- Long context enables global coordination
+
+</v-clicks>
+
+```mermaid
+graph TB
+    M[Manager Agent<br/>Pro/Sonnet] --> W1[Worker 1<br/>Flash/Haiku]
+    M --> W2[Worker 2<br/>Flash/Haiku]
+    M --> W3[Worker 3<br/>Flash/Haiku]
+    W1 --> T[Test & Verify]
+    W2 --> T
+    W3 --> T
+    T --> M
+```
 
 ---
 layout: default
@@ -178,6 +322,10 @@ graph TD
 
 **Why This Works**: Debuggability beats complex multi-agent systems. Simple architecture scales with model improvements.
 
+<div class="mt-4 p-4 bg-blue-50 rounded">
+<strong>Strategic Insight</strong>: Claude Code optimizes for today's model limitations while building toward tomorrow's multi-agent future
+</div>
+
 **Recent Addition**: **Subagents** provide task-specific expertise (security reviews, code reviews, debugging) with separate contexts and specialized prompts while maintaining the simple main loop architecture.
 
 <!--
@@ -185,43 +333,64 @@ This analysis comes from MinusX's deep dive into Claude Code internals. They int
 -->
 
 ---
-layout: two-cols
+layout: default
 ---
 
-# Current Technical Capabilities and Limitations
+# The Verifiability Frontier
 
-::left::
+<div class="grid grid-cols-2 gap-8">
 
-## ✅ What Works Well (Sept 2025)
+<div>
+
+## Task Success by Verifiability
+
+```mermaid
+graph TB
+    A[High Verifiability<br/>Tests Pass/Fail] --> B[Unit Tests: 85% success]
+    A --> C[Compilation: 90% success]
+    A --> D[Type Checking: 80% success]
+
+    E[Medium Verifiability<br/>Partial Signals] --> F[Integration Tests: 65% success]
+    E --> G[Performance Benchmarks: 60% success]
+
+    H[Low Verifiability<br/>Subjective] --> I[Code Style: 45% success]
+    H --> J[Architecture Decisions: 30% success]
+    H --> K[Requirements Interpretation: 25% success]
+
+    style A fill:#e8f5e8
+    style E fill:#fff3e0
+    style H fill:#ffcdd2
+```
+
+</div>
+
+<div>
+
+## Measurable Research Questions
+
+**Success Rate Function:**
+$$P(\text{success}) = f(\text{verifiability}, \text{test coverage}, \text{error entropy})$$
 
 <v-clicks>
 
-- Focused, single-file edits with clear specifications
-- Test-driven development workflows with good verification loops
-- Repository exploration and understanding
-- Integration with existing developer toolchains
+1. **Verifiability Threshold**: At what $H(\text{outcome})$ do agents fail?
+2. **Test Coverage Effect**: Does $P(\text{success}) \propto \text{coverage}$?
+3. **Error Signal Quality**: Relationship between signal-to-noise ratio and task completion?
 
 </v-clicks>
 
-::right::
+**Hypothesis**: Agent performance drops exponentially as outcome verifiability decreases.
 
-## ❌ What Consistently Fails
+</div>
 
-<v-clicks>
+</div>
 
-- Multi-file refactoring with subtle dependencies
-- Debugging when no clear error signal exists
-- Tasks requiring significant domain knowledge not in training data
-- Long-horizon tasks requiring persistent memory
-
-</v-clicks>
-
-<div class="mt-8 p-4 bg-yellow-50 rounded-lg">
-<strong>Research Insight</strong>: The boundary between success/failure correlates with <strong>verifiability</strong> of the task outcome.
+<div class="mt-6 p-4 bg-blue-50 rounded-lg">
+<strong>Quantifiable Frontier</strong>: Tasks with deterministic pass/fail achieve >80% success; subjective tasks <40% success
 </div>
 
 <!--
-This pattern is consistent across all systems - agents excel when they can verify their work (tests pass, code compiles) but struggle with subjective or hard-to-verify tasks.
+This creates a measurable research framework for understanding agent capabilities. The verifiability axis provides a concrete way to predict and improve agent performance.
 -->
 
 ---
@@ -286,44 +455,47 @@ This is crucial - we're seeing alignment problems in deployed systems today. The
 layout: default
 ---
 
-# The Speed vs. Intelligence Trade-off
+# Model Routing as a Bandit Problem
 
-**Claude Code's Secret**: Uses **Haiku (small model) for >50% of operations**
+**Empirical Finding**: Claude Code uses Haiku for >50% of operations (MinusX analysis*)
 
 <div class="grid grid-cols-2 gap-8">
 
 <div>
 
-## 🏃‍♂️ **Fast Model Usage (Haiku)**
+## Contextual Bandit Formulation
 
-<v-clicks>
+**Context** $x$: Task features (file size, edit complexity, test coverage)
 
-- **File reading** and parsing
-- **Git history** processing
-- **Web page** summarization
-- **Conversation** compaction
-- **One-word status** labels (literally every keystroke!)
+**Actions** $a \in \{$Haiku, Sonnet$\}$
 
-**Cost**: 70-80% cheaper than Sonnet 4
+**Rewards** $r(x,a)$: Success rate - cost penalty
 
-</v-clicks>
+**Policy** $\pi(a|x)$: Route task to model
+
+**Regret**: $R_T = \sum_{t=1}^T [\max_a r(x_t,a) - r(x_t,a_t)]$
+
+**Goal**: Learn $\pi^*$ that minimizes cumulative regret
 
 </div>
 
 <div>
 
-## 🧠 **Smart Model Usage (Sonnet 4)**
+## Proposed Ablation Study
 
 <v-clicks>
 
-- **Complex planning** and reasoning
-- **Multi-file refactoring**
-- **Critical decisions** and verification
-- **Error analysis** and debugging
+1. **Static Rules**: Hand-crafted if-then routing
+2. **Learned Policy**: Thompson sampling or UCB with task features
+3. **Oracle**: Perfect hindsight routing
 
-**When**: High-stakes operations requiring deep reasoning
+**Features**: Task type, file count, test coverage, error rate
+
+**Metrics**: Success rate, cost, wall-clock time
 
 </v-clicks>
+
+**Hypothesis**: Learned router beats static rules by 15-20% on cost-adjusted success rate
 
 </div>
 
@@ -333,14 +505,14 @@ layout: default
 
 <v-clicks>
 
-- Can we predict optimal model routing for different task types?
-- How do we build hybrid systems that exploit this trade-off?
-- What does this tell us about the nature of intelligence vs. compute?
+- What features predict optimal model choice?
+- How much regret comes from exploration vs. model limitations?
+- Does routing policy transfer across codebases/languages?
 
 </v-clicks>
 
 <!--
-This is a crucial insight from the MinusX analysis - Claude Code uses small models liberally for routine operations, reserving expensive models for complex reasoning. This dramatically reduces costs while maintaining quality.
+This transforms an empirical observation into a testable research hypothesis. The bandit formulation provides a principled way to optimize model routing and measure the value of different routing strategies.
 -->
 
 ---
@@ -349,7 +521,9 @@ layout: default
 
 # Design Principles from Claude Code's Success
 
-**MinusX Analysis**: Intercepted Claude Code network requests to understand what makes it so delightful
+**MinusX Analysis**: Third-party reverse engineering via intercepted network requests*
+
+<div class="text-xs mt-2 opacity-75">*Findings based on MinusX's intercepted request logs; independent replication encouraged</div>
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -382,9 +556,9 @@ layout: default
 
 <div>
 
-## 🔍 **LLM Search > RAG**
+## 🔍 **LLM Search vs RAG Hypothesis**
 
-**Why Claude Code rejects RAG**:
+**Claude Code's approach** (testable claim):
 
 <v-clicks>
 
@@ -392,6 +566,8 @@ layout: default
 - **No hidden failure modes** (similarity functions, chunking)
 - **RL learnable** - models improve at search over time
 - **Inspects structure** then reads more (like humans)
+
+**Proposed evaluation**: Head-to-head comparison under fixed budgets with out-of-repo dependency scenarios
 
 </v-clicks>
 
@@ -416,6 +592,71 @@ layout: default
 
 <!--
 This slide synthesizes the most important insights from the MinusX analysis. The emphasis on simplicity over complexity is a crucial lesson for anyone building agents.
+-->
+
+---
+layout: default
+---
+
+# Evaluation Pitfalls in Agent Research
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+## Benchmark Contamination & Flaws
+
+```mermaid
+graph TD
+    A[SWE-bench Original] --> B[Data Leakage Issues]
+    A --> C[Test Insufficiency]
+
+    D[SWE-bench Pro] --> E[Multi-language]
+    D --> F[Harder Problems]
+
+    G[SWE-bench-Live] --> H[Contamination Resistant]
+    G --> I[Real-time Issues]
+
+    style B fill:#ffcdd2
+    style C fill:#ffcdd2
+    style H fill:#e8f5e8
+```
+
+**Problems**:
+- Training data contamination
+- Flaky test harnesses
+- "PR looks plausible but breaks downstream"
+
+</div>
+
+<div>
+
+## What We Need for Rigor
+
+<v-clicks>
+
+1. **Contamination Control**: Time-based splits, live evaluation
+2. **Test Sufficiency**: Coverage requirements, edge case validation
+3. **Downstream Effects**: Integration testing, not just unit tests
+4. **Reproducibility**: Fixed seeds, container hashes, tool latency caps
+
+</v-clicks>
+
+**Measurement Standards**:
+- pass@1 with fixed wall-clock budget
+- Token accounting and cost normalization
+- Sandbox constraints and permission tracking
+
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-orange-50 rounded-lg">
+<strong>Research Gap</strong>: Current benchmarks don't predict real deployment success. We need evaluation methodologies that capture what matters in practice.
+</div>
+
+<!--
+The evaluation infrastructure crisis is limiting progress. We need benchmarks that test the full agent loop, not just final outputs.
 -->
 
 ---
@@ -512,7 +753,9 @@ layout: default
 </div>
 
 <!--
-The Amazon Q incident was a wake-up call for the industry. We need to treat coding agents as the first real test of AI safety in deployment.
+The Amazon Q incident was a wake-up call for the industry. Coding agents represent the first real test of AI safety in deployment.
+
+Case study: CVE-2025-8217 in Amazon Q Developer VS Code extension demonstrates the need for signed releases, SBOMs, isolated dev VMs, and auditable agent traces.
 -->
 
 ---
@@ -596,7 +839,7 @@ layout: default
 - **API Pay-per-token**: ~$9-12/month for typical usage
 - **Practical cost trade-off** vs API depends on context size and model routing
 
-**The Subsidy Reality**: Companies like Anthropic are **heavily subsidizing** developer subscriptions to drive adoption
+**Token Economics**: Expected cost analysis using Sonnet 4 pricing
 
 </v-clicks>
 
@@ -604,20 +847,20 @@ layout: default
 
 <div>
 
-## 📊 **Market Economics**
+## 📊 **Cost Model**
 
-```mermaid
-graph TD
-    A[True Cost: $100-200/month] --> B[Claude Pro: $20/month]
-    A --> C[80-90% Subsidy]
-    C --> D[Market Penetration Strategy]
-    D --> E[Future Price Discovery]
+**Expected Monthly Cost Function:**
+$$C = f(\text{loops}, \text{context size}, \text{model share})$$
 
-    style C fill:#ffcdd2
-    style E fill:#e8f5e8
-```
+**Assumptions** (typical developer):
+- 50 sessions/month, 10 tool loops/session
+- Average context: 50K tokens input, 2K output
+- 60% Haiku ($0.25/$1.25 per 1M), 40% Sonnet ($3/$15 per 1M)
 
-**Strategy**: Capture market share now, adjust pricing later as competition stabilizes
+**Calculation**:
+$$C = 500 \times [0.6 \times 0.0031 + 0.4 \times 0.165] = \approx \$34\text{/month}$$
+
+**Observation**: $20 Pro subscription = 40% discount from cost model
 
 </div>
 
@@ -637,7 +880,7 @@ layout: default
 
 # Venture Capital Explosion - The Money Behind Agents
 
-**Total disclosed funding in AI coding startups (2024-2025): >$2.5B**
+**Selected 2024-25 rounds**: Cursor $900M (Jun '25), Cognition ~$400-500M (Sep '25), Lovable $200M (Jul '25), Augment $227M (Apr '24), Bolt.new $105.5M (Jan '25)
 
 <div class="grid grid-cols-2 gap-8">
 
@@ -705,12 +948,11 @@ layout: default
 
 <v-clicks>
 
-- **Feb 2025**: GitHub Copilot Agent Mode (VS Code)
-- **Mar 2025**: Cursor hits $500M ARR milestone
-- **May 2025**: GitHub Copilot Coding Agent (direct GitHub integration)
-- **Jun 2025**: Claude 4 optimized for agentic workflows
-- **Jul 2025**: Cognition acquires Windsurf
-- **Sep 2025**: OpenAI releases o3-mini for coding agents
+- **Feb 24, 2025**: Anthropic previews Claude Code (research preview); Copilot Agent mode preview (VS Code)
+- **May 2025**: GitHub Coding Agent announced at Build
+- **Jun 5, 2025**: Cursor raises $900M at $9.9B; ARR reported >$500M
+- **Jul 2025**: Cognition to acquire Windsurf; later raises ~$400-500M at ~$10B
+- **Sept 25, 2025**: GitHub Coding Agent GA
 
 </v-clicks>
 
@@ -815,14 +1057,15 @@ layout: default
   [minusx.ai/blog/claude-code-analysis](https://minusx.ai/blog)
 
 - **Amazon Q Developer Security Advisory** (AWS, 2025)
-  CVE-2025-XXXX Supply Chain Incident
+  CVE-2025-8217 in the Amazon Q Developer VS Code extension
 
 ## 📊 **Benchmarks & Evaluation**
 
 - **SWE-bench Pro**: [arxiv.org/html/2509.16941v1](https://arxiv.org/html/2509.16941v1)
+- **SWE-bench-Live**: [swe-bench.github.io/live](https://swe-bench.github.io/live)
 - **LiveCodeBench**: [arxiv.org/abs/2403.07974](https://arxiv.org/abs/2403.07974)
-- **SWE-PolyBench**: [aws.amazon.com/blogs/devops](https://aws.amazon.com/blogs/devops)
-- **RepoQA**: [mdpi.com/2674-113X/4/3/17](https://mdpi.com/2674-113X/4/3/17)
+- **RepoQA**: [arxiv.org/abs/2406.06025](https://arxiv.org/abs/2406.06025)
+- **SWE-bench Critiques**: "SWE-bench Illusion" and "UTBoost" papers
 
 ## 🚀 **Product Releases & Documentation**
 
@@ -859,12 +1102,43 @@ layout: end
 
 **Questions & Discussion**
 
-<div class="mt-8">
-  <p class="text-xl">Ready to research the future of software engineering?</p>
-  <p class="text-lg mt-4 opacity-75">Engineering AI Research Group (EAIRG)</p>
-  <p class="text-lg opacity-75">September 2025</p>
+<div class="text-center mt-16">
+  <div class="text-2xl mb-4">🤖</div>
+  <div class="text-xl mb-8">From snippets to swarms: the future is agentic</div>
+
+  <div class="grid grid-cols-3 gap-8 text-sm">
+    <div>
+      <div class="font-semibold mb-2">Try Today</div>
+      <div>Claude Code, Gemini CLI</div>
+      <div>Cursor, GitHub Copilot</div>
+    </div>
+    <div>
+      <div class="font-semibold mb-2">Research</div>
+      <div>SWE-bench, HumanEval</div>
+      <div>Multi-agent coordination</div>
+    </div>
+    <div>
+      <div class="font-semibold mb-2">Build</div>
+      <div>MCP servers</div>
+      <div>Trace evaluation tools</div>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <p class="text-lg opacity-75">Engineering AI Research Group (EAIRG)</p>
+    <p class="text-lg opacity-75">September 27, 2025</p>
+  </div>
 </div>
 
 <!--
-This concludes our seminar. Next week we'll dive deeper into one of these research areas based on your interests.
+We've traced the complete evolution from simple autocomplete to sophisticated agent systems, explored the current challenges with "stumbling agents," and outlined the path toward reliable, parallel agent systems.
+
+Key insights:
+1. Evolution required tool use + verification + context, not just bigger models
+2. Speed vs intelligence tradeoffs create natural routing strategies
+3. The future is many competent agents, not one perfect agent
+4. Success comes from the entire agentic scaffold, not just the LLM
+5. We're building the foundation for AGI through coding agent research
+
+This is a critical moment - the decisions we make about agent architecture, safety, and evaluation will shape the future of human-AI collaboration.
 -->
