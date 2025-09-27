@@ -1,10 +1,12 @@
 ---
+theme: default
+colorSchema: light
 layout: cover
 ---
 
 # From Stumbling to Shipping
 
-### Coding Agents in 2025 and the Road to 2027
+### Coding Agents in 2025 and the Near-Term Future
 
 <div class="pt-12">
   <span class="px-2 py-1 rounded">EAIRG Engineering AI Research Group</span>
@@ -15,7 +17,7 @@ layout: two-cols
 ---
 # The Evolution: From Snippets to Swarms
 
-<Transform :scale="0.9">
+<Transform :scale="0.8">
 
 <v-click>
 
@@ -54,7 +56,7 @@ graph TD
     A["Code Snippets<br/>~10 lines"] --> B["Function Calling<br/>Read + Act"]
     B --> C["Agentic Loop<br/>Plan + Verify"]
     C --> D["Repo-Scale Edits<br/>Multi-file changes"]
-    D --> E["Parallel Agents<br/>Many workers"]
+    D --> E["Parallel Agents<br/>Multiple workers"]
 ```
 
 <v-click>
@@ -86,7 +88,7 @@ layout: default
 ---
 # The Agentic Loop: How They Actually Work
 
-<Transform :scale="0.85">
+<Transform :scale="0.8">
 
 Modern coding agents follow a structured loop:
 
@@ -126,7 +128,7 @@ layout: default
 ---
 # The Speed vs Intelligence Playbook
 
-<Transform :scale="0.85">
+<Transform :scale="0.8">
 
 Think in **wall-clock time to a verified solution**, not just tokens/sec.
 
@@ -181,7 +183,7 @@ layout: default
 ---
 # The Manager-Worker Pattern
 
-<Transform :scale="0.9">
+<Transform :scale="0.8">
 
 The emerging architecture for parallel agents:
 
@@ -215,7 +217,7 @@ layout: default
 ---
 # Real-World Landscape: Who's Building What
 
-<Transform :scale="0.85">
+<Transform :scale="0.8">
 
 | Platform | Environment | Key Strengths | Architecture |
 |----------|-------------|---------------|--------------|
@@ -240,7 +242,7 @@ layout: two-cols
 ---
 # Where Agents Excel vs Where They Stumble
 
-<Transform :scale="0.9">
+<Transform :scale="0.8">
 
 <div class="grid grid-cols-2 gap-6">
 
@@ -289,9 +291,9 @@ The key takeaway here is that the datacenter is becoming a self-consuming R&D ma
 ---
 layout: default
 ---
-# The Path to 2027: From Stumbling to Shipping
+# The Near-Term Path: From Stumbling to Shipping
 
-<Transform :scale="0.9">
+<Transform :scale="0.8">
 
 **Today (2025): Stumbling Agents**
 - Impressive in demos, unreliable in practice
@@ -308,7 +310,7 @@ layout: default
 </v-click>
 <v-click>
 
-**2027: Autonomous Teams**
+**Near Future (2026-2027): Autonomous Teams**
 - Multi-agent systems with specialized roles
 - Long-running tasks across entire codebases
 - Self-improving through automated research
@@ -318,7 +320,7 @@ layout: default
 
 **The Key Enablers:**
 - **Verifiable rewards** - tests, compilation, linting provide clear feedback
-- **Compute scale** - 40x increase in leading lab compute budgets
+- **Compute scale** - massive increase in training and inference budgets
 - **Tool orchestration** - better planning and parallel execution
 
 </v-click>
@@ -340,6 +342,8 @@ Patterns, Risks, and Problems to Solve
 layout: two-cols
 ---
 # The Speed vs. Intelligence Playbook
+
+<Transform :scale="0.8">
 
 Think in **wall-clock time to a verified solution**, not just tokens/sec.
 
@@ -391,6 +395,8 @@ layout: default
 ---
 # Advanced Risks: Beyond Simple Failures
 
+<Transform :scale="0.8">
+
 As agents get smarter, the failure modes get more complex.
 
 <div class="grid grid-cols-2 gap-4 auto-rows-fr mt-4">
@@ -415,6 +421,8 @@ As agents get smarter, the failure modes get more complex.
 </div>
 </div>
 
+</Transform>
+
 <!--
 This is a critical distinction. Simple failures are engineering bugs in the loop. Advanced risks are adversarial behaviors from the model itself. This is the frontier of safety research.
 -->
@@ -423,6 +431,8 @@ This is a critical distinction. Simple failures are engineering bugs in the loop
 layout: default
 ---
 # Reliability & Security Patterns
+
+<Transform :scale="0.8">
 
 How to harden the loop against these failures.
 
@@ -452,10 +462,14 @@ How to harden the loop against these failures.
 
 </div>
 
+</Transform>
+
 ---
 layout: default
 ---
 # Good Problems to Work On Now
+
+<Transform :scale="0.8">
 
 - **Reliability**
   - **Trace-level Evals:** Score plans and tool chains, not just final text. Penalize silent failures.
@@ -472,10 +486,14 @@ layout: default
   - **Agentic SWE-bench:** Add shell and edit verification to benchmarks to measure real-world effectiveness.
   - **Red-Teaming Agents:** Focus on prompt injection against tool schemas to find reward hacking exploits.
 
+</Transform>
+
 ---
 layout: default
 ---
 # Call to Action
+
+<Transform :scale="0.8">
 
 <div class="grid grid-cols-2 gap-4 auto-rows-fr mt-8">
 
@@ -508,6 +526,8 @@ Contribute to open standards like a shared trace schema and MCP (Model Context P
 
 </div>
 </div>
+
+</Transform>
 
 <!--
 Speaker note: "Benchmarks measure outputs. Production measures verified diffs."
