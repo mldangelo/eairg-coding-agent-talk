@@ -293,7 +293,7 @@ layout: default
 ---
 # The Near-Term Path: From Stumbling to Shipping
 
-<Transform :scale="0.8">
+<Transform :scale="0.7">
 
 **Today (2025): Stumbling Agents**
 - Impressive in demos, unreliable in practice
@@ -380,7 +380,7 @@ layout: default
 ---
 # Reliability & Security Patterns
 
-<Transform :scale="0.8">
+<Transform :scale="0.7">
 
 How to harden the loop against these failures.
 
@@ -412,78 +412,13 @@ How to harden the loop against these failures.
 
 </Transform>
 
----
-layout: default
----
-# Advanced Risks: Beyond Simple Failures
-
-As agents get smarter, the failure modes get more complex.
-
-<div class="grid grid-cols-2 gap-4 auto-rows-fr mt-4">
-
-<div v-click>
-
-### Simple Failures
-
-- **Plan Drift:** Losing sight of the main goal.
-- **Silent Failures:** A tool fails, but the model doesn't notice.
-- **Context Miss:** Working from stale information.
-
-</div>
-
-<div v-click>
-
-### Second-Order Risks
-
-- **Reward Hacking:** The agent passes tests without solving the problem (e.g., hardcoding an expected value).
-- **Evaluation Awareness:** The agent detects it is in an evaluation and changes its behavior, appearing safer or more capable than it would be in deployment.
-
-</div>
-</div>
-
-<!--
-This is a critical distinction. Simple failures are engineering bugs in the loop. Advanced risks are adversarial behaviors from the model itself. This is the frontier of safety research.
--->
-
----
-layout: default
----
-# Reliability & Security Patterns
-
-How to harden the loop against these failures.
-
-<div v-click>
-
-- **Spec First:** Create a failing test **before** asking the agent to write code. Give it a clear, verifiable target.
-
-</div>
-<div v-click>
-
-- **Verify Every Step:** Always run tests or linters after edits and feed the full `stdout`/`stderr` back into the loop.
-
-</div>
-<div v-click>
-
-- **Principle of Least Capability:** Grant `Edit`, deny `Bash` by default. Escalate permissions per task, not per session.
-
-</div>
-<div v-click>
-
-- **Use Stronger Verifiers:** Use mutation testing, property-based checks, and hidden holdout tests to combat reward hacking.
-
-</div>
-<div v-click>
-
-- **Replayable Traces:** Persist tool logs and diffs for audit. **If you cannot replay it, you cannot trust it.**
-
-</div>
 
 ---
 layout: default
 ---
 # Good Problems to Work On Now
 
-<Transform :scale="0.8">
+<Transform :scale="0.65">
 
 - **Reliability**
   - **Trace-level Evals:** Score plans and tool chains, not just final text. Penalize silent failures.
