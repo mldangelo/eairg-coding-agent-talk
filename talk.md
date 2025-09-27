@@ -47,7 +47,7 @@ As of Sept 2025
 
 <div class="pt-8">
   <span @click="$slidev.nav.next" class="px-4 py-2 rounded cursor-pointer hover:bg-blue-50 text-blue-600 border border-blue-200">
-    Press Space for next page <carbon:arrow-right class="inline"/>
+    Press Space for next page →
   </span>
 </div>
 
