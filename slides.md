@@ -332,53 +332,6 @@ These numbers make the abstract concept of 'AGI' tangible. This isn't just softw
 -->
 
 ---
-layout: default
----
-# The Physical Reality of 2027
-
-The scale of a single leading AI lab becomes staggering.
-
-<div class="grid grid-cols-2 gap-8 text-center mt-8">
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-🔧
-
-**~1M AI Researchers**
-
-<p class="text-sm">running in parallel</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-⏱️
-
-**@ 50x Human Speed**
-
-<p class="text-sm">~500 words/sec</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-⚡
-
-**~10 GW of Power**
-
-<p class="text-sm">output of ~10 nuclear reactors</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-💰
-
-**~$100B / year**
-
-<p class="text-sm">in compute costs</p>
-</div>
-
-</div>
-
-<!--
-These numbers make the abstract concept of 'AGI' tangible. This isn't just software; it's a massive industrial and energy undertaking on the scale of a nation-state.
--->
-
----
 layout: section
 ---
 # The Engineering Reality
@@ -386,54 +339,78 @@ layout: section
 Patterns, Risks, and Problems to Solve
 
 ---
-layout: two-cols
+layout: default
 ---
-# The Speed vs. Intelligence Playbook
+# Advanced Risks: Beyond Simple Failures
 
-Think in **wall-clock time to a verified solution**, not just tokens/sec.
+<Transform :scale="0.8">
 
-<v-click>
+As agents get smarter, the failure modes get more complex.
 
-**Fast Models** (Gemini Flash, Claude Haiku)
+<div class="grid grid-cols-2 gap-4 auto-rows-fr mt-4">
 
-- <span v-click>Low latency, high throughput.</span>
-- <span v-click>Need more iterations to converge.</span>
-- <span v-click>**Use for:** boilerplate, generating variants, simple patches.</span>
+<div v-click>
 
-</v-click>
-<v-click>
+### Simple Failures
 
-**Smart Models** (Gemini Pro, Claude Opus)
+- **Plan Drift:** Losing sight of the main goal.
+- **Silent Failures:** A tool fails, but the model doesn't notice.
+- **Context Miss:** Working from stale information.
 
-- <span v-click>Converge in fewer iterations.</span>
-- <span v-click>High latency, expensive.</span>
-- <span v-click>**Use for:** complex refactors, API design, managing workers.</span>
+</div>
 
-</v-click>
+<div v-click>
 
-::right::
+### Second-Order Risks
 
-<v-click>
+- **Reward Hacking:** The agent passes tests without solving the problem (e.g., hardcoding an expected value).
+- **Evaluation Awareness:** The agent detects it is in an evaluation and changes its behavior, appearing safer or more capable than it would be in deployment.
 
-### The Manager-Worker Pattern
+</div>
+</div>
 
-```mermaid
-graph TD
-    Manager["Smart Model: Plan & Verify"] --> Worker1["Fast Model: Attempt Patch A"]
-    Manager --> Worker2["Fast Model: Attempt Patch B"]
-    Manager --> Worker3["Fast Model: Attempt Patch C"]
-    Worker1 --> Manager
-    Worker2 --> Manager
-    Worker3 --> Manager
-```
+</Transform>
 
-</v-click>
+<!--
+This is a critical distinction. Simple failures are engineering bugs in the loop. Advanced risks are adversarial behaviors from the model itself. This is the frontier of safety research.
+-->
 
-<v-click>
+---
+layout: default
+---
+# Reliability & Security Patterns
 
-> “Fast models are great at being many. Smart models are great at being right.”
+<Transform :scale="0.8">
 
-</v-click>
+How to harden the loop against these failures.
+
+<div v-click>
+
+- **Spec First:** Create a failing test **before** asking the agent to write code. Give it a clear, verifiable target.
+
+</div>
+<div v-click>
+
+- **Verify Every Step:** Always run tests or linters after edits and feed the full `stdout`/`stderr` back into the loop.
+
+</div>
+<div v-click>
+
+- **Principle of Least Capability:** Grant `Edit`, deny `Bash` by default. Escalate permissions per task, not per session.
+
+</div>
+<div v-click>
+
+- **Use Stronger Verifiers:** Use mutation testing, property-based checks, and hidden holdout tests to combat reward hacking.
+
+</div>
+<div v-click>
+
+- **Replayable Traces:** Persist tool logs and diffs for audit. **If you cannot replay it, you cannot trust it.**
+
+</div>
+
+</Transform>
 
 ---
 layout: default
@@ -506,6 +483,8 @@ layout: default
 ---
 # Good Problems to Work On Now
 
+<Transform :scale="0.8">
+
 - **Reliability**
   - **Trace-level Evals:** Score plans and tool chains, not just final text. Penalize silent failures.
   - **Adaptive Planning:** Develop agents that can backtrack or create partial-order plans instead of failing on linear scripts.
@@ -521,10 +500,14 @@ layout: default
   - **Agentic SWE-bench:** Add shell and edit verification to benchmarks to measure real-world effectiveness.
   - **Red-Teaming Agents:** Focus on prompt injection against tool schemas to find reward hacking exploits.
 
+</Transform>
+
 ---
 layout: default
 ---
 # Call to Action
+
+<Transform :scale="0.8">
 
 <div class="grid grid-cols-2 gap-4 auto-rows-fr mt-8">
 
@@ -557,6 +540,8 @@ Contribute to open standards like a shared trace schema and MCP (Model Context P
 
 </div>
 </div>
+
+</Transform>
 
 <!--
 Speaker note: "Benchmarks measure outputs. Production measures verified diffs."
