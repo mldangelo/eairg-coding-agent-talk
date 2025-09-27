@@ -2,9 +2,9 @@
 layout: cover
 ---
 
-# Building Reliable AI Coding Agents
+# From Stumbling to Shipping
 
-### Engineering Practices for Production Systems
+### Coding Agents in 2025 and the Road to 2027
 
 <div class="pt-12">
   <span class="px-2 py-1 rounded">EAIRG Engineering AI Research Group</span>
@@ -13,14 +13,17 @@ layout: cover
 ---
 layout: two-cols
 ---
-# A Short Origin Story
+# The Evolution: From Snippets to Swarms
+
+<Transform :scale="0.9">
 
 <v-click>
 
 **2019-2021: Text-to-Code Begins**
 
-- GPT-style LMs emit small code completions.
+- GPT-style LMs emit small code completions (~10 lines of JavaScript).
 - **Codex** proves code-finetuning works, powering early Copilot.
+- HumanEval: "sample-and-rerank" becomes the early win pattern.
 
 </v-click>
 <v-click>
@@ -29,6 +32,7 @@ layout: two-cols
 
 - **Function Calling** and **ReAct-style prompting** fuse reasoning with actions.
 - Agents begin to read files, call tools, and iterate.
+- Chat UIs spread, then structured tool use emerges.
 
 </v-click>
 <v-click>
@@ -37,27 +41,32 @@ layout: two-cols
 
 - Systems add shells, editors, and permission gates.
 - **SWE-bench** pushes toward repo-scale edits with test verification.
+- Long context (1M+ tokens) and prompt caching enable sustained work.
 
 </v-click>
+
+</Transform>
 
 ::right::
 
 ```mermaid
 graph TD
-    A["Code Snippets"] --> B["Function Calling"]
-    B --> C["Agentic Loop"]
-    C --> D["Repo-Scale Edits"]
+    A["Code Snippets<br/>~10 lines"] --> B["Function Calling<br/>Read + Act"]
+    B --> C["Agentic Loop<br/>Plan + Verify"]
+    C --> D["Repo-Scale Edits<br/>Multi-file changes"]
+    D --> E["Parallel Agents<br/>Many workers"]
 ```
 
 <v-click>
 
 ### The Leap
 
-The jump from "a few lines of JS" to "repo-scale edits" came from three key ingredients:
+The jump from "a few lines of JS" to "repo-scale edits" came from:
 
-1.  **Tool Use**
-2.  **Verification Loops**
-3.  **Much Larger Context**
+1.  **Tool Use** - structured interaction with environment
+2.  **Verification Loops** - test, lint, compile feedback
+3.  **Much Larger Context** - whole repos in working memory
+4.  **Smart Orchestration** - planning and error recovery
 
 </v-click>
 
@@ -68,49 +77,45 @@ This slide provides crucial historical context. The key point to land here is th
 ---
 layout: section
 ---
-# The Core Drivers
+# The Anatomy of Modern Agents
 
-Why progress is accelerating now
+Understanding how they actually work
 
 ---
 layout: default
 ---
-# 1. The Engine: Verifiable Rewards
+# The Agentic Loop: How They Actually Work
 
-Why did code agents advance faster than general "do my job" agents? **Verifiability.**
+<Transform :scale="0.85">
 
-Code has crisp, binary rewards:
+Modern coding agents follow a structured loop:
 
-<div class="grid grid-cols-3 gap-4 text-center mt-4">
+```mermaid
+sequenceDiagram
+    participant User
+    participant Agent as Agent Brain
+    participant Tools
+    participant Verifier
 
-<div v-click class="p-4 rounded bg-gray-500/10">
-💻
+    User->>Agent: "Fix the failing test in auth.py"
+    Agent->>Tools: Read(auth.py)
+    Tools-->>Agent: File contents
+    Agent->>Tools: Grep("test.*auth")
+    Tools-->>Agent: Test locations
+    Agent->>Tools: Edit(auth.py, patch)
+    Tools-->>Agent: Edit confirmed
+    Agent->>Verifier: Run tests
+    Verifier-->>Agent: Test results
+    Agent-->>User: "Fixed authentication bug + diff"
+```
 
-Did it compile?
+**Key Components:**
+- **Brain:** LLM with function calling (Claude, Gemini, etc.)
+- **Tools:** Read, Edit, Bash, Grep, Web search
+- **Memory:** Project context (CLAUDE.md, conversation history)
+- **Verifier:** Tests, linters, compilers for feedback
 
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-🧪
-
-Did the tests pass?
-
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-📋
-
-Did the linter succeed?
-
-</div>
-
-</div>
-
-<v-click>
-
-This creates a **clean feedback loop**, which is perfect for Reinforcement Learning (RL). When the reward signal is unambiguous, RL can scale and impart capabilities beyond what Supervised Fine-Tuning (SFT) alone can elicit.
-
-</v-click>
+</Transform>
 
 <!--
 This is the central thesis. Domains with verifiable outcomes (like coding and math) were the first to see dramatic gains from agentic RL because the feedback loop is so pure. This is the secret sauce.
@@ -119,70 +124,112 @@ This is the central thesis. Domains with verifiable outcomes (like coding and ma
 ---
 layout: default
 ---
-# 2. The Economics: Compute > Labels
+# The Speed vs Intelligence Playbook
 
-Verifiable rewards change the economic equation of AI development.
+<Transform :scale="0.85">
 
-<div class="grid grid-cols-2 gap-8 mt-6">
+Think in **wall-clock time to a verified solution**, not just tokens/sec.
 
-<div class="p-4 text-center">
-🚀
+<div class="grid grid-cols-2 gap-6 mt-4">
 
-**Nvidia's FY25 Revenue**
+<div>
+<v-click>
 
-<span class="text-4xl font-bold">~$130B</span>
+**Fast Models** (Gemini Flash, Claude Haiku)
 
+- Low latency, high throughput
+- Need more iterations to converge
+- **Use for:** boilerplate, variants, simple patches
+
+</v-click>
 </div>
 
-<div class="p-4 text-center">
-📊
+<div>
+<v-click>
 
-**Scale AI's 2024 Revenue**
+**Smart Models** (Gemini Pro, Claude Opus)
 
-<span class="text-4xl font-bold"><$1B</span>
+- Converge in fewer iterations
+- High latency, expensive
+- **Use for:** complex refactors, API design, orchestration
 
+</v-click>
 </div>
 
 </div>
 
 <v-click>
 
-Budgets are flowing to **compute-heavy training and inference** over human-label-heavy regimes. It is now more economically efficient to spend on GPUs for RL than on human data labeling for verifiable tasks.
+**The Break-Even Point:**
+```
+Wall-clock ≈ N × (input + output)/TPS + tool_time + test_time
+```
+
+Faster model wins when: high throughput × many simple tasks
+Smarter model wins when: fewer iterations × complex reasoning
 
 </v-click>
+
+</Transform>
 
 <!--
 It's not just about technical feasibility; it's about economics. The money is following the compute-heavy RL path because the ROI is clearer in domains like coding. This explains the massive datacenter buildout.
 -->
 
 ---
-layout: section
+layout: default
 ---
-# The Physical Foundation
+# The Manager-Worker Pattern
 
-Compute, Cost, and Power
+<Transform :scale="0.9">
+
+The emerging architecture for parallel agents:
+
+```mermaid
+graph TD
+    Manager["Smart Model: Plan & Verify"] --> Worker1["Fast Model: Attempt Patch A"]
+    Manager --> Worker2["Fast Model: Attempt Patch B"]
+    Manager --> Worker3["Fast Model: Attempt Patch C"]
+    Worker1 --> Manager
+    Worker2 --> Manager
+    Worker3 --> Manager
+    Manager --> Verifier["Run Tests & Select Best"]
+```
+
+<v-click>
+
+**How it works:**
+- Manager (Pro/Opus) creates spec and acceptance tests
+- Workers (Flash/Haiku) generate candidate solutions in parallel
+- Manager evaluates results and merges the best approach
+- Tests provide the final verification step
+
+> "Fast models are great at being many. Smart models are great at being right."
+
+</v-click>
+
+</Transform>
 
 ---
 layout: default
 ---
-# The Great Compute Buildout
+# Real-World Landscape: Who's Building What
 
-The economic drivers are leading to unprecedented hardware scale.
+<Transform :scale="0.85">
 
-- **Global AI Compute:** Projected to **10x** by Dec 2027 (to 100M H100-equivalents).
-- **Leading Lab Compute:** Projected to **40x** in the same period, as their share of global compute triples.
+| Platform | Environment | Key Strengths | Architecture |
+|----------|-------------|---------------|--------------|
+| **Gemini CLI** | Local terminal | Open source, MCP support, 1M+ context | ReAct loop + tool servers |
+| **Claude Code** | Local terminal | Strong permissions, CLAUDE.md memory | Tool belt + hierarchical memory |
+| **GitHub Copilot** | IDE + Cloud | Deep VS Code integration, PR workflows | Chat + background agents |
+| **Cursor** | AI-first editor | Agent mode, Rules for context | Editor-native tools |
+| **Replit Agent** | Cloud workspace | Full app building, autonomous deployment | Sandbox + web tools |
 
-```mermaid
-graph TD
-    subgraph Dec2024["Dec 2024"]
-        A["10M H100e Global"] --> B["0.5M H100e for Lab X"]
-    end
-    subgraph Dec2027["Dec 2027"]
-        C["100M H100e Global"] --> D["20M H100e for Lab X"]
-    end
-    A --> C
-    B --> D
-```
+**The Split:**
+- **Local agents:** Permission-gated, your machine, your rules
+- **Cloud agents:** Sandboxed, auditable, but less filesystem access
+
+</Transform>
 
 <!--
 This slide quantifies the scale. The key insight is the compounding effect: the total pie is growing 10x, but the slice of the pie for the top labs is also growing, leading to a 40x increase for them. This is the hardware foundation of the intelligence explosion.
@@ -191,39 +238,49 @@ This slide quantifies the scale. The key insight is the compounding effect: the 
 ---
 layout: two-cols
 ---
-# How The Compute is Used
+# Where Agents Excel vs Where They Stumble
 
-The allocation of this massive compute budget is shifting dramatically **inward**.
+<Transform :scale="0.9">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+<v-click>
+
+### ✅ **What Works Today**
+
+- **Code changes** with test-driven specs
+- **Refactoring** with existing test coverage
+- **Boilerplate generation** and mechanical tasks
+- **Bug fixes** with clear reproduction steps
+- **Documentation** updates and API changes
+
+</v-click>
+</div>
+
+<div>
+<v-click>
+
+### ❌ **What Still Breaks**
+
+- **Plan drift** - losing sight of main goal
+- **Silent failures** - tools fail, model doesn't notice
+- **Context miss** - working from stale assumptions
+- **Over-editing** - wide diffs with low signal
+- **Security regressions** - unsafe changes slip through
+
+</v-click>
+</div>
+
+</div>
 
 <v-click>
 
-**From (2024): Serving Products**
-
-- Primarily external deployment (serving ChatGPT-like products).
-- Significant pre-training costs.
-
-</v-click>
-<v-click>
-
-**To (2027): Fueling Research**
-
-- Majority of compute used for **internal research automation**.
-- Massive budgets for **synthetic data generation** and running **AI research experiments**.
-- Pre-training becomes a smaller fraction of the total spend.
+**Key Pattern:** Agents thrive with **verifiable outcomes** (compile, test, lint) but struggle with **ambiguous requirements** or **complex multi-step coordination**.
 
 </v-click>
 
-::right::
-
-```mermaid
-pie title 2027 Compute Allocation (Leading Lab)
-    "Research Experiments" : 35
-    "Synthetic Data Gen" : 22
-    "Training (Post-Training)" : 20
-    "External Deployment" : 13
-    "Running AI Assistants" : 6
-    "Other" : 4
-```
+</Transform>
 
 <!--
 The key takeaway here is that the datacenter is becoming a self-consuming R&D machine. The AI is using most of its own compute to make itself smarter, rather than to serve external customers. This is the feedback loop in action.
@@ -232,45 +289,41 @@ The key takeaway here is that the datacenter is becoming a self-consuming R&D ma
 ---
 layout: default
 ---
-# The Physical Reality of 2027
+# The Path to 2027: From Stumbling to Shipping
 
-The scale of a single leading AI lab becomes staggering.
+<Transform :scale="0.9">
 
-<div class="grid grid-cols-2 gap-8 text-center mt-8">
+**Today (2025): Stumbling Agents**
+- Impressive in demos, unreliable in practice
+- Need careful human management and supervision
+- Work well on bounded tasks with clear verification
 
-<div v-click class="p-4 rounded bg-gray-500/10">
-🔧
+<v-click>
 
-**~1M AI Researchers**
+**Near Future (2026): Reliable Workers**
+- Better planning and error recovery
+- Self-correction through test feedback loops
+- Parallel execution with smart coordination
 
-<p class="text-sm">running in parallel</p>
-</div>
+</v-click>
+<v-click>
 
-<div v-click class="p-4 rounded bg-gray-500/10">
-⏱️
+**2027: Autonomous Teams**
+- Multi-agent systems with specialized roles
+- Long-running tasks across entire codebases
+- Self-improving through automated research
 
-**@ 50x Human Speed**
+</v-click>
+<v-click>
 
-<p class="text-sm">~500 words/sec</p>
-</div>
+**The Key Enablers:**
+- **Verifiable rewards** - tests, compilation, linting provide clear feedback
+- **Compute scale** - 40x increase in leading lab compute budgets
+- **Tool orchestration** - better planning and parallel execution
 
-<div v-click class="p-4 rounded bg-gray-500/10">
-⚡
+</v-click>
 
-**~10 GW of Power**
-
-<p class="text-sm">output of ~10 nuclear reactors</p>
-</div>
-
-<div v-click class="p-4 rounded bg-gray-500/10">
-💰
-
-**~$100B / year**
-
-<p class="text-sm">in compute costs</p>
-</div>
-
-</div>
+</Transform>
 
 <!--
 These numbers make the abstract concept of 'AGI' tangible. This isn't just software; it's a massive industrial and energy undertaking on the scale of a nation-state.
