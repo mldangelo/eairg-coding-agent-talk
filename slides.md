@@ -1,7 +1,6 @@
 ---
 layout: cover
 ---
----
 
 # From Stumbling to Shipping
 
@@ -12,11 +11,8 @@ layout: cover
 </div>
 
 ---
-
----
 layout: intro
 ---
-
 # Cold Open: What Happens When an Agent Gets Root?
 
 🔧
@@ -42,11 +38,8 @@ This is the hook. Start with a real-world, recent security incident to immediate
 -->
 
 ---
-
----
 layout: two-cols
 ---
-
 # A Short Origin Story
 
 <v-click>
@@ -100,21 +93,15 @@ This slide provides crucial historical context. The key point to land here is th
 -->
 
 ---
-
----
 layout: section
 ---
-
 # The Core Drivers
 
 Why progress is accelerating now
 
 ---
-
----
 layout: default
 ---
-
 # 1. The Engine: Verifiable Rewards
 
 Why did code agents advance faster than general "do my job" agents? **Verifiability.**
@@ -157,11 +144,8 @@ This is the central thesis. Domains with verifiable outcomes (like coding and ma
 -->
 
 ---
-
----
 layout: default
 ---
-
 # 2. The Economics: Compute > Labels
 
 Verifiable rewards change the economic equation of AI development.
@@ -199,21 +183,15 @@ It's not just about technical feasibility; it's about economics. The money is fo
 -->
 
 ---
-
----
 layout: section
 ---
-
 # The Physical Foundation
 
 Compute, Cost, and Power
 
 ---
-
----
 layout: default
 ---
-
 # The Great Compute Buildout
 
 The economic drivers are leading to unprecedented hardware scale.
@@ -238,11 +216,8 @@ This slide quantifies the scale. The key insight is the compounding effect: the 
 -->
 
 ---
-
----
 layout: two-cols
 ---
-
 # How The Compute is Used
 
 The allocation of this massive compute budget is shifting dramatically **inward**.
@@ -283,11 +258,8 @@ The key takeaway here is that the datacenter is becoming a self-consuming R&D ma
 -->
 
 ---
-
----
 layout: default
 ---
-
 # The Physical Reality of 2027
 
 The scale of a single leading AI lab becomes staggering.
@@ -333,21 +305,15 @@ These numbers make the abstract concept of 'AGI' tangible. This isn't just softw
 -->
 
 ---
-
----
 layout: section
 ---
-
 # The Engineering Reality
 
 Patterns, Risks, and Problems to Solve
 
 ---
-
----
 layout: two-cols
 ---
-
 # The Speed vs. Intelligence Playbook
 
 Think in **wall-clock time to a verified solution**, not just tokens/sec.
@@ -396,11 +362,8 @@ graph TD
 </v-click>
 
 ---
-
----
 layout: default
 ---
-
 # Advanced Risks: Beyond Simple Failures
 
 As agents get smarter, the failure modes get more complex.
@@ -432,11 +395,8 @@ This is a critical distinction. Simple failures are engineering bugs in the loop
 -->
 
 ---
-
----
 layout: default
 ---
-
 # Reliability & Security Patterns
 
 How to harden the loop against these failures.
@@ -468,11 +428,8 @@ How to harden the loop against these failures.
 </div>
 
 ---
-
----
 layout: default
 ---
-
 # Good Problems to Work On Now
 
 - **Reliability**
@@ -491,11 +448,8 @@ layout: default
   - **Red-Teaming Agents:** Focus on prompt injection against tool schemas to find reward hacking exploits.
 
 ---
-
----
 layout: default
 ---
-
 # Call to Action
 
 <div class="grid grid-cols-2 gap-4 auto-rows-fr mt-8">
@@ -536,9 +490,8 @@ Speaker note: "Benchmarks measure outputs. Production measures verified diffs."
 
 ---
 layout: center
-class: "text-center"
 ---
-
+class: "text-center"
 # Thank You
 
 ### Q&A
