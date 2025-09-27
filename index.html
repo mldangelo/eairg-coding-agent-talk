@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Agents: From Snippets to Swarms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
+
+        .sidebar h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 1.5rem 1rem;
+            color: #495057;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .nav-link.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            max-width: 800px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #212529;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .header .meta {
+            color: #868e96;
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #212529;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: #495057;
+        }
+
+        .section h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 1.5rem 0 0.8rem;
+            color: #495057;
+        }
+
+        .section p {
+            margin-bottom: 1.2rem;
+            color: #495057;
+        }
+
+        .section ul, .section ol {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .card h4 {
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+        }
+
+        .timeline {
+            border-left: 2px solid #007bff;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: #007bff;
+            border-radius: 50%;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="nav-section">
+                <h2>Overview</h2>
+                <a href="#introduction" class="nav-link active">Introduction</a>
+                <a href="#summary" class="nav-link">Summary</a>
+            </div>
+
+            <div class="nav-section">
+                <h2>Act I: The Blueprint</h2>
+                <a href="#evolution" class="nav-link">Evolution: Autocomplete to Agents</a>
+                <a href="#interface-landscape" class="nav-link">Interface Landscape</a>
+                <a href="#conceptual-framework" class="nav-link">Conceptual Framework</a>
+                <a href="#case-study" class="nav-link">Case Study: Claude Code</a>
+                <a href="#typed-apis" class="nav-link">Typed APIs & Generation</a>
+            </div>
+
+            <div class="nav-section">
+                <h2>Act II: The Proving Ground</h2>
+                <a href="#verifiability" class="nav-link">Verifiability Frontier</a>
+                <a href="#model-routing" class="nav-link">Model Routing</a>
+                <a href="#operating-costs" class="nav-link">Operating Costs</a>
+                <a href="#enterprise-eval" class="nav-link">Enterprise Evaluation</a>
+                <a href="#evaluation-pitfalls" class="nav-link">Evaluation Pitfalls</a>
+                <a href="#agent-sre" class="nav-link">Agent SRE</a>
+            </div>
+
+            <div class="nav-section">
+                <h2>Act III: The Horizon</h2>
+                <a href="#swarms" class="nav-link">Path to Swarms</a>
+                <a href="#persistent-memory" class="nav-link">Persistent Memory</a>
+                <a href="#alignment" class="nav-link">Alignment Problem</a>
+                <a href="#security-safety" class="nav-link">Security & Safety</a>
+                <a href="#rlvr" class="nav-link">RLVR Framework</a>
+                <a href="#future-research" class="nav-link">Future Research</a>
+            </div>
+
+            <div class="nav-section">
+                <h2>Act IV: The Ecosystem</h2>
+                <a href="#consolidation" class="nav-link">Consolidation Phase</a>
+                <a href="#timeline" class="nav-link">Product Timeline</a>
+                <a href="#discussion" class="nav-link">Discussion</a>
+            </div>
+
+            <div class="nav-section">
+                <h2>Resources</h2>
+                <a href="#references" class="nav-link">References</a>
+                <a href="#checklist" class="nav-link">Superhuman Teammates</a>
+                <a href="#takeaways" class="nav-link">Key Takeaways</a>
+                <a href="#deployment" class="nav-link">Deployment Playbook</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="header" id="introduction">
+                <h1>AI Coding Agents</h1>
+                <div class="subtitle">From Snippets to Swarms</div>
+                <div class="subtitle">The Evolution of Intelligent Code Generation</div>
+                <div class="meta">
+                    Engineering AI Research Group (EAIRG)<br>
+                    September 27, 2025
+                </div>
+            </div>
+
+            <section class="section" id="summary">
+                <h2>Executive Summary</h2>
+                <p>This research seminar traces the complete evolution from simple autocomplete to multi-agent systems, and explores what this means for the future of software engineering. We follow a four-act structure: deconstructing modern agents, understanding their limitations, envisioning their future, and examining the ecosystem driving this transformation.</p>
+
+                <div class="highlight">
+                    <strong>Key Question:</strong> How do we build coding agents that are not just impressive demos, but reliable tools that developers actually want to use in production?
+                </div>
+            </section>
+
+            <section class="section" id="evolution">
+                <h2>Evolution: From Autocomplete to Agents</h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>2019-2021: Text-to-Code</h4>
+                        <ul>
+                            <li>GPT-style LMs emit small completions</li>
+                            <li>Codex shows code-finetuning potential</li>
+                            <li>HumanEval: "sample-and-rerank" wins</li>
+                            <li><strong>Capability:</strong> ~10 lines of JavaScript</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>2021-2023: Tool-Using Assistants</h4>
+                        <ul>
+                            <li>Chat UIs + function calling</li>
+                            <li>ReAct-style reasoning with actions</li>
+                            <li>Agents read files, call tools, iterate</li>
+                            <li><strong>Capability:</strong> Single-file modifications</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>2024-2025: Agentic Loops</h4>
+                        <ul>
+                            <li>Shell + editor + permission gates</li>
+                            <li>Multi-step debugging and iteration</li>
+                            <li>Context-aware codebase understanding</li>
+                            <li><strong>Capability:</strong> Multi-file feature implementation</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>2025+: Collaborative Swarms</h4>
+                        <ul>
+                            <li>Persistent context and memory</li>
+                            <li>Specialization and coordination</li>
+                            <li>Self-improving systems</li>
+                            <li><strong>Capability:</strong> Autonomous research and development</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- This is a template structure - the actual content will be populated from the markdown -->
+            <section class="section" id="interface-landscape">
+                <h2>Interface Landscape</h2>
+                <p>Content to be populated from talk.md...</p>
+            </section>
+
+            <!-- Additional sections will be populated dynamically -->
+
+            <div class="footer">
+                <p>AI Coding Agents Research Seminar | Engineering AI Research Group | September 27, 2025</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple navigation highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+
+            function highlightNavigation() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightNavigation);
+
+            // Smooth scrolling for navigation links
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -310,7 +310,7 @@ graph LR
 </div>
 
 <div class="mt-2 text-xs text-gray-600">
-*Example ranges only; replace with org data if available*
+*Example ranges only; replace with org baselines*
 </div>
 
 </div>
@@ -677,6 +677,10 @@ graph LR
 <strong class="text-yellow-800">Practical Takeaway:</strong> To maximize agent success, give it tasks it can verify. Write tests first, then ask the agent to implement. This single insight can 3x your productivity.
 </div>
 
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Smart Take:</strong> Most code work benefits more from better observation and tooling contracts than from bigger models. Track time-to-first-correct-file; LLM search + ctags often beats file-RAG for code tasks.
+</div>
+
 <!--
 This is the most actionable slide in the presentation. Verifiability isn't just about testing - it's about creating clear success criteria that both humans and agents can recognize.
 
@@ -750,7 +754,7 @@ PASSED                                [100%]
 </div>
 
 <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Result:</strong> Agent succeeded on first attempt. Task took 45 seconds total (15s analysis + 5s edit + 25s verification). This is the 3x productivity multiplier in action.
+<strong class="text-green-800">Result:</strong> Agent succeeded on first attempt. Task took 45 seconds total (15s analysis + 5s edit + 25s verification). ~12k tokens in, ~300 out; verified-diff@1 = 1/1. This is the 3x productivity multiplier in action.
 </div>
 
 ---
@@ -759,6 +763,10 @@ layout: default
 
 # Model Routing: The Core Trade-off
 *Practice* • **A. Trade-off**
+
+<div class="mb-2 p-2 bg-purple-50 rounded border border-purple-200">
+<strong class="text-purple-800 text-xs">Smart Take:</strong> Routing is scheduling. Wall-clock and error-budget aware; triggers based on backtracks/fail streaks; smarter beats faster when N dominates.
+</div>
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
 <strong class="text-blue-800">The Problem:</strong> Choosing the right model for each task
@@ -919,7 +927,7 @@ layout: default
 </div>
 
 <div class="mt-2 p-2 bg-yellow-100 rounded text-xs">
-<strong>Economic Reality:</strong> Pro subscriptions are likely subsidized relative to API list prices
+<strong>Economic Reality:</strong> Pro subscriptions are likely subsidized relative to API list prices *As of Sept 2025*
 </div>
 </div>
 
@@ -1335,10 +1343,10 @@ layout: default
 <div class="mt-3 bg-gray-100 p-2 rounded text-xs">
 <strong>Example JSONL Trace:</strong>
 <pre class="mt-1">
-{"t":0,"plan":"fix null bug","action":"grep","obs":"path user.py:47"}
-{"t":1,"action":"edit","diff":"hunk@47: add boundary check"}
-{"t":2,"action":"test","obs":"pytest green"}
-{"t":3,"verified_diff":true,"cost":"$0.23"}
+{"t":1,"plan":"fix NPE","tool":"grep","args":"-n validate_token src","obs":"src/auth.py:45"}
+{"t":2,"tool":"edit","args":{"file":"src/auth.py","range":{"start":44,"end":48},"patch":"+ if user is None: return None"},"obs":"ok"}
+{"t":3,"tool":"pytest","args":"-q tests/test_auth.py::test_login","obs":"PASSED"}
+{"t":4,"verified_diff":true,"cost":"$0.23","wall_time_ms":45000}
 </pre>
 </div>
 </div>
@@ -1370,7 +1378,7 @@ layout: default
 <div class="bg-yellow-50 p-4 rounded border border-yellow-200">
 <h4 class="font-semibold text-yellow-700 mb-3 text-sm">🔧 Implementation</h4>
 <div class="text-xs space-y-1">
-<div><strong>GitHub Template:</strong> Coming soon</div>
+<div><strong>GitHub Template:</strong> Reproducible eval infrastructure</div>
 <div><strong>Docker Image:</strong> Pre-configured eval environment</div>
 <div><strong>CLI Tool:</strong> `agent-eval run --task bug-fix-001`</div>
 <div><strong>Dashboard:</strong> Web UI for result visualization</div>
