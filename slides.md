@@ -1,6 +1,7 @@
 ---
 layout: cover
 ---
+---
 
 # From Stumbling to Shipping
 
@@ -12,7 +13,9 @@ layout: cover
 
 ---
 
-## layout: intro
+---
+layout: intro
+---
 
 # Cold Open: What Happens When an Agent Gets Root?
 
@@ -40,7 +43,9 @@ This is the hook. Start with a real-world, recent security incident to immediate
 
 ---
 
-## layout: two-cols
+---
+layout: two-cols
+---
 
 # A Short Origin Story
 
@@ -96,7 +101,9 @@ This slide provides crucial historical context. The key point to land here is th
 
 ---
 
-## layout: section
+---
+layout: section
+---
 
 # The Core Drivers
 
@@ -104,7 +111,9 @@ Why progress is accelerating now
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # 1. The Engine: Verifiable Rewards
 
@@ -149,7 +158,9 @@ This is the central thesis. Domains with verifiable outcomes (like coding and ma
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # 2. The Economics: Compute > Labels
 
@@ -189,7 +200,9 @@ It's not just about technical feasibility; it's about economics. The money is fo
 
 ---
 
-## layout: section
+---
+layout: section
+---
 
 # The Physical Foundation
 
@@ -197,7 +210,9 @@ Compute, Cost, and Power
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # The Great Compute Buildout
 
@@ -224,7 +239,9 @@ This slide quantifies the scale. The key insight is the compounding effect: the 
 
 ---
 
-## layout: two-cols
+---
+layout: two-cols
+---
 
 # How The Compute is Used
 
@@ -267,7 +284,9 @@ The key takeaway here is that the datacenter is becoming a self-consuming R&D ma
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # The Physical Reality of 2027
 
@@ -315,7 +334,9 @@ These numbers make the abstract concept of 'AGI' tangible. This isn't just softw
 
 ---
 
-## layout: section
+---
+layout: section
+---
 
 # The Engineering Reality
 
@@ -323,7 +344,9 @@ Patterns, Risks, and Problems to Solve
 
 ---
 
-## layout: two-cols
+---
+layout: two-cols
+---
 
 # The Speed vs. Intelligence Playbook
 
@@ -374,7 +397,9 @@ graph TD
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # Advanced Risks: Beyond Simple Failures
 
@@ -408,7 +433,9 @@ This is a critical distinction. Simple failures are engineering bugs in the loop
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # Reliability & Security Patterns
 
@@ -442,7 +469,9 @@ How to harden the loop against these failures.
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # Good Problems to Work On Now
 
@@ -463,7 +492,9 @@ How to harden the loop against these failures.
 
 ---
 
-## layout: default
+---
+layout: default
+---
 
 # Call to Action
 
@@ -504,10 +535,8 @@ Speaker note: "Benchmarks measure outputs. Production measures verified diffs."
 -->
 
 ---
-
 layout: center
 class: "text-center"
-
 ---
 
 # Thank You
