@@ -187,6 +187,10 @@ graph LR
 <strong class="text-blue-600">Key Challenge:</strong> Partial observability means agents must infer repository state from limited feedback.
 </div>
 
+<div class="mt-2 text-xs text-gray-600">
+*Example ranges only; replace with org data if available*
+</div>
+
 </div>
 
 </div>
@@ -285,10 +289,21 @@ graph TD
     G --> H
     H --> I[Continue Loop]
 
+    D --> J[Tool Categories]
+    J -.->|Meta| H
+    J -->|Read| K[Read/Glob/Grep]
+    J -->|Write ✓| L[Edit/MultiEdit]
+    J -->|Execute ✓| M[Bash]
+
+    B -.-> H
+
     style B fill:#4caf50,color:#fff
     style E fill:#ff9800,color:#fff
     style F fill:#e8f5e8
     style H fill:#2196f3,color:#fff
+    style K fill:#c8e6c9
+    style L fill:#ffcdd2
+    style M fill:#ffcdd2
 ```
 
 <div class="mt-4 bg-gray-50 p-3 rounded border">
@@ -380,13 +395,13 @@ graph LR
     A[High Verifiability] --> B[Agent Success]
     C[Low Verifiability] --> D[Agent Failure]
 
-    A1[Unit Tests] --> A
-    A2[Compilation] --> A
-    A3[Linting] --> A
+    A1[Unit Tests<br/>80-90%] --> A
+    A2[Compilation<br/>85-95%] --> A
+    A3[Linting<br/>70-85%] --> A
 
-    C1[Design Decisions] --> C
-    C2[User Experience] --> C
-    C3[Architecture] --> C
+    C1[Design Decisions<br/>20-40%] --> C
+    C2[User Experience<br/>10-30%] --> C
+    C3[Architecture<br/>30-50%] --> C
 
     style A fill:#c8e6c9
     style C fill:#ffcdd2
@@ -516,7 +531,7 @@ layout: default
 ---
 
 # Model Routing: The Core Trade-off
-*Practice*
+*Practice* • **A. Trade-off**
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
 <strong class="text-blue-800">The Problem:</strong> Choosing the right model for each task
@@ -574,8 +589,13 @@ Rule of thumb: If last 2 steps were backtracks → escalate to smarter model
 
 </div>
 
-<div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-<strong class="text-blue-800">Your Workflow:</strong> Don't just pick the fastest or smartest model. Match model intelligence to task complexity.
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Your Workflow:</strong> Don't just pick the fastest or smartest model. Match model intelligence to task complexity.
+</div>
+
+<div class="mt-3 p-3 bg-purple-50 rounded border border-purple-200">
+<h4 class="font-semibold text-purple-700 mb-2 text-sm">Adaptive Thinking Time</h4>
+<p class="text-xs">Short latency for easy tasks; expanded budget for hard tasks. Trigger-based escalation (≥2 backtracks, rising lint/test fail ratio).</p>
 </div>
 
 <!--
@@ -589,7 +609,7 @@ layout: default
 ---
 
 # Model Routing: Practical Decision Table
-*Practice*
+*Practice* • **B. Heuristic**
 
 <div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
 <strong class="text-green-800">The Heuristic:</strong> Mapping tasks to optimal models
@@ -644,7 +664,7 @@ layout: default
 ---
 
 # Model Routing: The Economics
-*Practice*
+*Practice* • **C. Economics**
 
 <div class="mb-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
 <strong class="text-yellow-800">The Economics:</strong> Cost implications of routing strategies *As of Sept 2025*
@@ -672,7 +692,7 @@ layout: default
 </div>
 
 <div class="mt-2 p-2 bg-yellow-100 rounded text-xs">
-<strong>Economic Reality:</strong> Pro subscriptions are heavily subsidized to drive adoption
+<strong>Economic Reality:</strong> Pro subscriptions are likely subsidized relative to API list prices
 </div>
 </div>
 
@@ -724,7 +744,7 @@ layout: default
 </div>
 
 <div class="mt-2 bg-gray-100 p-2 rounded text-xs">
-<strong>Assumptions:</strong> 5 steps, ~30k in/3k out tokens per step, TPS 2-5k/s. "All-Fast" requires +3 backtracks on complex tasks. "Medium request" = ≤60k total tokens, ≤5 tool calls, no long-running tests.
+<strong>Assumptions:</strong> 5 steps, ~30k in/3k out tokens per step, TPS 2-5k/s. "All-Fast" requires +3 backtracks on complex tasks. Based on Sept 2025 list prices.
 </div>
 
 <div class="mt-2 bg-purple-100 p-2 rounded text-xs">
@@ -751,7 +771,7 @@ layout: default
 ---
 
 # Model Routing: The Research Frontier
-*Research*
+*Research* • **D. Learned Routing**
 
 <div class="mb-4 p-3 bg-purple-50 rounded-lg border border-purple-200">
 <strong class="text-purple-800">The Research Goal:</strong> From heuristics to learned policies
@@ -950,6 +970,16 @@ layout: default
 <li>• <strong>JSONL Trace Schema:</strong> Plan/actions/obs/diffs/tests</li>
 <li>• <strong>Git Integration:</strong> Clean state per task</li>
 </ul>
+
+<div class="mt-3 bg-gray-100 p-2 rounded text-xs">
+<strong>Example JSONL Trace:</strong>
+<pre class="mt-1">
+{"t":0,"plan":"fix null bug","action":"grep","obs":"path user.py:47"}
+{"t":1,"action":"edit","diff":"hunk@47: add boundary check"}
+{"t":2,"action":"test","obs":"pytest green"}
+{"t":3,"verified_diff":true,"cost":"$0.23"}
+</pre>
+</div>
 </div>
 
 <div class="bg-blue-50 p-4 rounded border border-blue-200">
@@ -1052,19 +1082,27 @@ layout: default
 
 ```mermaid
 graph TB
-    M[Manager Agent<br/>Claude Sonnet] --> W1[Frontend Agent<br/>Claude Haiku]
-    M --> W2[Backend Agent<br/>Claude Haiku]
-    M --> W3[Test Agent<br/>Claude Haiku]
+    BL[Backlog/PR Queue] --> W1[Frontend Agent<br/>Claude Haiku]
+    BL --> W2[Backend Agent<br/>Claude Haiku]
+    BL --> W3[Test Agent<br/>Claude Haiku]
 
-    W1 --> V[Verification Agent<br/>Claude Sonnet]
-    W2 --> V
-    W3 --> V
+    M[Manager Agent<br/>Claude Sonnet] --> BL
 
-    V --> I[Integration Agent<br/>Claude Sonnet]
+    W1 -.->|review| V[Verification Agent<br/>Claude Sonnet]
+    W2 -.->|review| V
+    W3 -.->|review| V
+
+    V ==>|commit| I[Integration Agent<br/>Claude Sonnet]
+
+    HS[Handoff Schema<br/>goal, constraints,<br/>files touched,<br/>tests to run,<br/>verification steps] -.-> W1
+    HS -.-> W2
+    HS -.-> W3
 
     style M fill:#4caf50,color:#fff
     style V fill:#ff9800,color:#fff
     style I fill:#9c27b0,color:#fff
+    style BL fill:#e3f2fd
+    style HS fill:#f3e5f5
 ```
 
 <div class="mt-4 bg-green-50 p-4 rounded border border-green-200">
@@ -1147,6 +1185,9 @@ layout: default
 <li>• Escalating permissions across tools</li>
 <li>• Breaking isolation boundaries</li>
 </ul>
+<div class="mt-2 p-2 bg-red-100 rounded text-xs">
+<strong>Representative Attack Path:</strong> A debugging agent with broad write access is socially engineered by a code-gen agent to modify a deploy agent's policy file, effectively escalating privileges.
+</div>
 </div>
 </div>
 </div>
@@ -1259,8 +1300,19 @@ layout: default
 
 </div>
 
-<div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-<strong class="text-yellow-800">Defense Strategy:</strong> Container isolation, least-privilege access, and signed audit trails are essential. Treat agents like junior developers with security training.
+<div class="mt-4 p-3 bg-yellow-50 rounded border border-yellow-200">
+<strong class="text-yellow-800 text-sm">Defense Strategy:</strong> Container isolation, least-privilege access, and signed audit trails are essential. Treat agents like junior developers with security training.
+</div>
+
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-2 text-sm">Minimum Isolation Checklist</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Per-agent container</strong> isolation</li>
+<li>• <strong>Read-only mounts</strong> by default</li>
+<li>• <strong>Write/Shell behind explicit gates</strong> with approval</li>
+<li>• <strong>Signed traces</strong> for full audit trail</li>
+<li>• <strong>Secrets scan on save</strong> before commits</li>
+</ul>
 </div>
 
 <!--
@@ -1301,6 +1353,7 @@ layout: default
 <li>• Live, contamination-free benchmarks</li>
 <li>• Trace-level evaluation frameworks</li>
 <li>• Multi-agent coordination metrics</li>
+<li>• Autonomy-hours metric (1-5h → multi-day traces)</li>
 </ul>
 </div>
 </div>
@@ -1330,6 +1383,7 @@ layout: default
 <li>• Formal verification for agent code</li>
 <li>• Provable alignment guarantees</li>
 <li>• Robust multi-agent governance</li>
+<li>• Discovery evals (novel math/programming with independent verification)</li>
 </ul>
 </div>
 </div>
@@ -1497,27 +1551,28 @@ layout: default
 <div>
 <strong class="text-blue-600">GPT-5-Codex</strong> (Sept 15):¹⁵
 <ul class="mt-1 space-y-1 ml-4">
-<li>• First coding-specific GPT-5 variant</li>
-<li>• Adaptive thinking time (up to 7 hours)¹⁸</li>
-<li>• 51.3% on refactoring evals vs 33.9% for GPT-5¹⁹</li>
-<li>• Integrated code review workflows</li>
+<li>• Coding-tuned GPT-5 variant (OpenAI)</li>
+<li>• Multi-hour "thinking" windows, reported up to 7 hours (OpenAI)</li>
+<li>• Press reports cite 51.3% on a refactoring eval vs 33.9% for GPT-5 [media]</li>
+<li>• Integrated code-review and repo workflows (OpenAI)</li>
+<li>• <strong>Emerging pattern:</strong> Correctness-as-a-Service APIs that other agents call for verification</li>
 </ul>
 </div>
 
 <div>
 <strong class="text-blue-600">GitHub Copilot CLI</strong> (Sept 25):¹⁶
 <ul class="mt-1 space-y-1 ml-4">
-<li>• Public preview with GitHub Models</li>
-<li>• Defaults to Claude Sonnet 4, supports GPT-5</li>
+<li>• CLI can start and track Copilot coding-agent sessions</li>
+<li>• Uses GitHub Models multi-model backends</li>
 <li>• Shared billing with existing Copilot plans</li>
 </ul>
 </div>
 
 <div>
-<strong class="text-blue-600">Cross-Agent Security Research</strong> (Sept 24):¹⁷
+<strong class="text-blue-600">Cross-Agent Privilege Escalation</strong> (Sept 24):¹⁷
 <ul class="mt-1 space-y-1 ml-4">
-<li>• Johann Rehberger's privilege escalation findings</li>
-<li>• Industry wake-up call for container isolation</li>
+<li>• Rehberger shows agents can rewrite each other's configs</li>
+<li>• Mitigation: isolate configs, containerize, enforce least-privilege</li>
 </ul>
 </div>
 </div>
@@ -1569,8 +1624,17 @@ layout: default
 
 </div>
 
-<div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-<strong class="text-blue-800">Strategic Takeaway:</strong> For researchers and practitioners, this rapid evolution means staying current is essential. What's state-of-the-art today may be obsolete in six months.
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Strategic Takeaway:</strong> For researchers and practitioners, this rapid evolution means staying current is essential. What's state-of-the-art today may be obsolete in six months.
+</div>
+
+<div class="mt-2 text-xs text-gray-600 text-center">
+*As of Sept 2025; examples, see References.*
+</div>
+
+<div class="mt-3 p-3 bg-orange-50 rounded border border-orange-200">
+<h4 class="font-semibold text-orange-700 mb-2 text-sm">Compute Is Destiny</h4>
+<p class="text-xs">Long-horizon runs are expensive. Design routing/evals with wall-clock and $ budgets; expect persistent rate limits.</p>
 </div>
 
 <!--
@@ -1701,6 +1765,7 @@ layout: default
 <li>• <strong>GPT-5-Codex Analysis:</strong> Simon Willison's blog (Sept 2025)</li>
 <li>• <strong>Cross-Agent Security Research:</strong> Johann Rehberger (Sept 2025)</li>
 <li>• <strong>Amazon Q Security Advisory:</strong> CVE-2025-8217</li>
+<li>• <strong>From Vibe Coding to Vibe Researching:</strong> Chen & Pachocki (2025) — internal video; quotes used for "automated researcher" and "vibe researching" context</li>
 </ul>
 </div>
 
@@ -1758,13 +1823,14 @@ layout: default
 <div>¹⁷ Rehberger, Johann. "Multi-Agent Security Findings" (Sept 2025)</div>
 <div>¹⁸ Concept of adaptive thinking time in model routing based on task complexity</div>
 <div>¹⁹ OpenAI GPT-5-Codex Performance Benchmarks (Sept 2025)</div>
+<div>²⁰ Chen & Pachocki "From Vibe Coding to Vibe Researching" (2025)</div>
 </div>
 
 ---
 layout: default
 ---
 
-# From Stumbling to Superhuman: The 2027 Checklist
+# The Checklist for Superhuman Teammates
 *Practice & Research*
 
 <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border">
