@@ -11,9 +11,6 @@ layout: cover
 <div class="pt-12">
   <span class="px-2 py-1 rounded">EAIRG Engineering AI Research Group • September 2025</span>
 </div>
-<div class="pt-6 text-sm opacity-75">
-  A practical architecture + evals view for agentic coding
-</div>
 
 ---
 layout: default
