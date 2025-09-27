@@ -184,7 +184,7 @@ layout: default
 ---
 # Case Study: Claude Code Architecture
 
-<Transform :scale="0.6">
+<Transform :scale="0.5">
 
 **Claude Code: A Local Terminal Agent**
 
