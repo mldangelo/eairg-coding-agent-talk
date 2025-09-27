@@ -1014,6 +1014,52 @@ These questions define the field right now. Your research could tackle any of th
 layout: default
 ---
 
+# Latest Developments: September 2025
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+## 🆕 **GPT-5-Codex Release**
+
+**OpenAI's new coding-specific model** (Sept 15, 2025):
+- Specifically trained for code review
+- Dynamic thinking time: 7+ hours for complex tasks
+- 51.3% on proprietary refactoring evals (vs 33.9% for GPT-5)
+- Integrated into VS Code, Codex CLI, Codex Cloud
+- Automatic GitHub code review features
+
+**Key Innovation**: Adaptive computation based on task complexity
+
+</div>
+
+<div>
+
+## 🔥 **Security Developments**
+
+**Cross-Agent Privilege Escalation** (Johann Rehberger):
+- Multiple agents can "free" each other
+- Edit each other's configuration files
+- Escalate privileges across tool boundaries
+- **Mitigation**: Container isolation essential
+
+**GitHub Copilot CLI** (Sept 25, 2025):
+- Public preview with GitHub Models backend
+- Defaults to Claude Sonnet 4, supports GPT-5
+- Shared billing with GitHub Copilot plans
+
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-yellow-50 rounded">
+<strong>Takeaway</strong>: The field is moving extremely fast - these developments happened during our talk preparation!
+</div>
+
+---
+layout: default
+---
+
 # References & Further Reading
 
 <div class="grid grid-cols-2 gap-6 text-sm">
@@ -1056,6 +1102,12 @@ layout: default
 - **Claude Code Deep Dive**: "What makes Claude Code so damn good" (MinusX, 2025)
   [minusx.ai/blog/claude-code-analysis](https://minusx.ai/blog)
 
+- **GPT-5-Codex Analysis**: Simon Willison's blog post (Sept 15, 2025)
+  Comprehensive analysis of OpenAI's new coding model
+
+- **Cross-Agent Security Research**: Johann Rehberger (Sept 24, 2025)
+  Cross-Agent Privilege Escalation attack vectors
+
 - **Amazon Q Developer Security Advisory** (AWS, 2025)
   CVE-2025-8217 in the Amazon Q Developer VS Code extension
 
@@ -1066,6 +1118,14 @@ layout: default
 - **LiveCodeBench**: [arxiv.org/abs/2403.07974](https://arxiv.org/abs/2403.07974)
 - **RepoQA**: [arxiv.org/abs/2406.06025](https://arxiv.org/abs/2406.06025)
 - **SWE-bench Critiques**: "SWE-bench Illusion" and "UTBoost" papers
+
+## 🌐 **Essential Resources & Communities**
+
+- **Simon Willison's Blog**: [simonwillison.net/tags/ai-assisted-programming](https://simonwillison.net/tags/ai-assisted-programming/)
+- **swyx's AI Engineering**: [x.com/swyx/status/1963725773355057249](https://x.com/swyx/status/1963725773355057249)
+- **Hacker News**: Search "coding agents" for latest discussions
+- **r/MachineLearning**: Academic discussions and paper releases
+- **AI Engineering Communities**: Real-time practitioner insights
 
 ## 🚀 **Product Releases & Documentation**
 
@@ -1085,6 +1145,8 @@ layout: default
 <div class="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg text-center">
 
 *For the most current research, follow: **Anthropic**, **OpenAI**, **DeepMind** research blogs, and emerging academic groups focusing on agentic AI.*
+
+**Stay Current**: This field evolves daily. Follow security researchers like Johann Rehberger, read vendor blogs, and test new releases carefully.
 
 **Funding data**: Compiled from PitchBook, Crunchbase, and company announcements through September 2025.
 
