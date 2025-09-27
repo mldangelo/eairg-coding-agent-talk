@@ -6,10 +6,13 @@ layout: cover
 
 # From Stumbling to Shipping
 
-### Coding Agents in 2025 and the Near-Term Future
+### Coding Agents in 2025: Technical Architecture, Benchmarks, and Research Directions
 
 <div class="pt-12">
-  <span class="px-2 py-1 rounded">EAIRG Engineering AI Research Group</span>
+  <span class="px-2 py-1 rounded">EAIRG Engineering AI Research Group • September 2025</span>
+</div>
+<div class="pt-6 text-sm opacity-75">
+  A practical architecture + evals view for agentic coding
 </div>
 
 ---
@@ -23,9 +26,9 @@ layout: two-cols
 
 **2019-2021: Text-to-Code Begins**
 
-- GPT-style LMs emit small code completions (~10 lines of JavaScript).
-- **Codex** proves code-finetuning works, powering early Copilot.
-- HumanEval: "sample-and-rerank" becomes the early win pattern.
+- GPT-style LMs emit small code completions (short local snippets).
+- **Codex (Chen et al., 2021)**: 12B parameters, 28.8% on HumanEval@1, 70.2%@100
+- HumanEval: multi-sample pass@k ("sample-and-rerank") becomes the early win pattern.
 
 </v-click>
 <v-click>
@@ -42,14 +45,16 @@ layout: two-cols
 **2024-2025: Agents with Real Loops**
 
 - Systems add shells, editors, and permission gates.
-- **SWE-bench** pushes toward repo-scale edits with test verification.
-- Long context (1M+ tokens) and prompt caching enable sustained work.
+- **SWE-bench (Jimenez et al., 2024)**: 2,294 real GitHub issues; GPT-4 achieves 1.74% on Full, 12.3% on Verified subset
+- Long context on certain models (e.g., up to 1M tokens on Gemini 1.5/2.5) and prompt caching enable sustained work.
 
 </v-click>
 
 </Transform>
 
 ::right::
+
+<Transform :scale="0.8">
 
 ```mermaid
 graph TD
@@ -59,16 +64,18 @@ graph TD
     D --> E["Parallel Agents<br/>Multiple workers"]
 ```
 
+</Transform>
+
 <v-click>
 
 ### The Leap
 
 The jump from "a few lines of JS" to "repo-scale edits" came from:
 
-1.  **Tool Use** - structured interaction with environment
-2.  **Verification Loops** - test, lint, compile feedback
-3.  **Much Larger Context** - whole repos in working memory
-4.  **Smart Orchestration** - planning and error recovery
+1.  **Tool Use** - structured environment interaction + tool servers
+2.  **Verification Loops** - tests, linters, compilers
+3.  **Larger Context** - repo-level memory + prompt caching
+4.  **Smart Orchestration** - planning, error recovery, permission gating
 
 </v-click>
 
@@ -113,9 +120,12 @@ sequenceDiagram
 
 **Key Components:**
 - **Brain:** LLM with function calling (Claude, Gemini, etc.)
-- **Tools:** Read, Edit, Bash, Grep, Web search
-- **Memory:** Project context (CLAUDE.md, conversation history)
+- **Orchestrator/harness:** assembles prompts, executes tools, manages state/permissions
+- **Tools:** read, edit, shell, grep, web; local vs server-executed (MCP)
+- **Memory:** project files (CLAUDE.md / GEMINI.md), hierarchical imports, conversation history
 - **Verifier:** Tests, linters, compilers for feedback
+
+**Key insight:** Domains with verifiable outcomes (code, math) see dramatic agent improvements because the feedback loop provides clear reward signals.
 
 </Transform>
 
@@ -137,7 +147,7 @@ Think in **wall-clock time to a verified solution**, not just tokens/sec.
 <div>
 <v-click>
 
-**Fast Models** (Gemini Flash, Claude Haiku)
+**Fast-class models** (e.g., Flash/Haiku tiers)
 
 - Low latency, high throughput
 - Need more iterations to converge
@@ -149,7 +159,7 @@ Think in **wall-clock time to a verified solution**, not just tokens/sec.
 <div>
 <v-click>
 
-**Smart Models** (Gemini Pro, Claude Opus)
+**Smart-class models** (e.g., Pro/Opus tiers)
 
 - Converge in fewer iterations
 - High latency, expensive
@@ -165,7 +175,13 @@ Think in **wall-clock time to a verified solution**, not just tokens/sec.
 **The Break-Even Point:**
 ```
 Wall-clock ≈ N × (input + output)/TPS + tool_time + test_time
+where TPS = tokens per second
 ```
+
+**Example:** Adding a REST endpoint
+- Fast model: 4 iterations × 200ms = 800ms + 2s tools = 2.8s total
+- Smart model: 1 iteration × 3s = 3s + 2s tools = 5s total
+**Winner:** Fast model for this bounded task
 
 Faster model wins when: high throughput × many simple tasks
 Smarter model wins when: fewer iterations × complex reasoning
@@ -185,17 +201,18 @@ layout: default
 
 <Transform :scale="0.8">
 
-The emerging architecture for parallel agents:
+Emerging architecture supported by research on multi-agent reasoning:
 
 ```mermaid
 graph TD
-    Manager["Smart Model: Plan & Verify"] --> Worker1["Fast Model: Attempt Patch A"]
-    Manager --> Worker2["Fast Model: Attempt Patch B"]
-    Manager --> Worker3["Fast Model: Attempt Patch C"]
-    Worker1 --> Manager
-    Worker2 --> Manager
-    Worker3 --> Manager
-    Manager --> Verifier["Run Tests & Select Best"]
+    Manager["Smart Model: Pro/Opus<br/>Plan & Verify"] --> Worker1["Fast Model: Flash/Haiku<br/>Attempt Solution A"]
+    Manager --> Worker2["Fast Model: Flash/Haiku<br/>Attempt Solution B"]
+    Manager --> Worker3["Fast Model: Flash/Haiku<br/>Attempt Solution C"]
+    Worker1 --> Tests[Test Suite Verification]
+    Worker2 --> Tests
+    Worker3 --> Tests
+    Tests --> Manager
+    Manager --> User[Best Solution + Explanation]
 ```
 
 <v-click>
@@ -206,6 +223,8 @@ graph TD
 - Manager evaluates results and merges the best approach
 - Tests provide the final verification step
 
+**Research basis:** Tree-of-Thoughts (Yao et al., 2023) and self-consistency sampling show multi-path reasoning outperforms single-shot approaches.
+
 > "Fast models are great at being many. Smart models are great at being right."
 
 </v-click>
@@ -215,21 +234,26 @@ graph TD
 ---
 layout: default
 ---
-# Real-World Landscape: Who's Building What
+# Real-World Landscape: Measured Capabilities
 
 <Transform :scale="0.8">
 
-**Major Players:**
+**Benchmarked Performance (SWE-bench Verified, 500 tasks):**
+- Claude-3.5-Sonnet: ~49% (as of Jan 2025)
+- GPT-4 Turbo: ~12-15%
+- Open source agents: 5-20%
 
-- **Gemini CLI:** Local terminal, open source, MCP support, 1M+ context
-- **Claude Code:** Local terminal, strong permissions, CLAUDE.md memory
-- **GitHub Copilot:** IDE + Cloud, deep VS Code integration, PR workflows
-- **Cursor:** AI-first editor, agent mode, rules for context
-- **Replit Agent:** Cloud workspace, full app building, autonomous deployment
+**Architectural Split:**
+- **Local agents** (Claude Code, Aider): File system access, user permissions
+- **Cloud agents** (GitHub Copilot Workspace): Sandboxed, audit trails
+- **IDE-integrated** (Cursor, Windsurf): Deep editor context, real-time feedback
 
-**The Split:**
-- **Local agents:** Permission-gated, your machine, your rules
-- **Cloud agents:** Sandboxed, auditable, but less filesystem access
+**Adoption signals:** GitHub reports 1M+ Copilot subscribers; Claude Code in public beta
+
+**Technical differentiation:**
+- **Context length:** Gemini 2.5 Pro (1M+ tokens) vs others (~200K)
+- **Permission models:** Local approval vs cloud sandboxing
+- **Tool ecosystems:** MCP standardization vs proprietary APIs
 
 </Transform>
 
@@ -332,6 +356,31 @@ These numbers make the abstract concept of 'AGI' tangible. This isn't just softw
 -->
 
 ---
+layout: default
+---
+# Evaluation: Beyond HumanEval
+
+<Transform :scale="0.75">
+
+**Repository-Scale Tasks:**
+- **SWE-bench (2,294 real issues):** Current SOTA ~49% on Verified subset
+- **SWE-bench Pro (2025):** Harder, longer-horizon tasks
+- **LiveCodeBench:** Contamination-resistant, rolling evaluation
+
+**Language Coverage:**
+- **SWE-PolyBench:** Java, JS, TS, Python (2,110 tasks, 21 repos)
+- **SWE-bench Multilingual:** 9 languages, 300 tasks across 42 repos
+
+**Key Insight:** Simple code generation benchmarks don't predict real-world agent performance. Repository context and verification loops matter more than raw coding ability.
+
+**Current Gaps:**
+- Multi-agent coordination benchmarks
+- Long-horizon planning evaluation
+- Security and safety metrics
+
+</Transform>
+
+---
 layout: section
 ---
 # The Engineering Reality
@@ -368,6 +417,15 @@ As agents get smarter, the failure modes get more complex.
 
 </div>
 </div>
+
+<v-click>
+
+**Research Context:** These failure modes align with findings from:
+- **METR (2024):** "Reward hacking in frontier models"
+- **Anthropic (2024):** Constitutional AI alignment challenges
+- **OpenAI (2024):** GPT-4 system card safety evaluations
+
+</v-click>
 
 </Transform>
 
@@ -434,6 +492,33 @@ layout: default
 - **Evaluation**
   - **Agentic SWE-bench:** Add shell and edit verification to benchmarks to measure real-world effectiveness.
   - **Red-Teaming Agents:** Focus on prompt injection against tool schemas to find reward hacking exploits.
+
+</Transform>
+
+---
+layout: default
+---
+# Open Problems for EAIRG
+
+<Transform :scale="0.7">
+
+**1. Verification at Scale:** How do we verify correctness of 10,000-line changes?
+- Research direction: Formal verification integration with agent workflows
+- Testable hypothesis: Property-based verification reduces regression rates
+
+**2. Planning Under Uncertainty:** When should agents backtrack vs. continue?
+- Research direction: Adaptive planning with partial-order execution
+- Testable hypothesis: Multi-path planning outperforms linear execution
+
+**3. Multi-Agent Safety:** How do we prevent coordination failures in agent teams?
+- Research direction: Formal protocols for agent collaboration
+- Testable hypothesis: Hierarchical coordination reduces failure modes
+
+**4. Evaluation Methodology:** What metrics actually predict deployment success?
+- Research direction: Trace-level evaluation beyond final outputs
+- Testable hypothesis: Intermediate step quality predicts final success
+
+**Each question can be turned into concrete experiments with measurable outcomes.**
 
 </Transform>
 
