@@ -173,7 +173,8 @@ layout: default
 <div class="bg-yellow-50 p-4 rounded border border-yellow-200">
 <h4 class="font-semibold mb-3 text-sm">☁️ Agentic Environments</h4>
 <ul class="text-xs space-y-2">
-<li><strong>Sandbox VMs:</strong> Devin, GitHub Copilot agents, OpenHands</li>
+<li><strong>Sandbox VMs:</strong> Devin, GitHub Copilot agents, OpenHands CodeAct 2.1</li>
+<li><strong>Planning & PR flow:</strong> GitHub Copilot Workspace, Claude Code</li>
 <li><strong>Best for:</strong> Ticket-sized tasks, bug fixes, background automation</li>
 </ul>
 </div>
@@ -621,7 +622,7 @@ graph LR
 
     A1[Unit Tests<br/>80-90%] --> A
     A2[Compilation<br/>85-95%] --> A
-    A3[Linting<br/>70-85%] --> A
+    A3[SWE-bench Verified<br/>50-65%] --> A
 
     C1[Design Decisions<br/>20-40%] --> C
     C2[User Experience<br/>10-30%] --> C
@@ -639,6 +640,8 @@ graph LR
 <li>• Bug fixes with existing tests</li>
 <li>• Refactoring with type safety</li>
 <li>• API implementations with schemas</li>
+<li>• <strong>Real repos:</strong> OpenHands CodeAct 2.1 achieves 50%+ on SWE-bench Verified</li>
+<li>• <strong>Enterprise:</strong> 90%+ compile rate, 70%+ green CI</li>
 </ul>
 </div>
 
@@ -1055,6 +1058,73 @@ layout: default
 
 <div class="mt-4 p-3 bg-orange-50 rounded border border-orange-200">
 <strong class="text-orange-800 text-sm">Reality Check:</strong> A 50% cache hit rate can reduce costs by 30%. Measure $/win, not just token costs, to capture true system efficiency.
+</div>
+
+---
+layout: default
+---
+
+# Enterprise Evaluation: Beyond Academic Benchmarks
+*Practice* • **Real-World Metrics**
+
+<div class="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Beyond SWE-bench:</strong> What matters when agents ship to production
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-4">
+
+<div class="bg-green-50 p-4 rounded border border-green-200">
+<h4 class="font-semibold mb-3 text-sm">📊 Weekly Production Metrics</h4>
+<ul class="text-xs space-y-2">
+<li><strong>PR-level success rate:</strong> Merged without revert within 7 days</li>
+<li><strong>Test-gated throughput:</strong> Issues closed per agent-hour</li>
+<li><strong>Review load:</strong> Reviewer minutes per agent PR</li>
+<li><strong>Defect density:</strong> Post-merge bugs per KLOC from agent patches</li>
+</ul>
+</div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold mb-3 text-sm">🔒 Quality Gates</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Security defects:</strong> Caught pre-merge by SAST/DAST</li>
+<li><strong>Coverage movement:</strong> Test coverage change after agent edits</li>
+<li><strong>Flake rate:</strong> Test stability after agent changes</li>
+<li><strong>Policy compliance:</strong> Code ownership, license, secrets scan</li>
+</ul>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-purple-50 p-4 rounded border border-purple-200">
+<h4 class="font-semibold mb-3 text-sm">💰 Business Impact</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Cycle time reduction:</strong> Issue-to-deploy duration</li>
+<li><strong>Developer velocity:</strong> Features per sprint with/without agents</li>
+<li><strong>Cost per resolved issue:</strong> Total compute + human review time</li>
+<li><strong>Escalation rate:</strong> % requiring human intervention</li>
+</ul>
+</div>
+
+<div class="bg-red-50 p-4 rounded border border-red-200">
+<h4 class="font-semibold mb-3 text-sm">🚨 Failure Mode Detection</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Reward hacking:</strong> Hard-coded test outputs, test inference</li>
+<li><strong>Sycophancy signals:</strong> "Playing along" to secure approval</li>
+<li><strong>Drift accumulation:</strong> Performance degradation over time</li>
+<li><strong>Context bleeding:</strong> Cross-project information leakage</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded border">
+<strong class="text-purple-800 text-sm">Production Reality:</strong> Track verified-diff@1 (passes tests on first attempt), backtrack rate (<10% for reliability), and cost-per-win to measure true system performance beyond academic benchmarks.
 </div>
 
 ---
@@ -1683,6 +1753,16 @@ layout: default
 <li>• <strong>Private data access</strong> + <strong>untrusted content</strong> + <strong>external communication</strong></li>
 <li>• Prompt injection via web/email/docs → secret exfiltration</li>
 <li>• <strong>Mitigation:</strong> Remove at least one leg of the trifecta</li>
+</ul>
+</div>
+
+<div class="bg-red-50 p-3 rounded border border-red-200">
+<h4 class="font-semibold text-red-700 mb-2">Reward Hacking & Training-Game Behaviors</h4>
+<ul class="text-sm space-y-1">
+<li>• <strong>Hard-coding test outputs:</strong> Inferring expected results from artifacts</li>
+<li>• <strong>Sycophancy:</strong> "Playing along" to secure reward/approval</li>
+<li>• <strong>Hidden objectives:</strong> Pursuing goals not aligned with stated purpose</li>
+<li>• <strong>Mitigation:</strong> Hidden tests, mutation testing, ephemeral sandboxes</li>
 </ul>
 </div>
 </div>
@@ -2483,6 +2563,74 @@ layout: default
 
 <div class="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded border">
 <strong class="text-purple-800 text-sm">The Path Forward:</strong> We're moving from "stumbling agents" to "superhuman teammates" through systematic engineering: better tools, smarter routing, trace-level evaluation, and multi-agent coordination with safety guardrails.
+</div>
+
+---
+layout: default
+---
+
+# Practical Deployment Playbook: Shipping Agents That Close Tickets
+*Practice*
+
+<div class="mb-4 p-3 bg-green-50 rounded border border-green-200">
+<strong class="text-green-800 text-sm">System Design:</strong> Five-component architecture for production agent deployment
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-4">
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold mb-3 text-sm">🏗️ Core Components</h4>
+<ol class="text-xs space-y-2 ml-3">
+<li><strong>1. Planner:</strong> Issue → step plan + acceptance tests</li>
+<li><strong>2. Actor:</strong> File edits, test runs, artifact capture</li>
+<li><strong>3. Verifier:</strong> Policy checks, SAST, secret scan, hidden tests</li>
+<li><strong>4. Repo Memory:</strong> Symbol graph + embeddings + change history</li>
+<li><strong>5. Safety Guard:</strong> File allowlists + code-owner approval gates</li>
+</ol>
+</div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold mb-3 text-sm">📊 Data & RL Loop</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Log everything:</strong> Inputs, plans, changes, test outputs, human feedback</li>
+<li><strong>Verifiable rewards:</strong> Compile, lint, unit, property, fuzz tests</li>
+<li><strong>Weekly RLVR:</strong> Train on your backlog distribution</li>
+<li><strong>Start narrow:</strong> Bug fixes with good tests → features</li>
+</ul>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-purple-50 p-4 rounded border border-purple-200">
+<h4 class="font-semibold mb-3 text-sm">🚀 Staged Rollout</h4>
+<ol class="text-xs space-y-2 ml-3">
+<li><strong>Phase 1:</strong> Bash-only or edit-only "copilot plus tests"</li>
+<li><strong>Phase 2:</strong> PR with tests passing and policy OK</li>
+<li><strong>Phase 3:</strong> "Merge on green" for allowlisted directories</li>
+<li><strong>Monitor:</strong> Success rate, review load, defect density</li>
+</ol>
+</div>
+
+<div class="bg-red-50 p-4 rounded border border-red-200">
+<h4 class="font-semibold mb-3 text-sm">🔒 Safety Checklist</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Sandboxes:</strong> Locked egress, per-run identities, minimal secrets</li>
+<li><strong>Hidden tests:</strong> Adversarial CI, mutation testing, fuzzing</li>
+<li><strong>Policy engine:</strong> File allowlists, ownership matching, secret scanners</li>
+<li><strong>Rollout gates:</strong> PR labels, staged canaries, auto-revert</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded border">
+<strong class="text-blue-800 text-sm">Start Here:</strong> Pick one task type (bug fixes), one repo (well-tested), implement basic planner-actor-verifier loop, measure verified-diff@1 rate, then expand systematically.
 </div>
 
 ---
