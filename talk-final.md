@@ -19,8 +19,6 @@ fonts:
   sans: Inter
   serif: Inter
   mono: 'Fira Code'
-canvasWidth: 1280
-aspectRatio: 16/9
 ---
 
 # AI Coding Agents
@@ -65,52 +63,37 @@ layout: default
 ---
 
 # Evolution: From Autocomplete to Agents
-*Practice*
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-3 gap-6">
 
-<div class="space-y-6">
 <div class="p-6 bg-gray-50 rounded-lg border">
-<h3 class="font-bold text-blue-600 mb-4 text-lg">2019-2021: Text-to-Code</h3>
-<ul class="space-y-2">
+<h3 class="font-bold text-blue-600 mb-3">2019-2021: Text-to-Code</h3>
+<ul class="text-sm space-y-1">
 <li>• GPT-style LMs emit small completions</li>
 <li>• Codex shows code-finetuning potential</li>
 <li>• HumanEval: "sample-and-rerank" wins</li>
-<li class="font-semibold text-green-600 mt-3">→ Capability: ~10 lines of JavaScript</li>
+<li class="font-semibold text-green-600">• Capability: ~10 lines of JavaScript</li>
 </ul>
 </div>
 
 <div class="p-6 bg-blue-50 rounded-lg border">
-<h3 class="font-bold text-blue-600 mb-4 text-lg">2021-2023: Tool-Using Assistants</h3>
-<ul class="space-y-2">
+<h3 class="font-bold text-blue-600 mb-3">2021-2023: Tool-Using Assistants</h3>
+<ul class="text-sm space-y-1">
 <li>• Chat UIs + function calling</li>
 <li>• ReAct-style reasoning with actions</li>
 <li>• Agents read files, call tools, iterate</li>
-<li class="font-semibold text-green-600 mt-3">→ Capability: Single-file modifications</li>
+<li class="font-semibold text-green-600">• Capability: Single-file modifications</li>
 </ul>
 </div>
-</div>
 
-<div class="space-y-6">
 <div class="p-6 bg-green-50 rounded-lg border">
-<h3 class="font-bold text-blue-600 mb-4 text-lg">2024-2025: Agentic Loops</h3>
-<ul class="space-y-2">
+<h3 class="font-bold text-blue-600 mb-3">2024-2025: Agentic Loops</h3>
+<ul class="text-sm space-y-1">
 <li>• Shell + editor + permission gates</li>
 <li>• SWE-bench: repo-scale edits</li>
 <li>• Long context + thinking budgets</li>
-<li class="font-semibold text-green-600 mt-3">→ Capability: Multi-file, verified changes</li>
+<li class="font-semibold text-green-600">• Capability: Multi-file, verified changes</li>
 </ul>
-</div>
-
-<div class="p-6 bg-purple-50 rounded-lg border border-purple-200">
-<h3 class="font-bold text-purple-600 mb-4 text-lg">Future: 2025-2027</h3>
-<ul class="space-y-2">
-<li>• Multi-agent coordination</li>
-<li>• Formal verification integration</li>
-<li>• Adaptive model routing</li>
-<li class="font-semibold text-purple-600 mt-3">→ Target: Superhuman teammates</li>
-</ul>
-</div>
 </div>
 
 </div>
@@ -139,7 +122,6 @@ layout: default
 ---
 
 # The Fundamental Paradigm Shift
-*Research*
 
 ## Formalizing Coding Agents as POMDPs
 
@@ -147,9 +129,9 @@ layout: default
 
 <div>
 
-<div class="bg-gray-50 p-6 rounded-lg border">
-<h3 class="font-bold mb-4 text-lg">POMDP Components</h3>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded-lg border">
+<h3 class="font-bold mb-3">POMDP Components</h3>
+<ul class="text-sm space-y-2">
 <li><strong>States</strong> $s$: Repository state (files, dependencies, tests)</li>
 <li><strong>Actions</strong> $a$: Tool calls (read, edit, execute, search)</li>
 <li><strong>Observations</strong> $o$: Compile results, test outcomes, error messages</li>
@@ -157,7 +139,7 @@ layout: default
 <li><strong>Observation</strong> $O(o|s',a)$: What feedback we get</li>
 </ul>
 
-<div class="mt-4 p-3 bg-blue-100 rounded">
+<div class="mt-3 p-2 bg-blue-100 rounded text-sm">
 <strong>Policy:</strong> $\pi(a|h)$ where $h$ is action-observation history
 </div>
 </div>
@@ -187,18 +169,7 @@ graph LR
 
 </div>
 
-<div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Concrete Example: Fixing a Null Pointer Bug</strong>
-<div class="mt-3 text-sm">
-<strong>State $s$:</strong> Repository at commit abc123 with test_user_validation.py failing<br>
-<strong>Action $a$:</strong> Edit user.py:47 to add `if user is not None:` boundary check<br>
-<strong>Observation $o$:</strong> `pytest -q test_user_validation.py` returns "PASSED" (green)<br>
-<strong>Belief Update:</strong> Agent believes null pointer issue is resolved<br>
-<strong>Why POMDP:</strong> Agent can't directly see all code paths—must infer correctness from test feedback
-</div>
-</div>
-
-<div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+<div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
 <strong class="text-blue-800">Why This Matters:</strong> This formalization reveals that coding agents are fundamentally about sequential decision-making under uncertainty - the same framework used in robotics and game AI.
 </div>
 
@@ -213,7 +184,6 @@ layout: default
 ---
 
 # Anatomy of a SOTA Agent: Claude Code Case Study
-*Practice*
 
 <div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
 <strong class="text-green-800">Key Insight:</strong> Claude Code's success comes from architectural simplicity over complexity
@@ -227,38 +197,38 @@ layout: default
 
 <v-clicks>
 
-<div class="space-y-4">
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">1.</span>
+<div class="space-y-3 text-sm">
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1">1.</span>
 <div><strong>One Main Loop</strong> - No multi-agent handoffs, single coherent context</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">2.</span>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1">2.</span>
 <div><strong>Smart Tool Design</strong> - Mix of low/medium/high level operations</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">3.</span>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1">3.</span>
 <div><strong>LLM Search > RAG</strong> - Uses ripgrep/find like developers do</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">4.</span>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1">4.</span>
 <div><strong>Explicit Todo Management</strong> - Agent tracks its own progress</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">5.</span>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1">5.</span>
 <div><strong>Subagents for Specialization</strong> - Task-specific isolated contexts</div>
 </div>
-<div class="flex items-start space-x-3">
-<span class="text-blue-500 mt-1 font-bold">6.</span>
+<div class="flex items-start space-x-2">
+<span class="text-blue-500 mt-1">6.</span>
 <div><strong>Extensive Prompting</strong> - 2.8K system + 9.4K tools prompts</div>
 </div>
 </div>
 
 </v-clicks>
 
-<div class="mt-6 bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Memory Architecture</h4>
-<ul class="space-y-2">
+<div class="mt-4 bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold text-sm mb-2">Memory Architecture</h4>
+<ul class="text-xs space-y-1">
 <li>• CLAUDE.md files load hierarchically (enterprise → project → user)</li>
 <li>• @path imports up to 5 hops deep</li>
 <li>• Prompt caching for conversation efficiency</li>
@@ -287,9 +257,9 @@ graph TD
     style H fill:#2196f3,color:#fff
 ```
 
-<div class="mt-6 bg-gray-50 p-4 rounded border">
-<h4 class="font-semibold mb-3">Tool Categories</h4>
-<ul class="space-y-2">
+<div class="mt-4 bg-gray-50 p-3 rounded border">
+<h4 class="font-semibold text-sm mb-2">Tool Categories</h4>
+<ul class="text-xs space-y-1">
 <li><strong>Read:</strong> Read, Glob, Grep (permission-free)</li>
 <li><strong>Write:</strong> Edit, MultiEdit (approval required)</li>
 <li><strong>Execute:</strong> Bash (approval required)</li>
@@ -301,29 +271,7 @@ graph TD
 
 </div>
 
-<div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-<strong class="text-yellow-800">Real Todo Trace (Redacted)</strong>
-<div class="mt-2 text-sm font-mono">
-1. [pending] Fix authentication bug in login.py<br>
-2. [in_progress] Search for auth-related files<br>
-3. [completed] Found issue in validate_token() at line 45<br>
-4. [pending] Write test to reproduce the bug<br>
-5. [pending] Implement fix with error handling<br>
-6. [pending] Run full test suite to verify
-</div>
-</div>
-
-<div class="mt-4 p-4 bg-red-50 rounded-lg border border-red-200">
-<strong class="text-red-800">Failure → Recovery Example</strong>
-<div class="mt-2 text-sm">
-<strong>Iteration t:</strong> Agent edits config.py but breaks import<br>
-<strong>Observation:</strong> `ModuleNotFoundError: No module named 'validators'`<br>
-<strong>Iteration t+1:</strong> Agent reads error, searches for validators usage, adds missing import<br>
-<strong>Result:</strong> Tests pass, todo marked completed
-</div>
-</div>
-
-<div class="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+<div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
 <strong class="text-green-800">Strategic Insight:</strong> Debuggability beats complexity. Simple architecture scales with model improvements, while complex multi-agent systems introduce coordination failures.
 </div>
 
@@ -359,7 +307,6 @@ layout: default
 ---
 
 # The Verifiability Frontier
-*Practice*
 
 ## The Single Best Predictor of Agent Success
 
@@ -441,78 +388,7 @@ The key insight is to flip your workflow: instead of "implement then test," try 
 layout: default
 ---
 
-# Verifiability in Action: Micro-Demo
-*Practice*
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-
-<div class="bg-red-50 p-4 rounded border border-red-200">
-<h4 class="font-semibold text-red-700 mb-3">❌ Pre: Failing Test</h4>
-<div class="text-sm font-mono">
-```bash
-$ pytest -q test_auth.py::test_login
-FAILED test_auth.py::test_login - AttributeError:
-'NoneType' object has no attribute 'id'
-```
-</div>
-</div>
-
-<div class="mt-4 bg-blue-50 p-4 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-3">🔧 Agent Action</h4>
-<div class="text-sm">
-<strong>Single Edit in auth.py:23</strong>
-<div class="font-mono mt-2">
-```diff
-- return User.objects.get(username=username)
-+ user = User.objects.filter(username=username).first()
-+ return user if user else None
-```
-</div>
-</div>
-</div>
-
-</div>
-
-<div>
-
-<div class="bg-green-50 p-4 rounded border border-green-200">
-<h4 class="font-semibold text-green-700 mb-3">✅ Post: Green Test</h4>
-<div class="text-sm font-mono">
-```bash
-$ pytest -q test_auth.py::test_login
-PASSED                                [100%]
-
-1 passed in 0.03s
-```
-</div>
-</div>
-
-<div class="mt-4 bg-yellow-50 p-4 rounded border border-yellow-200">
-<h4 class="font-semibold text-yellow-700 mb-3">🎯 Why This Works</h4>
-<ul class="text-sm space-y-2">
-<li>• <strong>Clear failure signal:</strong> Specific error message</li>
-<li>• <strong>Fast feedback loop:</strong> 0.03s test execution</li>
-<li>• <strong>Unambiguous success:</strong> Green = good</li>
-<li>• <strong>Minimal scope:</strong> One function, one test</li>
-</ul>
-</div>
-
-</div>
-
-</div>
-
-<div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-<strong class="text-green-800">Result:</strong> Agent succeeded on first attempt. Task took 45 seconds total (15s analysis + 5s edit + 25s verification). This is the 3x productivity multiplier in action.
-</div>
-
----
-layout: default
----
-
 # Model Routing: The Core Trade-off
-*Practice*
 
 <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
 <strong class="text-blue-800">The Problem:</strong> Choosing the right model for each task
@@ -530,8 +406,8 @@ $$\text{Time} = N \times \frac{L_{in} + L_{out}}{TPS} + \text{tool\_time} + \tex
 
 <div>
 
-<h4 class="font-semibold mb-4">Where:</h4>
-<ul class="space-y-3">
+<h4 class="font-semibold mb-3">Where:</h4>
+<ul class="text-sm space-y-1">
 <li>• <strong>N</strong> = iterations to converge (edits + test cycles)</li>
 <li>• <strong>TPS</strong> = tokens per second</li>
 <li>• <strong>L<sub>in</sub>, L<sub>out</sub></strong> = input/output tokens per step</li>
@@ -554,18 +430,6 @@ $$\text{Time} = N \times \frac{L_{in} + L_{out}}{TPS} + \text{tool\_time} + \tex
 
 </v-clicks>
 
-<div class="bg-blue-50 p-3 rounded border border-blue-200 mt-3">
-<h4 class="font-semibold text-blue-700 mb-2">Estimating p_fail in Practice</h4>
-<ul class="text-sm space-y-1">
-<li>• <strong>Historical error rate:</strong> Task-specific success % from logs</li>
-<li>• <strong>Lint/test fail ratio:</strong> % of steps requiring fixes</li>
-<li>• <strong>Backtrack rate:</strong> Trace-level "undo" operations per step</li>
-</ul>
-<div class="mt-2 text-sm font-semibold text-blue-600">
-Rule of thumb: If last 2 steps were backtracks → escalate to smarter model
-</div>
-</div>
-
 </div>
 
 </div>
@@ -585,7 +449,6 @@ layout: default
 ---
 
 # Model Routing: Practical Decision Table
-*Practice*
 
 <div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
 <strong class="text-green-800">The Heuristic:</strong> Mapping tasks to optimal models
@@ -596,8 +459,6 @@ layout: default
 | Generate tests/stubs | ✅ High throughput | ❌ Overkill | Low risk, needs volume |
 | Search symbols | ✅ Quick iteration | ❌ Unnecessary | Simple pattern matching |
 | Small patches | ✅ Low risk | ❌ Too slow | Easy to verify |
-| **Mass refactor with types** | ❌ Type system misuse | ✅ Safety reasoning | Complex inference chains |
-| **Infra-as-code edits** | ❌ Misconfiguration risk | ✅ System understanding | Cross-service dependencies |
 | Framework migration | ❌ High failure rate | ✅ Needs reasoning | Complex dependencies |
 | API design | ❌ Poor abstractions | ✅ Architectural thinking | Requires deep understanding |
 | Debug failures | ❌ Misses context | ✅ Deep analysis | Complex causal reasoning |
@@ -621,11 +482,7 @@ layout: default
 
 </div>
 
-<div class="mt-6 p-4 bg-red-50 rounded-lg border border-red-200">
-<strong class="text-red-800">Escape Hatch:</strong> If confidence < 0.6 after K steps, reroute to manager-worker pattern with explicit human checkpoints.
-</div>
-
-<div class="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+<div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
 <strong class="text-green-800">Your Workflow:</strong> Start with this table, then adapt based on your specific codebase and task patterns.
 </div>
 
@@ -640,10 +497,9 @@ layout: default
 ---
 
 # Model Routing: The Economics
-*Practice*
 
 <div class="mb-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-<strong class="text-yellow-800">The Economics:</strong> Cost implications of routing strategies *As of Sept 2025*
+<strong class="text-yellow-800">The Economics:</strong> Cost implications of routing strategies
 </div>
 
 <div class="grid grid-cols-2 gap-8">
@@ -679,33 +535,33 @@ layout: default
 <div class="bg-gray-50 p-4 rounded border">
 <h4 class="font-semibold mb-3">Smart Model Routing Economics</h4>
 
-<table class="w-full">
+<table class="w-full text-sm">
 <thead>
 <tr class="border-b">
-<th class="text-left py-2">Pattern</th>
-<th class="text-center py-2">Cost Per Task</th>
-<th class="text-center py-2">Speed</th>
-<th class="text-center py-2">Quality</th>
+<th class="text-left py-1">Pattern</th>
+<th class="text-center py-1">Cost Per Task</th>
+<th class="text-center py-1">Speed</th>
+<th class="text-center py-1">Quality</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="py-2">All-Smart</td>
-<td class="text-center py-2">$2.50</td>
-<td class="text-center text-red-600 py-2">Slow</td>
-<td class="text-center text-green-600 py-2">High</td>
+<td>All-Smart</td>
+<td class="text-center">$2.50</td>
+<td class="text-center text-red-600">Slow</td>
+<td class="text-center text-green-600">High</td>
 </tr>
 <tr>
-<td class="py-2">All-Fast</td>
-<td class="text-center py-2">$0.25</td>
-<td class="text-center text-green-600 py-2">Fast</td>
-<td class="text-center text-yellow-600 py-2">Medium</td>
+<td>All-Fast</td>
+<td class="text-center">$0.25</td>
+<td class="text-center text-green-600">Fast</td>
+<td class="text-center text-yellow-600">Medium</td>
 </tr>
 <tr>
-<td class="py-2">Hybrid</td>
-<td class="text-center py-2">$0.75</td>
-<td class="text-center text-blue-600 py-2">Medium</td>
-<td class="text-center text-green-600 py-2">High</td>
+<td>Hybrid</td>
+<td class="text-center">$0.75</td>
+<td class="text-center text-blue-600">Medium</td>
+<td class="text-center text-green-600">High</td>
 </tr>
 </tbody>
 </table>
@@ -1191,19 +1047,17 @@ layout: default
 
 # Future Research Directions and Open Problems
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-3 gap-6">
 
-<div class="space-y-6">
-
-<div class="bg-blue-50 p-6 rounded border border-blue-200">
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
 <h3 class="font-bold text-blue-600 mb-4">🔜 Near-term (1-2 years)</h3>
 
 <v-clicks>
 
-<div class="space-y-4">
+<div class="space-y-3">
 <div>
-<h4 class="font-semibold mb-2">Technical Challenges</h4>
-<ul class="space-y-2">
+<h4 class="font-semibold text-sm mb-1">Technical Challenges</h4>
+<ul class="text-xs space-y-1">
 <li>• Advanced planning with backtracking</li>
 <li>• Self-improving agent architectures</li>
 <li>• Efficient context utilization (1M+ tokens)</li>
@@ -1211,8 +1065,8 @@ layout: default
 </div>
 
 <div>
-<h4 class="font-semibold mb-2">Evaluation Infrastructure</h4>
-<ul class="space-y-2">
+<h4 class="font-semibold text-sm mb-1">Evaluation Infrastructure</h4>
+<ul class="text-xs space-y-1">
 <li>• Live, contamination-free benchmarks</li>
 <li>• Trace-level evaluation frameworks</li>
 <li>• Multi-agent coordination metrics</li>
@@ -1224,15 +1078,15 @@ layout: default
 
 </div>
 
-<div class="bg-green-50 p-6 rounded border border-green-200">
+<div class="bg-green-50 p-4 rounded border border-green-200">
 <h3 class="font-bold text-green-600 mb-4">📅 Medium-term (2-5 years)</h3>
 
 <v-clicks>
 
-<div class="space-y-4">
+<div class="space-y-3">
 <div>
-<h4 class="font-semibold mb-2">Capabilities</h4>
-<ul class="space-y-2">
+<h4 class="font-semibold text-sm mb-1">Capabilities</h4>
+<ul class="text-xs space-y-1">
 <li>• Multi-modal agents (UI, diagrams, video)</li>
 <li>• Persistent cross-session learning</li>
 <li>• Natural human-agent collaboration</li>
@@ -1240,8 +1094,8 @@ layout: default
 </div>
 
 <div>
-<h4 class="font-semibold mb-2">Safety & Alignment</h4>
-<ul class="space-y-2">
+<h4 class="font-semibold text-sm mb-1">Safety & Alignment</h4>
+<ul class="text-xs space-y-1">
 <li>• Formal verification for agent code</li>
 <li>• Provable alignment guarantees</li>
 <li>• Robust multi-agent governance</li>
@@ -1253,19 +1107,15 @@ layout: default
 
 </div>
 
-</div>
-
-<div>
-
-<div class="bg-purple-50 p-6 rounded border border-purple-200">
+<div class="bg-purple-50 p-4 rounded border border-purple-200">
 <h3 class="font-bold text-purple-600 mb-4">🚀 Long-term Questions</h3>
 
 <v-clicks>
 
-<div class="space-y-4">
+<div class="space-y-3">
 <div>
-<h4 class="font-semibold mb-2">Fundamental Questions</h4>
-<ul class="space-y-2">
+<h4 class="font-semibold text-sm mb-1">Fundamental Questions</h4>
+<ul class="text-xs space-y-1">
 <li>• What is "software engineering" with AGI?</li>
 <li>• How do we maintain human agency?</li>
 <li>• Can we build truly autonomous software engineers?</li>
@@ -1273,8 +1123,8 @@ layout: default
 </div>
 
 <div>
-<h4 class="font-semibold mb-2">Societal Implications</h4>
-<ul class="space-y-2">
+<h4 class="font-semibold text-sm mb-1">Societal Implications</h4>
+<ul class="text-xs space-y-1">
 <li>• Economic displacement and transition</li>
 <li>• New forms of human-AI collaboration</li>
 <li>• Governance of autonomous systems</li>
@@ -1283,8 +1133,6 @@ layout: default
 </div>
 
 </v-clicks>
-
-</div>
 
 </div>
 
@@ -1334,39 +1182,39 @@ layout: default
 <div class="bg-gray-50 p-4 rounded border">
 <h4 class="font-semibold mb-3">Major Funding Rounds (2024-2025)</h4>
 
-<table class="w-full">
+<table class="w-full text-sm">
 <thead>
 <tr class="border-b">
-<th class="text-left py-2">Company</th>
-<th class="text-center py-2">Amount</th>
-<th class="text-left py-2">Focus Area</th>
+<th class="text-left py-1">Company</th>
+<th class="text-center py-1">Amount</th>
+<th class="text-left py-1">Focus Area</th>
 </tr>
 </thead>
-<tbody>
+<tbody class="space-y-1">
 <tr class="border-b">
-<td class="py-2"><strong>Cursor</strong></td>
-<td class="text-center py-2">$60M Series A</td>
-<td class="py-2">AI-first editor</td>
+<td class="py-1"><strong>Cursor</strong></td>
+<td class="text-center py-1">$60M Series A</td>
+<td class="py-1">AI-first editor</td>
 </tr>
 <tr class="border-b">
-<td class="py-2"><strong>Replit</strong></td>
-<td class="text-center py-2">$97.4M Series B</td>
-<td class="py-2">Cloud development</td>
+<td class="py-1"><strong>Replit</strong></td>
+<td class="text-center py-1">$97.4M Series B</td>
+<td class="py-1">Cloud development</td>
 </tr>
 <tr class="border-b">
-<td class="py-2"><strong>Sourcegraph</strong></td>
-<td class="text-center py-2">$150M Series D</td>
-<td class="py-2">Code intelligence</td>
+<td class="py-1"><strong>Sourcegraph</strong></td>
+<td class="text-center py-1">$150M Series D</td>
+<td class="py-1">Code intelligence</td>
 </tr>
 <tr class="border-b">
-<td class="py-2"><strong>Tabnine</strong></td>
-<td class="text-center py-2">$25M Series B</td>
-<td class="py-2">Enterprise coding AI</td>
+<td class="py-1"><strong>Tabnine</strong></td>
+<td class="text-center py-1">$25M Series B</td>
+<td class="py-1">Enterprise coding AI</td>
 </tr>
 <tr>
-<td class="py-2"><strong>GitHub Copilot</strong></td>
-<td class="text-center py-2">N/A (Microsoft)</td>
-<td class="py-2">Platform integration</td>
+<td class="py-1"><strong>GitHub Copilot</strong></td>
+<td class="text-center py-1">N/A (Microsoft)</td>
+<td class="py-1">Platform integration</td>
 </tr>
 </tbody>
 </table>
@@ -1620,41 +1468,41 @@ layout: default
 
 # References & Further Reading
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-6 text-sm">
 
-<div class="space-y-6">
+<div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">📖 Foundational Papers</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3">📖 Foundational Papers</h4>
+<ul class="space-y-2">
 <li>• <strong>METR:</strong> "Measuring AI Ability to Complete Long Tasks" (2024)</li>
 <li>• <strong>SWE-bench:</strong> "Can Language Models Resolve Real-World GitHub Issues?" (2024)</li>
 <li>• <strong>Sleeper Agents:</strong> "Training Deceptive LLMs" (2024)</li>
 </ul>
 </div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🔬 AI Safety Research</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3">🔬 AI Safety Research</h4>
+<ul class="space-y-2">
 <li>• <strong>Among Us:</strong> "A Sandbox for Agentic Deception" (2024)</li>
 <li>• <strong>AI Agents and Painted Facades</strong> (2024)</li>
 </ul>
 </div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🏗️ System Architecture</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3">🏗️ System Architecture</h4>
+<ul class="space-y-2">
 <li>• <strong>Basic Systems Architecture for AI Agents</strong> (2024)</li>
 </ul>
 </div>
 
 </div>
 
-<div class="space-y-6">
+<div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">🏭 Industry Analysis</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3">🏭 Industry Analysis</h4>
+<ul class="space-y-2">
 <li>• <strong>AI 2027:</strong> "Forecasting Superhuman Coders" (LessWrong, 2024)</li>
 <li>• <strong>Claude Code Deep Dive:</strong> MinusX analysis (2025)</li>
 <li>• <strong>GPT-5-Codex Analysis:</strong> Simon Willison's blog (Sept 2025)</li>
@@ -1663,18 +1511,18 @@ layout: default
 </ul>
 </div>
 
-<div class="bg-gray-50 p-6 rounded border">
-<h4 class="font-semibold mb-4">📊 Benchmarks & Evaluation</h4>
-<ul class="space-y-3">
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3">📊 Benchmarks & Evaluation</h4>
+<ul class="space-y-2">
 <li>• <strong>SWE-bench Pro, SWE-bench-Live</strong></li>
 <li>• <strong>LiveCodeBench, RepoQA</strong></li>
 <li>• <strong>SWE-bench Critiques:</strong> "Illusion" and "UTBoost" papers</li>
 </ul>
 </div>
 
-<div class="bg-blue-50 p-6 rounded border border-blue-200">
-<h4 class="font-semibold text-blue-700 mb-4">🌐 Essential Resources</h4>
-<ul class="space-y-3">
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold text-blue-700 mb-3">🌐 Essential Resources</h4>
+<ul class="space-y-2">
 <li>• <strong>Simon Willison's Blog:</strong> AI-assisted programming tag</li>
 <li>• <strong>swyx's AI Engineering Guide</strong></li>
 <li>• <strong>Hacker News:</strong> Search "coding agents"</li>
