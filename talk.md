@@ -42,7 +42,7 @@ class: text-center
 </div>
 
 <!--
-Welcome to our research seminar. Today we'll trace the complete evolution from simple autocomplete to sophisticated agent swarms, and explore what this means for the future of software engineering.
+Welcome to our research seminar. Today we'll trace the complete evolution from simple autocomplete to multi-agent systems, and explore what this means for the future of software engineering.
 
 This presentation follows a four-act structure: deconstructing modern agents, understanding their limitations, envisioning their future, and examining the ecosystem driving this transformation.
 -->
@@ -55,7 +55,7 @@ layout: section
 ## Deconstructing the Modern Agent
 
 <div class="text-lg opacity-75 mt-8">
-Understanding how state-of-the-art coding agents actually work
+Understanding how modern coding agents actually work
 </div>
 
 <!--
@@ -135,14 +135,14 @@ layout: default
 <!--
 This evolution wasn't just about bigger models - it required fundamental changes in architecture. We moved from generation-only to perception-action cycles, from isolated responses to persistent memory, from single-shot to iterative verification.
 
-Notice how each phase unlocked fundamentally new capabilities, not just incremental improvements.
+Notice how each phase enabled fundamentally new capabilities, not just incremental improvements.
 -->
 
 ---
 layout: default
 ---
 
-# The Fundamental Paradigm Shift
+# The Conceptual Framework
 *Research*
 
 ## Formalizing Coding Agents as POMDPs
@@ -357,6 +357,109 @@ The simplicity is intentional - it allows the system to be understood, debugged,
 -->
 
 ---
+layout: default
+---
+
+# Tools That Don't Lie: Typed APIs & Constrained Generation
+*Practice*
+
+<div class="mb-4 p-3 bg-purple-50 rounded border border-purple-200">
+<strong class="text-purple-800 text-sm">Core Insight:</strong> Agent reliability depends on tool design as much as model intelligence
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">Principles of Agent-Ready Tools</h4>
+
+<div class="space-y-3">
+<div class="border-b pb-2">
+<strong class="text-blue-600 text-sm">Atomic Operations</strong>
+<p class="text-xs mt-1">Single responsibility, complete or fail entirely</p>
+<div class="text-xs text-gray-600 mt-1">✅ create_file vs ❌ multi-step bash pipeline</div>
+</div>
+
+<div class="border-b pb-2">
+<strong class="text-blue-600 text-sm">Idempotent & Deterministic</strong>
+<p class="text-xs mt-1">Safe retries, predictable outcomes</p>
+<div class="text-xs text-gray-600 mt-1">✅ ensure_dependency('pytest') vs ❌ pip install</div>
+</div>
+
+<div class="border-b pb-2">
+<strong class="text-blue-600 text-sm">Structured Output</strong>
+<p class="text-xs mt-1">JSON/XML responses, not raw text</p>
+<div class="text-xs text-gray-600 mt-1">✅ {"files": [...]} vs ❌ ls -l output</div>
+</div>
+
+<div>
+<strong class="text-blue-600 text-sm">Clear Error Codes</strong>
+<p class="text-xs mt-1">Specific failure reasons for retry logic</p>
+<div class="text-xs text-gray-600 mt-1">✅ {'error': 'file_not_found'} vs ❌ generic exception</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold mb-3 text-sm">Example: Typed Tool Schema</h4>
+<pre class="text-xs bg-white p-3 rounded border mt-2">
+{
+  "title": "ApplyPatch",
+  "type": "object",
+  "properties": {
+    "file": {"type": "string"},
+    "range": {
+      "type": "object",
+      "properties": {
+        "start": {"type": "integer"},
+        "end": {"type": "integer"}
+      },
+      "required": ["start", "end"]
+    },
+    "patch": {"type": "string"}
+  },
+  "required": ["file", "range", "patch"],
+  "additionalProperties": false
+}
+</pre>
+</div>
+
+<div class="bg-green-50 p-4 rounded border border-green-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Tool Evolution Patterns</h4>
+<div class="space-y-2 text-xs">
+<div class="flex items-center space-x-2">
+<span class="text-red-600">❌</span>
+<code>run_shell('ls -l | grep .py')</code>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-yellow-600">⚠️</span>
+<code>list_files(path='/', pattern='*.py')</code>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-green-600">✅</span>
+<code>find_symbol('MyClass')</code>
+</div>
+</div>
+<div class="mt-2 text-xs text-gray-600">
+Progression: brittle → structured → semantic
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-yellow-50 rounded border border-yellow-200">
+<strong class="text-yellow-800 text-sm">Implementation Tip:</strong> Require "file", "range", "patch" parameters; reject out-of-range edits by design to prevent corruption.
+</div>
+
+---
 layout: section
 ---
 
@@ -364,7 +467,7 @@ layout: section
 ## Performance, Reliability & Cost
 
 <div class="text-lg opacity-75 mt-8">
-Examining the practical limitations and trade-offs of state-of-the-art agents
+Examining the practical limitations and trade-offs of current agents
 </div>
 
 <!--
@@ -656,7 +759,7 @@ layout: default
 <!--
 This table codifies the practical wisdom that experienced agent users develop. The key is understanding that different tasks have different risk profiles and complexity levels.
 
-The hybrid patterns are where the real sophistication comes in - combining multiple models in a single workflow to get the best of both worlds.
+The key insight is in hybrid patterns - combining multiple models in a single workflow to get the best of both worlds.
 -->
 
 ---
@@ -735,7 +838,7 @@ layout: default
 </table>
 
 <div class="mt-2 bg-blue-100 p-2 rounded text-xs">
-<strong>Cost Optimization Strategy:</strong>
+<strong>Cost Strategy:</strong>
 <ol class="mt-1 space-y-1 ml-3">
 <li>1. Profile your task mix</li>
 <li>2. Route based on complexity</li>
@@ -765,6 +868,73 @@ The economics reveal the real-world constraints on agent usage. Understanding th
 
 The hybrid patterns aren't just technically superior - they're economically essential for sustainable agent usage at scale.
 -->
+
+---
+layout: default
+---
+
+# Operating Costs: Caching, KV, Scheduling
+*Practice* • **C+. Operations**
+
+<div class="mb-4 p-3 bg-green-50 rounded border border-green-200">
+<strong class="text-green-800 text-sm">System-Level Cost Control:</strong> Token costs are just the beginning
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">Intelligent Caching</h4>
+<ul class="text-sm space-y-2">
+<li><strong>KV/Prompt Caching:</strong> Reuse context across steps</li>
+<li><strong>File Read Deduplication:</strong> Cache file contents within session</li>
+<li><strong>Test Container Warm Pools:</strong> Skip cold start overhead</li>
+<li><strong>Dependency Prefetch:</strong> Load likely imports ahead of time</li>
+</ul>
+</div>
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Queue Policies</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Priority:</strong> Verifiable tasks first (tests, compilation)</li>
+<li>• <strong>Throttling:</strong> Cap long-context steps per hour</li>
+<li>• <strong>Batching:</strong> Group similar tasks for efficiency</li>
+<li>• <strong>Preemption:</strong> Kill runaway sessions after budget</li>
+</ul>
+</div>
+
+</div>
+
+<div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold mb-3 text-sm">$/Win Optimization</h4>
+<ul class="text-sm space-y-2">
+<li><strong>Track at System Level:</strong> Include compute, storage, human time</li>
+<li><strong>Cost Per Success:</strong> (total_cost) / (verified_diffs)</li>
+<li><strong>Efficiency Curves:</strong> Cost vs speed vs quality trade-offs</li>
+<li><strong>Budget Alerts:</strong> Alert when cost/task exceeds threshold</li>
+</ul>
+</div>
+
+<div class="bg-purple-50 p-4 rounded border border-purple-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Resource Scheduling</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Peak hours:</strong> Route simple tasks to fast models</li>
+<li>• <strong>Off-peak:</strong> Use spare capacity for training/eval</li>
+<li>• <strong>Geographic:</strong> Follow-the-sun model routing</li>
+<li>• <strong>Spot pricing:</strong> Use preemptible instances for batch work</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-orange-50 rounded border border-orange-200">
+<strong class="text-orange-800 text-sm">Reality Check:</strong> A 50% cache hit rate can reduce costs by 30%. Measure $/win, not just token costs, to capture true system efficiency.
+</div>
 
 ---
 layout: default
@@ -1025,6 +1195,73 @@ layout: default
 </div>
 
 ---
+layout: default
+---
+
+# Agent SRE: SLOs, Error Budgets, Rollbacks
+*Practice*
+
+<div class="mb-4 p-3 bg-orange-50 rounded border border-orange-200">
+<strong class="text-orange-800 text-sm">Production Reality:</strong> Agents need SRE discipline just like distributed systems
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">Agent SLOs</h4>
+<ul class="text-sm space-y-2">
+<li><strong>Success:</strong> verified-diff@1 ≥85%</li>
+<li><strong>Latency:</strong> p95 response time <30s</li>
+<li><strong>Cost:</strong> $/successful task <$2.00</li>
+<li><strong>Stability:</strong> backtracks/task <0.3</li>
+</ul>
+</div>
+
+<div class="bg-red-50 p-4 rounded border border-red-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Error Budget & Kill Switches</h4>
+<ul class="text-xs space-y-1">
+<li>• Auto-throttle when SLO breach detected</li>
+<li>• Per-repo allowlist for agent access</li>
+<li>• Circuit breaker after 3 consecutive failures</li>
+<li>• Manual kill switch for agent runaway</li>
+</ul>
+</div>
+
+</div>
+
+<div>
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold mb-3 text-sm">PR Gates & Verification</h4>
+<ul class="text-sm space-y-2">
+<li>• <strong>Required:</strong> Green tests + policy checks</li>
+<li>• <strong>Required:</strong> Signed trace for full audit</li>
+<li>• <strong>Required:</strong> License scan + SBOM attached</li>
+<li>• <strong>Escalation:</strong> Human review for high-risk changes</li>
+</ul>
+</div>
+
+<div class="bg-green-50 p-4 rounded border border-green-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Canary & Rollback</h4>
+<ul class="text-xs space-y-1">
+<li>• Deploy new agent versions to 5% of repos first</li>
+<li>• Monitor success rate, escalation rate, cost</li>
+<li>• Automated rollback on SLO degradation</li>
+<li>• On-call rotation for agent incidents</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Runbook Example:</strong> If verified-diff@1 drops below 70% for >10 tasks, auto-escalate to smart model; if still failing, page on-call and disable agent for affected repos.
+</div>
+
+---
 layout: section
 ---
 
@@ -1127,6 +1364,73 @@ The evidence from reasoning research is compelling - multiple perspectives consi
 
 The manager-worker pattern is emerging as the most practical approach because it maintains global coherence while enabling parallel execution.
 -->
+
+---
+layout: default
+---
+
+# Persistent Memory: Value, Risks, Guardrails
+*Practice*
+
+<div class="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Memory Architecture:</strong> How agents remember across sessions determines capability and risk
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">Work Diaries vs Raw Transcripts</h4>
+<ul class="text-sm space-y-2">
+<li><strong>Work Diaries:</strong> Summarized decisions, patterns, and learnings</li>
+<li><strong>Raw Transcripts:</strong> Complete interaction logs</li>
+<li><strong>Strategy:</strong> Pin decisions, not raw logs</li>
+<li><strong>Retrieval Order:</strong> diary → code-intel → LLM search</li>
+</ul>
+</div>
+
+<div class="bg-red-50 p-4 rounded border border-red-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Security Boundaries</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Per-repo isolation:</strong> No cross-project memory bleed</li>
+<li>• <strong>Encryption at rest:</strong> All stored memories encrypted</li>
+<li>• <strong>Access controls:</strong> Team/org-level memory permissions</li>
+<li>• <strong>Audit trail:</strong> Who accessed what memory when</li>
+</ul>
+</div>
+
+</div>
+
+<div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold mb-3 text-sm">Memory Poisoning Risks</h4>
+<ul class="text-sm space-y-2">
+<li>• <strong>Injection attacks:</strong> Malicious prompts in stored memories</li>
+<li>• <strong>False patterns:</strong> Learning from incorrect decisions</li>
+<li>• <strong>Context pollution:</strong> Irrelevant memories affecting decisions</li>
+<li>• <strong>Drift accumulation:</strong> Errors compounding over time</li>
+</ul>
+</div>
+
+<div class="bg-green-50 p-4 rounded border border-green-200 mt-4">
+<h4 class="font-semibold mb-3 text-sm">Retention & Cleanup</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>TTL policies:</strong> Auto-expire memories after 90 days</li>
+<li>• <strong>PII redaction:</strong> Scrub personal info from memories</li>
+<li>• <strong>Quality scoring:</strong> Deweight low-confidence memories</li>
+<li>• <strong>Manual purge:</strong> Clear contaminated memory sets</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-purple-50 rounded border border-purple-200">
+<strong class="text-purple-800 text-sm">Best Practice:</strong> Keep RAG pipeline separate from write-path. Memories inform, but don't directly control agent actions.
+</div>
 
 ---
 layout: default
@@ -1318,7 +1622,7 @@ layout: default
 <!--
 The security challenges are real and immediate. The Amazon Q incident was a wake-up call - we need to treat agent security as seriously as we treat human developer security.
 
-The research directions point toward a future where we can have both powerful agents and strong security guarantees, but we're not there yet.
+The research directions point toward a future where we can have both capable agents and strong security guarantees, but we're not there yet.
 -->
 
 ---
@@ -1382,7 +1686,7 @@ layout: default
 <ul class="space-y-2">
 <li>• Formal verification for agent code</li>
 <li>• Provable alignment guarantees</li>
-<li>• Robust multi-agent governance</li>
+<li>• Multi-agent governance protocols</li>
 <li>• Discovery evals (novel math/programming with independent verification)</li>
 </ul>
 </div>
@@ -1451,7 +1755,7 @@ Grounding technology and research in real-world market forces and economic drive
 </div>
 
 <!--
-Act IV brings us back to earth. All the technical sophistication and research insights must be understood in the context of massive economic forces and rapid product development cycles.
+Act IV brings us back to earth. All the technical details and research insights must be understood in the context of massive economic forces and rapid product development cycles.
 
 This context is crucial for understanding why certain research directions matter more than others and where the field is likely to go next.
 -->
@@ -1524,7 +1828,7 @@ layout: default
 </div>
 
 <!--
-The funding levels reveal what sophisticated investors believe about the future of software development. They're not just betting on incremental improvements - they're betting on a complete transformation of the development workflow.
+The funding levels reveal what institutional investors believe about the future of software development. They're not just betting on incremental improvements - they're betting on significant changes to the development workflow.
 
 The competition between different approaches (editor-first vs cloud-first vs enterprise-first) will drive rapid innovation.
 -->
@@ -1625,7 +1929,7 @@ layout: default
 </div>
 
 <div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
-<strong class="text-blue-800 text-sm">Strategic Takeaway:</strong> For researchers and practitioners, this rapid evolution means staying current is essential. What's state-of-the-art today may be obsolete in six months.
+<strong class="text-blue-800 text-sm">Strategic Takeaway:</strong> For researchers and practitioners, this rapid evolution means staying current is essential. What's current today may be obsolete in six months.
 </div>
 
 <div class="mt-2 text-xs text-gray-600 text-center">
@@ -1715,7 +2019,7 @@ layout: default
 <!--
 These discussion questions are designed to bridge the gap between the research insights and practical applications we've covered.
 
-The meta-question is perhaps the most important - as we build increasingly sophisticated agent systems, we need to consciously design them to augment rather than replace human capability and creativity.
+The meta-question is perhaps the most important - as we build more capable agent systems, we need to consciously design them to augment rather than replace human capability and creativity.
 -->
 
 ---
@@ -1845,7 +2149,7 @@ layout: default
 <div class="flex items-start space-x-3">
 <span class="text-2xl">1️⃣</span>
 <div>
-<strong class="text-blue-600">Robust Planning</strong>
+<strong class="text-blue-600">Advanced Planning</strong>
 <p class="text-sm mt-1">Move from linear scripts to partial-order plans with backtracking capabilities</p>
 </div>
 </div>
@@ -1899,6 +2203,77 @@ layout: default
 
 <div class="mt-8 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border">
 <strong class="text-blue-800">The Path Forward:</strong> Co-design the LLM "brain" with the entire agentic scaffold - success comes from the system, not just the model
+</div>
+
+---
+layout: default
+---
+
+# Key Takeaways & Research Directions
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-4">
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h3 class="font-bold text-blue-600 mb-3 text-sm">🎯 What We Learned</h3>
+<ul class="text-xs space-y-2">
+<li><strong>Evolution:</strong> Tool use + verification + context enabled the leap from snippets to repo-scale edits</li>
+<li><strong>POMDP Framework:</strong> Coding agents are sequential decision-making under uncertainty</li>
+<li><strong>Verifiability Predicts Success:</strong> Tasks with fast feedback loops (tests, compilation) have 80-95% success rates</li>
+<li><strong>Model Routing:</strong> Fast models for volume, smart models for correctness. Adaptive thinking time based on complexity</li>
+<li><strong>Evaluation Crisis:</strong> Current benchmarks don't predict deployment success. Need trace-level, process evaluation</li>
+<li><strong>Multi-Agent Future:</strong> Specialization and verification through coordination, but alignment challenges amplify</li>
+</ul>
+</div>
+
+<div class="bg-green-50 p-4 rounded border border-green-200">
+<h3 class="font-bold text-green-600 mb-3 text-sm">📊 Actionable Metrics</h3>
+<ul class="text-xs space-y-2">
+<li><strong>verified-diff@1:</strong> Passes tests on first attempt</li>
+<li><strong>Backtrack rate:</strong> <10% for superhuman teammates</li>
+<li><strong>Cost per win:</strong> Track $/successful task at system level</li>
+<li><strong>Autonomy-hours:</strong> 1-5h → multi-day uninterrupted operation</li>
+<li><strong>Recovery rate:</strong> Fix after initial failure</li>
+<li><strong>Escalation trigger:</strong> ≥2 backtracks or rising lint/test failures</li>
+</ul>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-purple-50 p-4 rounded border border-purple-200">
+<h3 class="font-bold text-purple-600 mb-3 text-sm">🔬 Research Opportunities</h3>
+<ul class="text-xs space-y-2">
+<li><strong>Learned Model Routing:</strong> Contextual bandits for π(model|task, history)</li>
+<li><strong>Formal Verification:</strong> Property checking for agent-generated code</li>
+<li><strong>Discovery Evaluation:</strong> Novel math/programming with independent verification</li>
+<li><strong>Cross-Agent Coordination:</strong> Safe handoff protocols and shared state management</li>
+<li><strong>Security Research:</strong> Preventing privilege escalation and emergent deception</li>
+<li><strong>Memory Architecture:</strong> Work diaries vs raw transcripts, retention policies</li>
+<li><strong>Contamination-Free Benchmarks:</strong> Time-locked, dynamic evaluation generation</li>
+</ul>
+</div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h3 class="font-bold text-yellow-700 mb-3 text-sm">🛠️ Engineering Priorities</h3>
+<ul class="text-xs space-y-2">
+<li><strong>Tool Design:</strong> Typed schemas, idempotent operations, structured error codes</li>
+<li><strong>Trace Infrastructure:</strong> JSONL schemas, signed audit trails, replay capabilities</li>
+<li><strong>Policy Engine:</strong> No commits to main, writes require tests, approval gates</li>
+<li><strong>Cost Optimization:</strong> KV caching, prompt reuse, queue scheduling by verifiability</li>
+<li><strong>Security by Design:</strong> Container isolation, least privilege, secrets scanning</li>
+<li><strong>SRE for Agents:</strong> SLOs, error budgets, automated rollbacks</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded border">
+<strong class="text-purple-800 text-sm">The Path Forward:</strong> We're moving from "stumbling agents" to "superhuman teammates" through systematic engineering: better tools, smarter routing, trace-level evaluation, and multi-agent coordination with safety guardrails.
 </div>
 
 ---
@@ -1973,46 +2348,48 @@ layout: end
 
 # Thank You
 
-<div class="text-center">
-<h2 class="text-3xl font-bold mb-8">Questions & Discussion</h2>
+<div class="flex flex-col items-center justify-center h-full text-center space-y-12">
 
-<div class="text-6xl mb-6">🤖</div>
-<div class="text-2xl mb-8 text-gray-700">From snippets to swarms: the future is agentic</div>
+<div class="space-y-6">
+<h2 class="text-4xl font-bold text-gray-800">Questions & Discussion</h2>
+<p class="text-xl text-gray-600 max-w-2xl">From snippets to swarms: engineering the future of AI coding agents</p>
+</div>
 
-<div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
-<div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-<div class="font-bold text-blue-600 mb-2">Try Today</div>
-<div class="text-sm space-y-1">
-<div>Claude Code, Gemini CLI</div>
+<div class="grid grid-cols-3 gap-12 max-w-5xl">
+<div class="space-y-3">
+<h3 class="text-lg font-semibold text-blue-700">Try Today</h3>
+<div class="text-base space-y-2 text-gray-700">
+<div>Claude Code</div>
 <div>Cursor, GitHub Copilot</div>
 </div>
 </div>
 
-<div class="bg-green-50 p-4 rounded-lg border border-green-200">
-<div class="font-bold text-green-600 mb-2">Research</div>
-<div class="text-sm space-y-1">
-<div>SWE-bench, HumanEval</div>
+<div class="space-y-3">
+<h3 class="text-lg font-semibold text-green-700">Research</h3>
+<div class="text-base space-y-2 text-gray-700">
+<div>SWE-bench variants</div>
 <div>Multi-agent coordination</div>
 </div>
 </div>
 
-<div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
-<div class="font-bold text-purple-600 mb-2">Build</div>
-<div class="text-sm space-y-1">
+<div class="space-y-3">
+<h3 class="text-lg font-semibold text-purple-700">Build</h3>
+<div class="text-base space-y-2 text-gray-700">
 <div>MCP servers</div>
-<div>Trace evaluation tools</div>
+<div>Evaluation frameworks</div>
 </div>
 </div>
 </div>
 
-<div class="mt-12 text-gray-600">
-<div>Engineering AI Research Group (EAIRG)</div>
+<div class="text-lg text-gray-600 space-y-1">
+<div class="font-medium">Engineering AI Research Group (EAIRG)</div>
 <div>September 27, 2025</div>
 </div>
+
 </div>
 
 <!--
-We've traced the complete evolution from simple autocomplete to sophisticated agent systems, explored the current challenges with "stumbling agents," and outlined the path toward reliable, parallel agent systems.
+We've traced the complete evolution from simple autocomplete to multi-agent systems, explored the current challenges with "stumbling agents," and outlined the path toward reliable, parallel agent systems.
 
 Key insights:
 1. Evolution required tool use + verification + context, not just bigger models
