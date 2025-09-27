@@ -16,7 +16,7 @@ layout: cover
 
 # Cold Open: What Happens When an Agent Gets Root?
 
-<logos-amazon-aws class="text-3xl"/>
+🔧
 
 In July 2025, a critical vulnerability was found in the **Amazon Q Developer** VS Code extension.
 
@@ -115,21 +115,21 @@ Code has crisp, binary rewards:
 <div class="grid grid-cols-3 gap-4 text-center mt-4">
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:terminal class="text-4xl"/>
+💻
 
 Did it compile?
 
 </div>
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:test-tool class="text-4xl"/>
+🧪
 
 Did the tests pass?
 
 </div>
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:code-reference class="text-4xl"/>
+📋
 
 Did the linter succeed?
 
@@ -158,7 +158,7 @@ Verifiable rewards change the economic equation of AI development.
 <div class="grid grid-cols-2 gap-8 mt-6">
 
 <div class="p-4 text-center">
-<logos-nvidia class="text-8xl"/>
+🚀
 
 **Nvidia's FY25 Revenue**
 
@@ -167,7 +167,7 @@ Verifiable rewards change the economic equation of AI development.
 </div>
 
 <div class="p-4 text-center">
-<simple-icons-scaleai class="text-8xl"/>
+📊
 
 **Scale AI's 2024 Revenue**
 
@@ -276,7 +276,7 @@ The scale of a single leading AI lab becomes staggering.
 <div class="grid grid-cols-2 gap-8 text-center mt-8">
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:chip class="text-6xl"/>
+🔧
 
 **~1M AI Researchers**
 
@@ -284,7 +284,7 @@ The scale of a single leading AI lab becomes staggering.
 </div>
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:stopwatch class="text-6xl"/>
+⏱️
 
 **@ 50x Human Speed**
 
@@ -292,7 +292,7 @@ The scale of a single leading AI lab becomes staggering.
 </div>
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:power class="text-6xl"/>
+⚡
 
 **~10 GW of Power**
 
@@ -300,7 +300,7 @@ The scale of a single leading AI lab becomes staggering.
 </div>
 
 <div v-click class="p-4 rounded bg-gray-500/10">
-<carbon:money class="text-6xl"/>
+💰
 
 **~$100B / year**
 

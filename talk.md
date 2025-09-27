@@ -1044,7 +1044,7 @@ _Practice_ • **B. Heuristic**
 </div>
 
 <div class="mt-4 p-3 bg-red-50 rounded-lg border border-red-200">
-<strong class="text-red-800 text-sm">Escape Hatch:</strong> If confidence < 0.6 after K steps, reroute to manager-worker pattern with explicit human checkpoints.
+<strong class="text-red-800 text-sm">Escape Hatch:</strong> If confidence &lt; 0.6 after K steps, reroute to manager-worker pattern with explicit human checkpoints.
 </div>
 
 <div class="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
@@ -1310,7 +1310,7 @@ _Practice_ • **Real-World Metrics**
 </div>
 
 <div class="mt-3 p-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded border">
-<strong class="text-purple-800 text-xs">Production Reality:</strong> Track verified-diff@1 (passes tests on first attempt), backtrack rate (<10% for reliability), and cost-per-win to measure true system performance beyond academic benchmarks.
+<strong class="text-purple-800 text-xs">Production Reality:</strong> Track verified-diff@1 (passes tests on first attempt), backtrack rate (&lt;10% for reliability), and cost-per-win to measure true system performance beyond academic benchmarks.
 </div>
 
 </Transform>
@@ -1348,7 +1348,7 @@ _Evaluation_ • **Data Quality Impact**
 <h4 class="font-semibold mb-2 text-xs">📊 What This Means</h4>
 <ul class="text-xs space-y-1">
 <li><strong>Deployment proxy:</strong> Verified scores correlate with real PRs</li>
-<li><strong>Quality threshold:</strong> <30% = not production ready</li>
+<li><strong>Quality threshold:</strong> &lt;30% = not production ready</li>
 <li><strong>Cost planning:</strong> ~2-3 attempts per successful fix</li>
 </ul>
 </div>
@@ -1382,7 +1382,7 @@ _Evaluation_ • **Data Quality Impact**
 </div>
 
 <div class="mt-4 p-3 bg-gradient-to-r from-yellow-50 to-red-50 rounded border">
-<strong class="text-red-800 text-sm">Decision Rule:</strong> Evaluate agents on SWE-bench Verified first. If Verified performance is strong (>40%), then Pro scores can provide additional signal. Never rely on Pro scores alone for deployment decisions.
+<strong class="text-red-800 text-sm">Decision Rule:</strong> Evaluate agents on SWE-bench Verified first. If Verified performance is strong (&gt;40%), then Pro scores can provide additional signal. Never rely on Pro scores alone for deployment decisions.
 </div>
 
 </Transform>
@@ -1682,9 +1682,9 @@ _Practice_
 <h4 class="font-semibold mb-2 text-xs">Agent SLOs</h4>
 <ul class="text-sm space-y-2">
 <li><strong>Success:</strong> verified-diff@1 ≥85%</li>
-<li><strong>Latency:</strong> p95 response time <30s</li>
-<li><strong>Cost:</strong> $/successful task <$2.00</li>
-<li><strong>Stability:</strong> backtracks/task <0.3</li>
+<li><strong>Latency:</strong> p95 response time &lt;30s</li>
+<li><strong>Cost:</strong> $/successful task &lt;$2.00</li>
+<li><strong>Stability:</strong> backtracks/task &lt;0.3</li>
 </ul>
 </div>
 
@@ -2610,7 +2610,7 @@ _Practice & Research_
 </div>
 
 <div>
-<strong>3. Agent SLOs:</strong> verified-diff@1 ≥85%, p95 latency <5min, $/win <$2.00
+<strong>3. Agent SLOs:</strong> verified-diff@1 ≥85%, p95 latency &lt;5min, $/win &lt;$2.00
 </div>
 
 <div>
@@ -2861,7 +2861,7 @@ _Practice & Research_
 <h3 class="font-bold text-green-600 mb-2 text-xs">📊 Actionable Metrics</h3>
 <ul class="text-xs space-y-1">
 <li><strong>verified-diff@1:</strong> Passes tests on first attempt</li>
-<li><strong>Backtrack rate:</strong> <10% for superhuman teammates</li>
+<li><strong>Backtrack rate:</strong> &lt;10% for superhuman teammates</li>
 <li><strong>Cost per win:</strong> Track $/successful task at system level</li>
 <li><strong>Autonomy-hours:</strong> 1-5h → multi-day uninterrupted operation</li>
 <li><strong>Recovery rate:</strong> Fix after initial failure</li>
