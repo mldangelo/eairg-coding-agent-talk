@@ -1629,6 +1629,93 @@ The research directions point toward a future where we can have both capable age
 layout: default
 ---
 
+# RLVR: Reinforcement Learning from Verifiable Rewards
+*Research* • **September 2025 Pulse Check**
+
+<div class="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Core Insight:</strong> Training agents with execution-based rewards (tests pass, code compiles) rather than human feedback
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-4">
+
+<div class="bg-green-50 p-4 rounded border border-green-200">
+<h4 class="font-semibold mb-3 text-sm">✅ What's Working</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>SWE-bench gains:</strong> 70-76% pass rates reported (verify on official board)</li>
+<li>• <strong>SQL execution:</strong> Spider/BIRD scores with execution accuracy rewards</li>
+<li>• <strong>One-shot RLVR:</strong> Single example can ~2x MATH-500 accuracy</li>
+<li>• <strong>Agent specialization:</strong> General LMs → SWE agents via environment feedback</li>
+</ul>
+</div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold mb-3 text-sm">⚠️ Measurement Challenges</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Spurious rewards:</strong> Gains even with random/inverted rewards</li>
+<li>• <strong>Pass@K rethink:</strong> CoT-Pass@K requires correct reasoning, not just answers</li>
+<li>• <strong>Exploration collapse:</strong> Boosts Pass@1 but loses coverage at high K</li>
+<li>• <strong>Marketing vs reality:</strong> Check official boards, not blog posts</li>
+</ul>
+</div>
+
+<div class="bg-purple-50 p-4 rounded border border-purple-200">
+<h4 class="font-semibold mb-3 text-sm">🔬 Active Research Areas</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Adaptive exploration:</strong> Preventing premature policy collapse</li>
+<li>• <strong>Negative reinforcement:</strong> Penalizing poor samples for generalization</li>
+<li>• <strong>World model RLVR:</strong> Video/language models optimized for task metrics</li>
+<li>• <strong>Multimodal agents:</strong> OSWorld for GUI, computer use training</li>
+</ul>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold mb-3 text-sm">📊 Current Best Practices</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Reward Design:</strong> Execution + partial credit + rule checks</li>
+<li><strong>Diversity Monitoring:</strong> Track high-K curves and entropy</li>
+<li><strong>Contamination-Free Eval:</strong> Hidden tests, seed randomization</li>
+<li><strong>Verifiable Constraints:</strong> Mix unseen constraints into curricula</li>
+</ul>
+</div>
+
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">🛠️ Tooling Consolidation</h4>
+<ul class="text-xs space-y-1">
+<li>• GRPO/PPO with verifiable rewards</li>
+<li>• Meta's SWE-RL rule-based reward codebase</li>
+<li>• SQL-R1 execution accuracy frameworks</li>
+<li>• IFBench for instruction-following generalization</li>
+</ul>
+</div>
+
+<div class="bg-red-50 p-4 rounded border border-red-200">
+<h4 class="font-semibold mb-3 text-sm">🚨 Key Debates</h4>
+<ul class="text-xs space-y-1">
+<li>• Does RLVR create new solutions or reweight existing ones?</li>
+<li>• How much reward signal is spurious vs meaningful?</li>
+<li>• Can we scale beyond unit tests to complex objectives?</li>
+<li>• What's the right balance of exploration vs exploitation?</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded border">
+<strong class="text-blue-800 text-sm">Research Direction:</strong> RLVR works best when rewards are truly verifiable (tests, compilation, execution). The challenge is designing rich reward functions that capture complex software engineering objectives without gaming.
+</div>
+
+---
+layout: default
+---
+
 # Future Research Directions and Open Problems
 *Research*
 
