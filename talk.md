@@ -142,6 +142,127 @@ Notice how each phase enabled fundamentally new capabilities, not just increment
 layout: default
 ---
 
+# Interface Landscape: How Developers Actually Use AI Coding Tools
+*Practice*
+
+<div class="mb-4 p-3 bg-green-50 rounded border border-green-200">
+<strong class="text-green-800 text-sm">Reality Check:</strong> Agent capabilities mean nothing without the right interface for the task
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="space-y-4">
+
+<div class="bg-blue-50 p-4 rounded border border-blue-200">
+<h4 class="font-semibold mb-3 text-sm">🏗️ Integrated Development</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Full AI IDEs:</strong> Cursor, JetBrains AI Assistant, Windsurf</li>
+<li><strong>IDE Extensions:</strong> GitHub Copilot, Sourcegraph Cody, Continue.dev</li>
+<li><strong>Best for:</strong> Daily coding, multi-file edits, repo-aware refactors</li>
+</ul>
+</div>
+
+<div class="bg-purple-50 p-4 rounded border border-purple-200">
+<h4 class="font-semibold mb-3 text-sm">🖥️ Terminal & Command Line</h4>
+<ul class="text-xs space-y-2">
+<li><strong>CLI Assistants:</strong> Claude Code, Copilot CLI, aider, Warp AI</li>
+<li><strong>Best for:</strong> DevOps, scripting, repo chores, terminal workflows</li>
+</ul>
+</div>
+
+<div class="bg-yellow-50 p-4 rounded border border-yellow-200">
+<h4 class="font-semibold mb-3 text-sm">☁️ Agentic Environments</h4>
+<ul class="text-xs space-y-2">
+<li><strong>Sandbox VMs:</strong> Devin, GitHub Copilot agents, OpenHands</li>
+<li><strong>Best for:</strong> Ticket-sized tasks, bug fixes, background automation</li>
+</ul>
+</div>
+
+<div class="bg-red-50 p-4 rounded border border-red-200">
+<h4 class="font-semibold mb-3 text-sm">🔍 Code Review & Repo Bots</h4>
+<ul class="text-xs space-y-2">
+<li><strong>PR Automation:</strong> CodeRabbit, GitLab Duo, Copilot code review</li>
+<li><strong>Best for:</strong> Review quality, triage, enforcing guidelines</li>
+</ul>
+</div>
+
+</div>
+
+<div class="space-y-4">
+
+<div class="bg-gray-50 p-4 rounded border">
+<h4 class="font-semibold mb-3 text-sm">📊 Interface vs Task Matching</h4>
+<table class="text-xs w-full">
+<thead>
+<tr class="border-b">
+<th class="text-left py-1">Task Type</th>
+<th class="text-left py-1">Best Interface</th>
+<th class="text-left py-1">Why</th>
+</tr>
+</thead>
+<tbody class="space-y-1">
+<tr class="border-b">
+<td class="py-1 text-blue-600">Daily coding</td>
+<td class="py-1">IDE + extension</td>
+<td class="py-1">Context, low friction</td>
+</tr>
+<tr class="border-b">
+<td class="py-1 text-purple-600">Repo automation</td>
+<td class="py-1">CLI tools</td>
+<td class="py-1">Script-friendly</td>
+</tr>
+<tr class="border-b">
+<td class="py-1 text-yellow-600">Bug fixes</td>
+<td class="py-1">Agentic sandbox</td>
+<td class="py-1">Full investigation</td>
+</tr>
+<tr class="border-b">
+<td class="py-1 text-red-600">Code review</td>
+<td class="py-1">GitHub/GitLab bot</td>
+<td class="py-1">Native workflow</td>
+</tr>
+<tr>
+<td class="py-1 text-green-600">Prototyping</td>
+<td class="py-1">Web IDE/chat</td>
+<td class="py-1">Zero setup</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="bg-orange-50 p-4 rounded border border-orange-200">
+<h4 class="font-semibold mb-3 text-sm">🔧 Common Interaction Patterns</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Inline autocomplete:</strong> Sub-second, context-aware suggestions</li>
+<li>• <strong>Chat with code context:</strong> Natural language + file/selection awareness</li>
+<li>• <strong>Apply-edits workflow:</strong> Diff preview before writing files</li>
+<li>• <strong>Plan-execute-iterate:</strong> Sandbox → test → refine → PR</li>
+<li>• <strong>Tool integration:</strong> MCP connects Slack/Jira/GitHub context</li>
+</ul>
+</div>
+
+<div class="bg-indigo-50 p-4 rounded border border-indigo-200">
+<h4 class="font-semibold mb-3 text-sm">🏢 Deployment Styles</h4>
+<ul class="text-xs space-y-1">
+<li>• <strong>Cloud SaaS:</strong> Fast adoption, managed context (Copilot, Cursor)</li>
+<li>• <strong>Self-hosted:</strong> Keep code in VPC (Windsurf Enterprise, Tabnine)</li>
+<li>• <strong>Local-only:</strong> Air-gapped, privacy-first (Continue + Ollama)</li>
+<li>• <strong>Hybrid:</strong> Local editing, cloud intelligence routing</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+<strong class="text-blue-800 text-sm">Selection Strategy:</strong> Start with IDE extensions for daily work, add CLI tools for automation, evaluate agentic environments for complex tasks. Match interface to workflow, not technology hype.
+</div>
+
+---
+layout: default
+---
+
 # The Conceptual Framework
 *Research*
 
