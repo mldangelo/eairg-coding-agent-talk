@@ -59,7 +59,7 @@ This presentation follows a four-act structure: deconstructing modern agents, un
 
 ---
 
-## layout: section
+layout: section
 
 ## Deconstructing the Modern Agent
 
@@ -73,7 +73,7 @@ Act I builds our foundation. We'll trace the evolutionary path, establish the th
 
 ---
 
-## layout: default
+layout: default
 
 # From Completions to Repo Edits
 
@@ -168,7 +168,7 @@ Notice how each phase enabled fundamentally new capabilities, not just increment
 
 ---
 
-## layout: default
+layout: default
 
 # Interface Landscape: How Developers Actually Use AI Coding Tools
 
@@ -295,7 +295,7 @@ _Practice_
 
 ---
 
-## layout: default
+layout: default
 
 # Design Tasks the Agent Can Verify
 
@@ -335,7 +335,7 @@ Track time-to-first-green-test per task
 </div>
 
 <div class="mt-1 text-xs text-center text-gray-500">
-*Example ranges only; replace with org baselines*
+_Example ranges only; replace with org baselines_
 </div>
 
 <div class="mt-3 bg-green-50 p-2 rounded border border-green-200">
@@ -384,7 +384,7 @@ Track time-to-first-green-test per task
 
 ---
 
-## layout: default
+layout: default
 
 # Verifiability in Action: Micro-Demo
 
@@ -480,10 +480,10 @@ layout: default
 <div class="mb-4 p-3 bg-green-50 rounded-lg border border-green-200">
 <strong class="text-green-800">Concrete Example: Fixing a Null Pointer Bug</strong>
 <div class="mt-2 text-xs">
-<strong>State $s$:</strong> Repository at commit abc123 with test_user_validation.py failing<br>
-<strong>Action $a$:</strong> Edit user.py:47 to add `if user is not None:` boundary check<br>
-<strong>Observation $o$:</strong> `pytest -q test_user_validation.py` returns "PASSED" (green)<br>
-<strong>Belief Update:</strong> Agent believes null pointer issue is resolved<br>
+<strong>State $s$:</strong> Repository at commit abc123 with test_user_validation.py failing<br/>
+<strong>Action $a$:</strong> Edit user.py:47 to add `if user is not None:` boundary check<br/>
+<strong>Observation $o$:</strong> `pytest -q test_user_validation.py` returns "PASSED" (green)<br/>
+<strong>Belief Update:</strong> Agent believes null pointer issue is resolved<br/>
 <strong>Why POMDP:</strong> Agent can't directly see all code paths—must infer correctness from test feedback
 </div>
 </div>
@@ -559,7 +559,7 @@ The parallel to robotics is important - we're essentially doing "software roboti
 
 ---
 
-## layout: default
+layout: default
 
 # Claude Code: The Minimal Loop That Scales
 
@@ -667,11 +667,11 @@ graph TD
 <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
 <strong class="text-yellow-800 text-sm">Real Todo Trace (Redacted)</strong>
 <div class="mt-2 text-xs font-mono">
-1. [pending] Fix authentication bug in login.py<br>
-2. [in_progress] Search for auth-related files<br>
-3. [completed] Found issue in validate_token() at line 45<br>
-4. [pending] Write test to reproduce the bug<br>
-5. [pending] Implement fix with error handling<br>
+1. [pending] Fix authentication bug in login.py<br/>
+2. [in_progress] Search for auth-related files<br/>
+3. [completed] Found issue in validate_token() at line 45<br/>
+4. [pending] Write test to reproduce the bug<br/>
+5. [pending] Implement fix with error handling<br/>
 6. [pending] Run full test suite to verify
 </div>
 </div>
@@ -679,9 +679,9 @@ graph TD
 <div class="mt-3 p-3 bg-red-50 rounded-lg border border-red-200">
 <strong class="text-red-800 text-sm">Failure → Recovery Example</strong>
 <div class="mt-2 text-xs">
-<strong>Iteration t:</strong> Agent edits config.py but breaks import<br>
-<strong>Observation:</strong> `ModuleNotFoundError: No module named 'validators'`<br>
-<strong>Iteration t+1:</strong> Agent reads error, searches for validators usage, adds missing import<br>
+<strong>Iteration t:</strong> Agent edits config.py but breaks import<br/>
+<strong>Observation:</strong> `ModuleNotFoundError: No module named 'validators'`<br/>
+<strong>Iteration t+1:</strong> Agent reads error, searches for validators usage, adds missing import<br/>
 <strong>Result:</strong> Tests pass, todo marked completed
 </div>
 </div>
@@ -704,7 +704,7 @@ The simplicity is intentional - it allows the system to be understood, debugged,
 
 ---
 
-## layout: default
+layout: default
 
 # Tools That Don't Lie: Typed APIs & Constrained Generation
 
@@ -812,7 +812,7 @@ Progression: brittle → structured → semantic
 
 ---
 
-## layout: default
+layout: default
 
 # MCP in Practice: The Tool Integration Standard
 
@@ -890,7 +890,7 @@ Key insight: The value isn't just in the protocol - it's in the ecosystem effect
 
 ---
 
-## layout: section
+layout: section
 
 ## Performance, Reliability & Cost
 
@@ -910,7 +910,7 @@ layout: default
 
 ---
 
-## layout: default
+layout: default
 
 # Model Routing A: The Core Trade-off
 
@@ -1001,7 +1001,7 @@ The formula shows that wall-clock time depends on both raw speed and the number 
 
 ---
 
-## layout: default
+layout: default
 
 # Routing Heuristic You Can Ship Today
 
@@ -1061,7 +1061,7 @@ The key insight is in hybrid patterns - combining multiple models in a single wo
 
 ---
 
-## layout: default
+layout: default
 
 # Model Routing C: The Economics
 
@@ -1173,7 +1173,7 @@ The hybrid patterns aren't just technically superior - they're economically esse
 
 ---
 
-## layout: default
+layout: default
 
 # Operating Costs: Caching, KV, Scheduling
 
@@ -1245,7 +1245,7 @@ _Practice_ • **C+. Operations**
 
 ---
 
-## layout: default
+layout: default
 
 # Enterprise Evaluation: Beyond Academic Benchmarks
 
@@ -1317,7 +1317,7 @@ _Practice_ • **Real-World Metrics**
 
 ---
 
-## layout: default
+layout: default
 
 # SWE-bench Pro vs Verified: The Critical Distinction
 
@@ -1389,7 +1389,7 @@ _Evaluation_ • **Data Quality Impact**
 
 ---
 
-## layout: default
+layout: default
 
 # Model Routing D: The Research Frontier
 
@@ -1463,7 +1463,7 @@ The contextual bandit formulation is key because it captures the sequential deci
 
 ---
 
-## layout: default
+layout: default
 
 # Stop Measuring the Wrong Thing
 
@@ -1580,7 +1580,7 @@ The shift from output-only to process evaluation is crucial - we need to underst
 
 ---
 
-## layout: default
+layout: default
 
 # Beyond Benchmarks: Starter Eval Kit
 
@@ -1662,7 +1662,7 @@ _Research_
 
 ---
 
-## layout: default
+layout: default
 
 # Agent SRE: SLOs, Error Budgets, Rollbacks
 
@@ -1732,7 +1732,7 @@ _Practice_
 
 ---
 
-## layout: section
+layout: section
 
 ## Swarms, Safety & The Future
 
@@ -1748,7 +1748,7 @@ The alignment and safety challenges become much more complex in multi-agent sett
 
 ---
 
-## layout: default
+layout: default
 
 # When Many Agents Beat One
 
@@ -1840,7 +1840,7 @@ The manager-worker pattern is emerging as the most practical approach because it
 
 ---
 
-## layout: default
+layout: default
 
 # Persistent Memory: Value, Risks, Guardrails
 
@@ -1912,7 +1912,7 @@ _Practice_
 
 ---
 
-## layout: default
+layout: default
 
 # Cooperation Amplifies Misalignment
 
@@ -2008,7 +2008,7 @@ Multi-agent systems make these problems worse because agents can coordinate in u
 
 ---
 
-## layout: default
+layout: default
 
 # Guardrails That Ship
 
@@ -2130,7 +2130,7 @@ The research directions point toward a future where we can have both capable age
 
 ---
 
-## layout: default
+layout: default
 
 # RLVR: Reinforcement Learning from Verifiable Rewards
 
@@ -2222,7 +2222,7 @@ _Research_ • **September 2025 Pulse Check**
 
 ---
 
-## layout: default
+layout: default
 
 # What's Next (Engineering + Research)
 
@@ -2345,7 +2345,7 @@ The near-term work is essential for making current systems reliable. The long-te
 
 ---
 
-## layout: section
+layout: section
 
 ## Market Forces & Final Thoughts
 
@@ -2361,7 +2361,7 @@ This context is crucial for understanding why certain research directions matter
 
 ---
 
-## layout: default
+layout: default
 
 # Where the Market Is Moving
 
@@ -2439,7 +2439,7 @@ The competition between different approaches (editor-first vs cloud-first vs ent
 
 ---
 
-## layout: default
+layout: default
 
 # Major Product Releases Timeline
 
@@ -2558,7 +2558,7 @@ The convergence trends are particularly important - the field is moving toward m
 
 ---
 
-## layout: default
+layout: default
 
 # Decisions for Your Team Next Quarter
 
@@ -2642,7 +2642,7 @@ The meta-question is perhaps the most important - as we build more capable agent
 
 ---
 
-## layout: default
+layout: default
 
 # References & Further Reading
 
@@ -2726,7 +2726,7 @@ _Practice & Research_
 
 ---
 
-## layout: default
+layout: default
 
 # Footnotes
 
@@ -2755,7 +2755,7 @@ _Practice & Research_
 
 ---
 
-## layout: default
+layout: default
 
 # The Checklist for Superhuman Teammates
 
@@ -2835,7 +2835,7 @@ _Practice & Research_
 
 ---
 
-## layout: default
+layout: default
 
 # Key Takeaways & Research Directions
 
@@ -2910,7 +2910,7 @@ _Practice & Research_
 
 ---
 
-## layout: default
+layout: default
 
 # Practical Deployment Playbook: Shipping Agents That Close Tickets
 
@@ -2983,7 +2983,7 @@ _Practice_
 
 ---
 
-## layout: default
+layout: default
 
 # Start This Week
 

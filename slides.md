@@ -71,9 +71,9 @@ layout: two-cols
 
 ```mermaid
 graph TD
-    A[Code Snippets] --> B(Function Calling);
-    B --> C{Agentic Loop};
-    C --> D(Repo-Scale Edits);
+    A["Code Snippets"] --> B["Function Calling"]
+    B --> C["Agentic Loop"]
+    C --> D["Repo-Scale Edits"]
 ```
 
 <v-click>
@@ -201,14 +201,14 @@ The economic drivers are leading to unprecedented hardware scale.
 
 ```mermaid
 graph TD
-    subgraph Dec 2024
-        A(10M H100e Global) --> B(0.5M H100e for Lab X);
+    subgraph Dec2024["Dec 2024"]
+        A["10M H100e Global"] --> B["0.5M H100e for Lab X"]
     end
-    subgraph Dec 2027
-        C(100M H100e Global) --> D(20M H100e for Lab X);
+    subgraph Dec2027["Dec 2027"]
+        C["100M H100e Global"] --> D["20M H100e for Lab X"]
     end
-    A --> C;
-    B --> D;
+    A --> C
+    B --> D
 ```
 
 <!--
@@ -243,8 +243,7 @@ The allocation of this massive compute budget is shifting dramatically **inward*
 ::right::
 
 ```mermaid
-pie
-    title 2027 Compute Allocation (Leading Lab)
+pie title 2027 Compute Allocation (Leading Lab)
     "Research Experiments" : 35
     "Synthetic Data Gen" : 22
     "Training (Post-Training)" : 20
@@ -345,12 +344,12 @@ Think in **wall-clock time to a verified solution**, not just tokens/sec.
 
 ```mermaid
 graph TD
-    Manager(Smart Model: Plan & Verify) --> Worker1(Fast Model: Attempt Patch A);
-    Manager --> Worker2(Fast Model: Attempt Patch B);
-    Manager --> Worker3(Fast Model: Attempt Patch C);
-    Worker1 --> Manager;
-    Worker2 --> Manager;
-    Worker3 --> Manager;
+    Manager["Smart Model: Plan & Verify"] --> Worker1["Fast Model: Attempt Patch A"]
+    Manager --> Worker2["Fast Model: Attempt Patch B"]
+    Manager --> Worker3["Fast Model: Attempt Patch C"]
+    Worker1 --> Manager
+    Worker2 --> Manager
+    Worker3 --> Manager
 ```
 
 </v-click>
@@ -490,8 +489,9 @@ Speaker note: "Benchmarks measure outputs. Production measures verified diffs."
 
 ---
 layout: center
+class: text-center
 ---
-class: "text-center"
+
 # Thank You
 
 ### Q&A

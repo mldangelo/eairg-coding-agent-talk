@@ -40,22 +40,32 @@ Pace: ~30–40s per slide. Keep commentary crisp and actionable.
 
 ---
 
-## layout: default
-
 # Why Now: The Leap to Repo-Scale
 
 <v-clicks>
 
-- Bigger models alone didn’t do it. The leap came from:
-- Tool use — agents act via shell/editor/CLI with typed tools
-- Verification loops — tests, linters, and policy gates close the loop
-- Massive context — enough to reason across repos, not just files
+- Tool execution: deterministic shell/editor tools with typed I/O
+- Verification: compile/lint/test gates after every change
+- Context: long windows + retrieval over symbol graphs
 
 </v-clicks>
 
-<div class="mt-4 p-3 bg-blue-50 rounded border border-blue-200 text-sm">
-Key shift: from single-shot completions to iterative perception–action–verification.
-</div>
+```json
+{
+  "tool": "apply_patch",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "diff": {"type": "string"},
+      "idempotency_key": {"type": "string"}
+    },
+    "required": ["diff"]
+  },
+  "errors": ["E_PARSE", "E_CONFLICT", "E_POLICY"]
+}
+```
+
+<div class="mt-3 text-xs text-gray-600">Typed tools + explicit error codes enable safe retries and recovery.</div>
 
 <!--
 Anchor the audience: capability jumps track addition of tools, verification, and long context. Sets expectations.
@@ -63,30 +73,38 @@ Anchor the audience: capability jumps track addition of tools, verification, and
 
 ---
 
-## layout: default
-
 # Minimal Viable Agent Loop
 
-<v-clicks>
+```python
+def run(issue, tools, budget_steps=8, budget_seconds=600):
+    plan = planner(issue)
+    t0 = now()
+    for step in range(budget_steps):
+        if now() - t0 > budget_seconds:
+            return failure("E_BUDGET_TIME", plan=plan)
+        action = plan.next()
+        out = tools.invoke(action)
+        if out.error:
+            # structured errors: E_PARSE, E_CONFLICT, E_POLICY
+            plan = planner.revise(plan, feedback=out.error)
+            continue
+        v = verifier.check(repo_state(), out.artifacts)
+        if v.passed:
+            if plan.done():
+                return success(plan=plan, trace=v.trace)
+            plan = planner.revise(plan, feedback=v.results)
+        else:
+            plan = planner.revise(plan, feedback=v.failures)
+    return failure("E_BUDGET_STEPS", plan=plan)
+```
 
-- Planner — decomposes issue → steps + acceptance checks
-- Actor — edits files, runs tests, captures artifacts
-- Verifier — policy checks, SAST/secret scan, hidden tests
-- Iterate until checks pass or budget is exhausted
-
-</v-clicks>
-
-<div class="mt-4 text-xs text-gray-600">
-Tip: keep loops short; prioritize actions that increase verifiability per step.
-</div>
+<div class="mt-3 text-xs text-gray-600">Short loops, explicit budgets, structured errors, verifier‑driven revision.</div>
 
 <!--
 Emphasize that the loop is simple by design; reliability comes from safeguards and verification, not long chains of thought alone.
 -->
 
 ---
-
-## layout: default
 
 # Production Architecture (5 Components)
 
@@ -100,9 +118,19 @@ Emphasize that the loop is simple by design; reliability comes from safeguards a
 
 </v-clicks>
 
-<div class="mt-4 p-3 bg-amber-50 rounded border border-amber-200 text-xs">
-Engineering priorities: typed tool schemas, structured errors, JSONL traces, replay, cost-aware scheduling.
-</div>
+```jsonc
+// policy.json (example)
+{
+  "deny": [
+    {"rule": "no_main_commits", "when": {"branch": "main"}},
+    {"rule": "limit_diff_size", "max_changed_lines": 400},
+    {"rule": "tests_required", "when": {"changed_paths": ["src/**"]}}
+  ],
+  "require_checks": ["compile", "lint", "unit", "secrets", "sast"]
+}
+```
+
+<div class="mt-3 text-xs text-gray-600">Priorities: typed schemas, deterministic tools, JSONL traces, replayable runs.</div>
 
 <!--
 Map directly to the larger talk’s playbook; this is the deployable skeleton.
@@ -110,22 +138,18 @@ Map directly to the larger talk’s playbook; this is the deployable skeleton.
 
 ---
 
-## layout: default
-
 # What Works Today
 
 <v-clicks>
 
-- Bug fixes with good tests; small features in well-scoped modules
-- Repo chores: refactors, config, dependency bumps with CI gates
-- DevOps and scripting in constrained sandboxes via CLI tools
-- SWE-bench Verified shows repo-scale edits are attainable with loops
+- Code changes where tests define behavior; stable CI; reproducible builds
+- Structured chores: refactors, config, dependency bumps with policy gates
+- DevOps tasks in sandboxes via CLI tools with explicit allowlists
+- Public benchmarks with repository edits; prefer Verified subsets for clarity
 
 </v-clicks>
 
-<div class="mt-4 text-xs text-gray-600">
-Start narrow: maximize verifiable surfaces, minimize ambiguity and side effects.
-</div>
+<div class="mt-4 text-xs text-gray-600">Preconditions: hermetic env (container), deterministic toolchain, reliable tests.</div>
 
 <!--
 Avoid overpromising; highlight verifiability as the common thread for wins.
@@ -133,22 +157,30 @@ Avoid overpromising; highlight verifiability as the common thread for wins.
 
 ---
 
-## layout: default
-
 # What Breaks (Fast)
 
 <v-clicks>
 
-- Hallucinated files/paths; stale mental model of repo
-- Brittle tools; untyped I/O; silent errors; non-idempotent ops
-- Flaky tests obscure progress; long loops drift off-spec
-- Security: unintended privilege, secret leakage, unsafe shell
+- Stale repo model → proposes edits to non-existent paths
+- Untyped tool I/O → silent coercion and lossy parsing
+- Non-idempotent tools → duplicate patches, corrupted state
+- Flaky tests → non-stationary reward signal, spurious regressions
+- Privilege mistakes → editing protected files, leaking secrets
 
 </v-clicks>
 
-<div class="mt-4 p-3 bg-rose-50 rounded border border-rose-200 text-xs">
-Mitigations: typed schemas, retries with backoff, deterministic tools, container isolation, least privilege.
-</div>
+```jsonc
+// Tool design checklist
+{
+  "idempotency": true,
+  "schema": "json-schema://tool/v1",
+  "errors": ["E_PARSE", "E_TIMEOUT", "E_CONFLICT", "E_POLICY"],
+  "stderr_as_error": true,
+  "dry_run": true
+}
+```
+
+<div class="mt-3 text-xs text-gray-600">Prefer explicit schemas, retries with backoff/jitter, and no-op defaults on error.</div>
 
 <!--
 Name the sharp edges succinctly; pair with concrete mitigations.
@@ -156,22 +188,30 @@ Name the sharp edges succinctly; pair with concrete mitigations.
 
 ---
 
-## layout: default
-
 # Evaluation That Predicts Shipping
 
 <v-clicks>
 
-- Prefer process metrics over just outcomes: passes, retries, human interventions
+- Metrics: success_rate, intervention_rate, redo_ratio, compile_error_rate
 - Gate on verifiable signals: compile/lint/unit/property/fuzz tests
-- Benchmarks: prioritize SWE-bench Verified; treat Pro with caution
-- Trace-level review: replay runs; label failure modes to drive fixes
+- Benchmarks: prioritize "Verified" subsets; treat broader sets with caution
+- Trace review: replay runs; label failure modes → fixes
 
 </v-clicks>
 
-<div class="mt-4 text-xs text-gray-600">
-Decision rule: strong on Verified → Pro adds signal; never the reverse.
-</div>
+```text
+success_rate          = successes / total
+intervention_rate     = human_interventions / runs
+redo_ratio            = total_tool_calls / unique_steps
+compile_error_rate    = compile_failures / runs
+```
+
+```json
+{"ts":"2025-09-27T13:14:20Z","run_id":"r_123","step":3,"tool":"apply_patch","ok":true,"lines":42}
+{"ts":"2025-09-27T13:14:27Z","run_id":"r_123","step":4,"tool":"run_tests","ok":false,"error":"E_FAIL_TEST","failing":["tests/foo.spec.js::bar"]}
+```
+
+<div class="mt-3 text-xs text-gray-600">Evaluate the process, not just the final diff.</div>
 
 <!--
 Steer away from leaderboard chasing; align eval with deployment reality.
@@ -179,22 +219,31 @@ Steer away from leaderboard chasing; align eval with deployment reality.
 
 ---
 
-## layout: default
-
 # Deployment Playbook (90 Days)
 
 <v-clicks>
 
-- Phase 1: Edit-only or bash-only with tests; PRs behind flags
-- Phase 2: Policy-verified PRs; human review; track defect density
-- Phase 3: Merge-on-green in allowlisted dirs; rollback on SLO breach
-- Data loop: log everything; weekly RL/VR on your backlog distribution
+- Phase 1: edit-only or bash-only agents; PRs always; CI must pass
+- Phase 2: policy-verified PRs; human review; measure defect density
+- Phase 3: merge-on-green within allowlists; auto-rollback on SLO breach
+- Data loop: log traces; weekly model/tool updates from labeled failures
 
 </v-clicks>
 
-<div class="mt-4 p-3 bg-green-50 rounded border border-green-200 text-xs">
-Route by verifiability and cost; use small, fast models for exploration; large for commit paths.
-</div>
+```yaml
+# gate.yaml
+require:
+  checks: [compile, lint, unit, secrets, sast]
+  reviewers: ["CODEOWNERS"]
+limits:
+  changed_lines: 400
+  new_files: 10
+allowlist:
+  - "src/**"
+  - "configs/**"
+```
+
+<div class="mt-3 text-xs text-gray-600">Route by verifiability/cost; small models for exploration, large for commit paths.</div>
 
 <!--
 Make it concrete and time-bound; emphasize staged risk and continuous learning.
@@ -202,43 +251,48 @@ Make it concrete and time-bound; emphasize staged risk and continuous learning.
 
 ---
 
-## layout: default
-
-# Guardrails You Actually Need
+# Operational Controls
 
 <v-clicks>
 
-- Policy engine: no commits to main; tests required; diff size limits
-- Secrets and SAST gating; deny dangerous shells; approval gates
-- Sandboxing: container per run; least privilege; network egress controls
-- Observability: signed JSONL traces; replay runners; audit trails
+- Branch protection + policy engine (deny on missing checks/oversized diffs)
+- Secrets scan + SAST as hard gates; deny shells with wildcard writes
+- Sandbox: one container per run; user namespace remap; no host mounts
+- Observability: signed JSONL traces; deterministic replays
 
 </v-clicks>
 
-<div class="mt-4 text-xs text-gray-600">
-Security amplifies in multi-agent settings — contain blast radius first.
-</div>
+```bash
+docker run --rm \
+  --network=none \
+  --pids-limit=512 \
+  --memory=2g --cpus=2 \
+  --read-only -v /tmp:/tmp:rw \
+  --security-opt no-new-privileges \
+  --security-opt seccomp=seccomp.json \
+  agent-runner:latest
+```
+
+<div class="mt-3 text-xs text-gray-600">Contain blast radius first; then optimize capabilities.</div>
 
 <!--
 Short list that prevents 80% of incidents; matches the big-deck guidance.
 -->
 
 ---
-
-## layout: center
-
-# The Takeaway
+layout: center
+---
+# Operational Invariants
 
 <v-clicks>
 
-- It’s not magic — it’s loops, tools, and tests
-- Ship a minimal loop with guardrails, then scale scope
-- Evaluate processes, not just final diffs
-- Optimize for verifiability, cost, and safety
+- Loops are short, budgeted, and verifier-driven
+- Tools are typed, idempotent, and deterministic by default
+- Evaluation is process-level with replayable traces
+- Controls enforce least privilege and merge-on-green discipline
 
 </v-clicks>
 
 <!--
 Close with crisp action bias; invite discussion if time remains.
 -->
-
