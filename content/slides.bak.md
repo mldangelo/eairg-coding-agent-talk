@@ -2,13 +2,40 @@
 layout: cover
 ---
 
-# Building Reliable AI Coding Agents
+# From Stumbling to Shipping
 
-### Engineering Practices for Production Systems
+### Coding Agents in 2025 and the Road to 2027
 
 <div class="pt-12">
   <span class="px-2 py-1 rounded">EAIRG Engineering AI Research Group</span>
 </div>
+
+---
+layout: intro
+---
+# Cold Open: What Happens When an Agent Gets Root?
+
+🔧
+
+In July 2025, a critical vulnerability was found in the **Amazon Q Developer** VS Code extension.
+
+<v-click>
+
+- A malicious prompt injection in a public dataset led to arbitrary code execution capabilities.
+- The attack was inert due to a syntax error, but the supply chain exposure was real.
+- AWS shipped a fix and a security bulletin (**CVE-2024-6991**).
+
+</v-click>
+
+<v-click>
+
+**The Stakes:** Agents are moving from autocomplete to autonomous action. **Verification and security are now as important as model quality.**
+
+</v-click>
+
+<!--
+This is the hook. Start with a real-world, recent security incident to immediately ground the talk in practical engineering reality. This isn't theoretical; it's happening now. The key takeaway is that as agents become more capable, their potential for harm—intentional or not—grows exponentially. This sets the stage for why the rest of the talk (reliability, security, verification) is so important.
+-->
 
 ---
 layout: two-cols
